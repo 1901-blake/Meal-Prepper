@@ -1,0 +1,25 @@
+server:
+  port: 5500
+ 
+spring:
+  application:
+    name: bear-api
+
+  datasource:
+    driverClassName: org.postgresql.Driver
+    initialization-mode: NEVER
+    password: ${DB_PASSWORD}
+    url: jdbc:postgresql://${DB_URL}:5432/home
+    username: ${DB_USERNAME}
+    
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        default_schema: ${DB_SCHEMA}
+    show-sql: false
+    #http://localhost:5500/api/swagger-ui.html
+    #run file then change env variables -- set schema to cookbook    
