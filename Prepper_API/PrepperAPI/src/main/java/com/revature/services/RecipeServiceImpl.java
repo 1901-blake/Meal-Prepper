@@ -54,19 +54,7 @@ public class RecipeServiceImpl implements RecipeService{
 	public List<Recipe> findByInstruction(String instructions) {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	/*@Override
-	public List<Recipe> findByAvg_rating(int avg_rating) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Recipe> findByNum_ratings(int num_ratings) {
-		// TODO Auto-generated method stub
-		return null;
-	}*/
+	}	
 	
 	
 }

@@ -14,10 +14,7 @@ public interface RecipeService {
 	List<Recipe> findAll();
 	Recipe findById(int id);
 	List<Recipe> findByName(String name);
-	List<Recipe> findByInstruction(String instructions);
-	/*List<Recipe> findByAvg_rating(int avg_rating);
-	List<Recipe> findByNum_ratings(int num_ratings);*/
-	
+	List<Recipe> findByInstruction(String instructions);	
 
 
 }

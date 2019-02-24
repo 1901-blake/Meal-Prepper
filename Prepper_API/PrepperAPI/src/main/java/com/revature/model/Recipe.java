@@ -17,39 +17,33 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@Table(name = "recipes")
+@Table(name = "recipe")
 @Entity
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class Recipe {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "recipe_id")//creating a primary key	
+	@Column(name = "id")//creating a primary key	
 	private int id;
 
 	//columns in Recipe table
 	private String name;
 	private String description;
 	private String instructions;
-/*	private int avg_rating;
-	private int num_ratings;
-	*/
+	
 	public Recipe() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	//constructor
+
 	public Recipe(int id, String name, String description, String instructions) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.instructions = instructions;
-		/*this.avg_rating = avg_rating;
-		this.num_ratings = num_ratings;*/
 	}
-	
-	//getters and setters for columns
+
 	public int getId() {
 		return id;
 	}
@@ -57,7 +51,7 @@ public class Recipe {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
@@ -121,7 +115,6 @@ public class Recipe {
 			return false;
 		return true;
 	}
-
 	
 	
 

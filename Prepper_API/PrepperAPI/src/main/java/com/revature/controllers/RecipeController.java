@@ -12,7 +12,7 @@ import com.revature.model.Recipe;
 import com.revature.services.RecipeService;
 
 @RestController
-@RequestMapping("recipes")
+@RequestMapping("recipe")
 public class RecipeController {
 	
 	@Autowired
@@ -28,9 +28,4 @@ public class RecipeController {
 		return recipeService.findById(id);
 	}
 	
-	/*@GetMapping("/Avg_rating/{avg_rating}")
-	public List<Recipe> findByAvg_rating(@PathVariable int avg_rating) {
-		// TODO Auto-generated method stub
-		return recipeService.findByAvg_rating(avg_rating);
-	}*/
 }

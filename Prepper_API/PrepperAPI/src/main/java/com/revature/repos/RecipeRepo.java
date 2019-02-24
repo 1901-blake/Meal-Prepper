@@ -10,6 +10,6 @@ import com.revature.model.Recipe;
 public interface RecipeRepo extends JpaRepository<Recipe, Integer> {
 	List<Recipe> findByName(String name);
 	List<Recipe> findByDescription(String description);
-
+	List<Recipe> findByInstructions(String instructions);
 
 }
