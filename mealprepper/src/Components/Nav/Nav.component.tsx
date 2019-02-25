@@ -1,5 +1,4 @@
 import React from 'react';
-import Nav from 'reactstrap/lib/Nav';
 import NavItem from 'reactstrap/lib/NavItem';
 import { INavState, IState } from '../../reducers';
 import { connect } from 'react-redux';
@@ -10,6 +9,7 @@ import DropdownItem from 'reactstrap/lib/DropdownItem';
 import { Link } from 'react-router-dom';
 import NavLink from 'reactstrap/lib/NavLink';
 import { toggle1, toggle } from '../../Actions/Nav.action';
+import {Nav} from 'reactstrap';
 
 
 export interface INavProps {
