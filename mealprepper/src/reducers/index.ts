@@ -3,6 +3,7 @@ import { navReducer } from './nav.reducer';
 import { grocReducer } from './groceryList.reducer';
 import { Ingredients } from '../Model/Ingredient';
 import { Recipe } from '../Model/Recipe';
+import { recipeHistoryReducer } from './RecipeHistory.reducer';
 
 export interface INavState {
     dropdown1: boolean
@@ -17,6 +18,7 @@ export interface IFavoriteState {
 export interface IEnterNewRecipeState {
 }
 export interface IRecipeHistoryState {
+  recipehistoryarray : Recipe[];
 }
 export interface ISettingState {
 }
@@ -41,7 +43,7 @@ export interface IState {
     nav: INavState
     groc: IGRocState
     // enterrecipe : IEnterNewRecipeState
-    // recipehistory: IRecipeHistoryState
+    recipehistory: IRecipeHistoryState
     // setting: ISettingState
     // userinfo: IUserInfoState
     // weeklyview: IWeeklyViewState
@@ -53,5 +55,6 @@ export interface IState {
 
 export const state = combineReducers<IState>({
   nav: navReducer,
-  groc: grocReducer
+  groc: grocReducer,
+  recipehistory : recipeHistoryReducer
 })
