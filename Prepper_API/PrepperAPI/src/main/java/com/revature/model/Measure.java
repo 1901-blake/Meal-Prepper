@@ -17,14 +17,14 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@Table(name = "Measure")
+@Table(name = "measure")
 @Entity
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 
 public class Measure {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "measures_id")
+	@Column(name = "id")
 	private int id;
 	private String name;
 	

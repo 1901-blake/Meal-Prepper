@@ -1,5 +1,9 @@
 package com.revature.model;
 
+
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,13 +18,13 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@Table(name = "Ingredient")
+@Table(name = "ingredient")
 @Entity
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class Ingredient {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ingredients_id")
+	@Column(name = "id")
 	private int id;
 	private String name;
 	
