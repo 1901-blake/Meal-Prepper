@@ -32,10 +32,10 @@ export class NavComponent extends React.Component<INavProps, any> {
                         <Link to="">Home</Link>
                     </NavItem>
                     <NavItem>
-                        <NavLink><Link to="" >About</Link></NavLink>
+                        <NavLink><Link to="/about" >About</Link></NavLink>
                     </NavItem>
                      <NavItem>
-                        <NavLink><Link to="" >Grocery List</Link></NavLink>
+                        <NavLink><Link to="/grocerylist" >Grocery List</Link></NavLink>
                     </NavItem>
                     <Dropdown nav isOpen={this.props.nav.dropdown1} toggle={this.props.toggle}>
                         <DropdownToggle nav caret>
@@ -44,19 +44,19 @@ export class NavComponent extends React.Component<INavProps, any> {
                         <DropdownMenu right>
                             <DropdownItem>
                                 <NavLink>
-                                    <Link to="">Weekly View</Link></NavLink>
+                                    <Link to="/weeklyinfo">Weekly View</Link></NavLink>
                             </DropdownItem>
                             <DropdownItem>
                                 <NavLink>
-                                <Link to="">Daily View</Link></NavLink>
+                                <Link to="/dailyinfo">Daily View</Link></NavLink>
                             </DropdownItem>
                         </DropdownMenu>
                     </Dropdown>
                     <NavItem>
-                        <NavLink><Link to="" >Recipe History</Link></NavLink>
+                        <NavLink><Link to="/recipehistory" >Recipe History</Link></NavLink>
                     </NavItem>
                     <NavItem>
-                        <NavLink><Link to="" >Favorites</Link></NavLink>
+                        <NavLink><Link to="/favorites" >Favorites</Link></NavLink>
                     </NavItem>
                     <Dropdown nav isOpen={this.props.nav.dropdown2} toggle={this.props.toggle1}>
                         <DropdownToggle nav caret>
@@ -65,11 +65,11 @@ export class NavComponent extends React.Component<INavProps, any> {
                         <DropdownMenu right>
                             <DropdownItem>
                                 <NavLink>
-                                <Link to="">Settings</Link></NavLink>            
+                                <Link to="/setting">Settings</Link></NavLink>            
                             </DropdownItem>
                             <DropdownItem>
                                 <NavLink>
-                                    <Link to="">User Info</Link></NavLink>
+                                    <Link to="/userinfo">User Info</Link></NavLink>
                             </DropdownItem>
                         </DropdownMenu>
                     </Dropdown>
