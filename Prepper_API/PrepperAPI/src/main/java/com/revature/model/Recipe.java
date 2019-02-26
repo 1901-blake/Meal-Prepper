@@ -31,6 +31,21 @@ public class Recipe {
 	private String description;
 	private String instructions;
 	
+/*	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "recipeingredient", 
+		joinColumns = @JoinColumn(name = "recipe_id", referencedColumnName = "id"), 
+		inverseJoinColumns = @JoinColumn(name = "measure_id", referencedColumnName = "id"))
+	private Set<Measure> measurement = new HashSet<>();
+
+	
+	//doesn't match up with measurement
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "recipeingredient", 
+		joinColumns = @JoinColumn(name = "recipe_id", referencedColumnName = "id"), 
+		inverseJoinColumns = @JoinColumn(name = "ingredient_id", referencedColumnName = "id"))
+	private Set<Ingredient> ingredient = new HashSet<>();
+	*/
+	
 	public Recipe() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -115,7 +130,6 @@ public class Recipe {
 			return false;
 		return true;
 	}
-	
-	
 
+	
 }
