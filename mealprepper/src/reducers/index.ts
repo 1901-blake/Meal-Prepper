@@ -3,15 +3,18 @@ import { navReducer } from './nav.reducer';
 import { grocReducer } from './groceryList.reducer';
 import { Ingredients } from '../Model/Ingredient';
 import { Recipe } from '../Model/Recipe';
-<<<<<<< HEAD
+
 import { enterNewRecipeReducer } from './EnterNewRecipe.reducer';
 
 export interface rTuple {
   rTuple:[number, string, string]
 }
-=======
+
 import { recipeHistoryReducer } from './RecipeHistory.reducer';
->>>>>>> adb1ea8b8720d264689031e849e5c898faaf7e40
+
+
+import { userInfoReducer } from './userinfo.reducer';
+
 
 export interface INavState {
   dropdown1: boolean
@@ -35,6 +38,11 @@ export interface IRecipeHistoryState {
 export interface ISettingState {
 }
 export interface IUserInfoState {
+   firstname: string
+   lastname: string
+   email: string
+   username: string
+   feedback: string
 }
 export interface IWeeklyViewState {
   //create an array of recipe and call it weekly recipe
@@ -49,30 +57,17 @@ export interface IGRocState {
   amount: number
 }
 export interface IState {
-<<<<<<< HEAD
   // about: IAboutState,
   // daily: IDailyState
   // favorite: IFavoriteState
   nav: INavState,
   groc: IGRocState,
-  newRecipe: IEnterNewRecipeState
-  // recipehistory: IRecipeHistoryState
-  // setting: ISettingState
-  // userinfo: IUserInfoState
+  newRecipe: IEnterNewRecipeState,
   // weeklyview: IWeeklyViewState
-=======
-    // about: IAboutState,
-    // daily: IDailyState
     // favorite: IFavoriteState
-    nav: INavState
-    groc: IGRocState
-    // enterrecipe : IEnterNewRecipeState
     recipehistory: IRecipeHistoryState
-    // setting: ISettingState
-    // userinfo: IUserInfoState
+    userinfo: IUserInfoState
     // weeklyview: IWeeklyViewState
->>>>>>> adb1ea8b8720d264689031e849e5c898faaf7e40
-
 
 }
 
@@ -81,9 +76,7 @@ export interface IState {
 export const state = combineReducers<IState>({
   nav: navReducer,
   groc: grocReducer,
-<<<<<<< HEAD
-  newRecipe: enterNewRecipeReducer
-=======
-  recipehistory : recipeHistoryReducer
->>>>>>> adb1ea8b8720d264689031e849e5c898faaf7e40
+  newRecipe: enterNewRecipeReducer,
+  recipehistory : recipeHistoryReducer,
+  userinfo: userInfoReducer
 })

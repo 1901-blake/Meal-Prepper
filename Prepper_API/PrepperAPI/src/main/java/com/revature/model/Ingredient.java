@@ -14,8 +14,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Table(name = "ingredient")
@@ -28,6 +30,9 @@ public class Ingredient {
 	private int id;
 	private String name;
 	
+	@OneToMany(mappedBy = "ingredient")
+	@JsonIgnore
+    private Set<RecipeIngredient> newingredient;
 	
 	public Ingredient() {
 		super();
