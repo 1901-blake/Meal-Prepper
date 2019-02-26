@@ -11,10 +11,10 @@ import { WeeklyViewComponent } from './Components/Weekly_View/WeeklyView.compone
 import { RecipeHistoryComponent } from './Components/Recipe_History/Recipe.component';
 import { FavoriteComponent } from './Components/Favorites/Favorite.component';
 import { SettingComponent } from './Components/Setting/Setting.component';
-import { UserInfoComponent } from './Components/User_Info/UserInfo.component';
+import UserInfoComponent from './Components/User_Info/UserInfo.component';
 import { AboutComponent } from './Components/About/About.component';
 import Amplify from 'aws-amplify';
-import config from './config/cognito.config'
+import config from './config/cognito.config';
 
 Amplify.configure({
   Auth : {

@@ -1,5 +1,4 @@
 import React from 'react';
-import Nav from 'reactstrap/lib/Nav';
 import NavItem from 'reactstrap/lib/NavItem';
 import { INavState, IState } from '../../reducers';
 import { connect } from 'react-redux';
@@ -10,6 +9,12 @@ import DropdownItem from 'reactstrap/lib/DropdownItem';
 import { Link } from 'react-router-dom';
 import NavLink from 'reactstrap/lib/NavLink';
 import { toggle1, toggle } from '../../Actions/Nav.action';
+import { Nav } from 'reactstrap';
+import SignInButton from '../AuthComponents/SignInButton/SignInButton';
+import SignUpButton from '../AuthComponents/SignUpButton/SignUpButton';
+import ForgotPasswordButton from '../AuthComponents/ForgotPasswordButton/ForgotPasswordButton';
+import SignOutButton from '../AuthComponents/SignOutButton/SignOutButton';
+import ChangePasswordButton from '../AuthComponents/ChangePasswordButton/ChangePasswordButton';
 
 
 export interface INavProps {
@@ -34,7 +39,7 @@ export class NavComponent extends React.Component<INavProps, any> {
                     <NavItem>
                         <NavLink><Link to="/about" >About</Link></NavLink>
                     </NavItem>
-                     <NavItem>
+                    <NavItem>
                         <NavLink><Link to="/grocerylist" >Grocery List</Link></NavLink>
                     </NavItem>
                     <Dropdown nav isOpen={this.props.nav.dropdown1} toggle={this.props.toggle}>
@@ -48,7 +53,7 @@ export class NavComponent extends React.Component<INavProps, any> {
                             </DropdownItem>
                             <DropdownItem>
                                 <NavLink>
-                                <Link to="/dailyinfo">Daily View</Link></NavLink>
+                                    <Link to="/dailyinfo">Daily View</Link></NavLink>
                             </DropdownItem>
                         </DropdownMenu>
                     </Dropdown>
@@ -65,12 +70,18 @@ export class NavComponent extends React.Component<INavProps, any> {
                         <DropdownMenu left>
                             <DropdownItem>
                                 <NavLink>
-                                <Link to="/setting">Settings</Link></NavLink>            
+                                    <Link to="/setting">Settings</Link></NavLink>
                             </DropdownItem>
                             <DropdownItem>
                                 <NavLink>
                                     <Link to="/userinfo">User Info</Link></NavLink>
                             </DropdownItem>
+                            <DropdownItem><NavLink><SignInButton /></NavLink></DropdownItem>
+                            <DropdownItem><NavLink><SignUpButton /></NavLink></DropdownItem>
+                            <DropdownItem><NavLink><SignOutButton /></NavLink></DropdownItem>
+                            <DropdownItem><NavLink><ForgotPasswordButton /></NavLink></DropdownItem>
+                            <DropdownItem><NavLink><SignUpButton /></NavLink></DropdownItem>
+                            <DropdownItem><NavLink><ChangePasswordButton /></NavLink></DropdownItem>
                         </DropdownMenu>
                     </Dropdown>
                 </Nav>
