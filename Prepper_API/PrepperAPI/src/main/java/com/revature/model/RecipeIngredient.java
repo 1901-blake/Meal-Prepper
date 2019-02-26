@@ -38,12 +38,6 @@ public class RecipeIngredient {
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ingredient_id")
     private Ingredient ingredient;
-	
-/*	@Column(name = "measure_id")
-	private int measurements;*/
-	
-	/*@Column(name = "ingredient_id")
-	private int ingredients;*/
 
 	private int amount;
 

@@ -33,69 +33,92 @@ public class Recipe {
 	private String description;
 	private String instructions;
 	
+	@OneToMany(mappedBy = "measure")
+	@JsonIgnore
+    private Set<RecipeIngredient> newmeasurement;
+	
 	@OneToMany(mappedBy = "recipe")
 	@JsonIgnore
-    private Set<RecipeIngredient> newrecipe;
+    private Set<Ratings> newrecipe;
 	
-/*	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "recipeingredient", 
-		joinColumns = @JoinColumn(name = "recipe_id", referencedColumnName = "id"), 
-		inverseJoinColumns = @JoinColumn(name = "measure_id", referencedColumnName = "id"))
-	private Set<Measure> measurement = new HashSet<>();
-
-	
-	//doesn't match up with measurement
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "recipeingredient", 
-		joinColumns = @JoinColumn(name = "recipe_id", referencedColumnName = "id"), 
-		inverseJoinColumns = @JoinColumn(name = "ingredient_id", referencedColumnName = "id"))
-	private Set<Ingredient> ingredient = new HashSet<>();
-	*/
-	
+		
 	public Recipe() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Recipe(int id, String name, String description, String instructions) {
+
+	public Recipe(int id, String name, String description, String instructions, Set<RecipeIngredient> newmeasurement,
+			Set<Ratings> newrecipe) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.instructions = instructions;
+		this.newmeasurement = newmeasurement;
+		this.newrecipe = newrecipe;
 	}
+
 
 	public int getId() {
 		return id;
 	}
 
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 
 	public String getName() {
 		return name;
 	}
 
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 
 	public String getDescription() {
 		return description;
 	}
 
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
 
 	public String getInstructions() {
 		return instructions;
 	}
 
+
 	public void setInstructions(String instructions) {
 		this.instructions = instructions;
 	}
+
+
+	public Set<RecipeIngredient> getNewmeasurement() {
+		return newmeasurement;
+	}
+
+
+	public void setNewmeasurement(Set<RecipeIngredient> newmeasurement) {
+		this.newmeasurement = newmeasurement;
+	}
+
+
+	public Set<Ratings> getNewrecipe() {
+		return newrecipe;
+	}
+
+
+	public void setNewrecipe(Set<Ratings> newrecipe) {
+		this.newrecipe = newrecipe;
+	}
+
 
 	@Override
 	public int hashCode() {
@@ -105,8 +128,11 @@ public class Recipe {
 		result = prime * result + id;
 		result = prime * result + ((instructions == null) ? 0 : instructions.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((newmeasurement == null) ? 0 : newmeasurement.hashCode());
+		result = prime * result + ((newrecipe == null) ? 0 : newrecipe.hashCode());
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -134,8 +160,17 @@ public class Recipe {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
+		if (newmeasurement == null) {
+			if (other.newmeasurement != null)
+				return false;
+		} else if (!newmeasurement.equals(other.newmeasurement))
+			return false;
+		if (newrecipe == null) {
+			if (other.newrecipe != null)
+				return false;
+		} else if (!newrecipe.equals(other.newrecipe))
+			return false;
 		return true;
 	}
-
 	
 }
