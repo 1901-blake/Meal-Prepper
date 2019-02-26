@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from 'react-redux';
 import { IGRocState, IState, state } from "../../reducers";
-import { addGroceryRow } from "../../Actions/GroceryList.action";
+import { loadGroceryRow, addGroceryRow } from "../../Actions/GroceryList.action";
 
 const divStyle = {
     margin: '40px',
@@ -10,7 +10,9 @@ const divStyle = {
 
 export interface IGrocProps {
     groc: IGRocState,
-    addGroceryRow: (amount: number) => void,
+    loadGroceryRow: () => void,
+    addGroceryRow: (Ingredientname: string, amount: number) => void
+
 }
 
 export class GroceryListComponent extends React.Component<IGrocProps, any> {
@@ -18,7 +20,9 @@ export class GroceryListComponent extends React.Component<IGrocProps, any> {
     constructor(props) {
         super(props);
         this.state = {
-            tempamount: 0
+            tempamount: 0,
+            tempname: ''
+
         }
     }
 
@@ -27,20 +31,18 @@ export class GroceryListComponent extends React.Component<IGrocProps, any> {
     changeamount = (event) => {
         this.setState({ tempamount: event.target.value });
     }
-
-    tempfunc =  () => {
-        // console.log('tempfunc called');
-        // var rows = this.state.rows
-        // rows.push('new row')
-        // this.setState({rows: rows})
-         this.props.addGroceryRow(this.state.tempamount);
-        console.log('tempfunc called with state of: ' + this.props.groc.arrayingredient + 'with a length of: ' + this.props.groc.arrayingredient.length);
-
-        // this.state.rows.push('new stuff');
+    changename = (event) => {
+        this.setState({ tempname: event.target.value });
     }
-componentDidMount(){
-    this.tempfunc();
-}
+
+    tempfunc = () => {
+        this.props.addGroceryRow(this.state.tempname,this.state.tempamount);
+    }
+
+    componentDidMount() {
+        this.props.loadGroceryRow();
+    }
+
     render() {
         return (
             <div>
@@ -57,8 +59,8 @@ componentDidMount(){
                     <tbody>
                         <tr style={divStyle}>
                             {/* <td> <input type="checkbox" /> </td> */}
-                            <td> <button>+</button> </td>
-                            <td> <input type="text" placeholder="ingredient name" /> </td>
+                            <td> <button onClick={this.tempfunc}>+</button> </td>
+                            <td> <input type="text" placeholder="ingredient name" onChange={this.changename}/> </td>
                             <td> <input type="number" placeholder="amount" onChange={this.changeamount} /> </td>
                         </tr>
                         {
@@ -71,12 +73,9 @@ componentDidMount(){
                                 </tr>
                             ))
                         }
-
-                        <button id="addBtn" onClick={this.tempfunc}>ADD</button>
                     </tbody>
 
                 </table>
-                <h1>{this.state.tempamount}</h1>
             </div>
         )
     }
@@ -89,6 +88,7 @@ const mapStateToProps = (state: IState) => {
 }
 
 const mapDispatchToProps = {
+    loadGroceryRow,
     addGroceryRow
 }
 
