@@ -13,6 +13,8 @@ import { FavoriteComponent } from './Components/Favorites/Favorite.component';
 import { SettingComponent } from './Components/Setting/Setting.component';
 import { UserInfoComponent } from './Components/User_Info/UserInfo.component';
 import { AboutComponent } from './Components/About/About.component';
+import EnterNewRecipeComponent from './Components/Recipe_Input/EnterNewRecipe.component';
+import { HomeComponent } from './Components/Home/Home.component';
 
 class App extends Component {
   render() {
@@ -22,7 +24,7 @@ class App extends Component {
             <div>
               <NavComponent />
               
-              <Route exact path="/home" component={GroceryListComponent} />
+              <Route exact path="" component={HomeComponent} />
 
               <Route exact path="/grocerylist" component={GroceryListComponent} />
 
@@ -32,7 +34,7 @@ class App extends Component {
               <Route exact path="/weeklyinfo" component={WeeklyViewComponent} />
 
               <Route exact path="/recipehistory" component={RecipeHistoryComponent} />
-
+              <Route exact path="/recipeInput" component={EnterNewRecipeComponent} />
               <Route exact path="/favorites" component={FavoriteComponent} />
 
               <Route exact path="/setting" component={SettingComponent} />

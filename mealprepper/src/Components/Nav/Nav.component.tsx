@@ -10,6 +10,8 @@ import DropdownItem from 'reactstrap/lib/DropdownItem';
 import { Link } from 'react-router-dom';
 import NavLink from 'reactstrap/lib/NavLink';
 import { toggle1, toggle } from '../../Actions/Nav.action';
+import logodark from '../../assets/logo-dark.png'
+import logolight from '../../assets/logo-light.png'
 
 
 export interface INavProps {
@@ -27,7 +29,10 @@ export class NavComponent extends React.Component<INavProps, any> {
     render() {
         return (
             <div>
-                <Nav pills>
+                <Nav className="navbar navbar-expand-lg navbar-dark bg-dark" pills>
+                    <Link to="" className="navbar-brand">
+                        <img src={logodark}  height="50" className="d-inline-block align-top" alt="prepper" />
+                    </Link>
                     <NavItem>
                         <NavLink><Link to="">Home</Link></NavLink>
                     </NavItem>
@@ -54,6 +59,9 @@ export class NavComponent extends React.Component<INavProps, any> {
                     </Dropdown>
                     <NavItem>
                         <NavLink><Link to="/recipehistory" >Recipe History</Link></NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink><Link to="/recipeInput" >Enter New Recipe</Link></NavLink>
                     </NavItem>
                     <NavItem>
                         <NavLink><Link to="/favorites" >Favorites</Link></NavLink>
