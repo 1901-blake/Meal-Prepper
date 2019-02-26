@@ -24,6 +24,7 @@ export class AboutComponent extends React.Component<any, any> {
     render() {
         return (
             <div>
+                About Component
             </div>
         )
     }

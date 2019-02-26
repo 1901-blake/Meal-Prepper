@@ -3,8 +3,8 @@ import { groceryTypes } from "../Actions/GroceryList.action";
 
 
 const initialState: IGRocState = {
-    arrayingredient : [],
-    amount : 0
+    arrayingredient: [],
+    amount: 0
 }
 
 export const grocReducer = (state = initialState, action: any) => {
@@ -13,10 +13,16 @@ export const grocReducer = (state = initialState, action: any) => {
             return {
                 ...state,
                 // arrayingredient: action.payload.arrayingredient,
-                arrayingredient: [...state.arrayingredient, action.payload.hi],
-                amount: state.amount
+                arrayingredient: [...state.arrayingredient, action.payload.Ingredientname],
             }
-        }
+        case groceryTypes.LOAD_ROW:
+            return {
+                ...state,
+                // arrayingredient: action.payload.arrayingredient,
+                arrayingredient: [...state.arrayingredient, action.payload.temo],
+            }
+    }
+
     return state;
 }
 
