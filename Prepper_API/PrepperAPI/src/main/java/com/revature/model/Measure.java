@@ -13,8 +13,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Table(name = "measure")
@@ -28,22 +30,22 @@ public class Measure {
 	private int id;
 	private String name;
 	
+	@OneToMany(mappedBy = "measure")
+	@JsonIgnore
+    private Set<RecipeIngredient> newmeasurement;
 	
 	public Measure() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-
-	//constructor
-	public Measure(int id, String name) {
+	public Measure(int id, String name, Set<RecipeIngredient> newmeasurement) {
 		super();
 		this.id = id;
 		this.name = name;
+		this.newmeasurement = newmeasurement;
 	}
-	
-	
-	//getters and setters
+
 	public int getId() {
 		return id;
 	}
@@ -60,6 +62,13 @@ public class Measure {
 		this.name = name;
 	}
 
+	public Set<RecipeIngredient> getNewmeasurement() {
+		return newmeasurement;
+	}
+
+	public void setNewmeasurement(Set<RecipeIngredient> newmeasurement) {
+		this.newmeasurement = newmeasurement;
+	}
 
 	@Override
 	public int hashCode() {
@@ -67,9 +76,9 @@ public class Measure {
 		int result = 1;
 		result = prime * result + id;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((newmeasurement == null) ? 0 : newmeasurement.hashCode());
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -87,9 +96,14 @@ public class Measure {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
+		if (newmeasurement == null) {
+			if (other.newmeasurement != null)
+				return false;
+		} else if (!newmeasurement.equals(other.newmeasurement))
+			return false;
 		return true;
 	}
 	
-	
+
 
 }

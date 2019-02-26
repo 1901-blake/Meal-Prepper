@@ -13,8 +13,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Table(name = "recipe")
@@ -30,6 +32,10 @@ public class Recipe {
 	private String name;
 	private String description;
 	private String instructions;
+	
+	@OneToMany(mappedBy = "recipe")
+	@JsonIgnore
+    private Set<RecipeIngredient> newrecipe;
 	
 /*	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "recipeingredient", 

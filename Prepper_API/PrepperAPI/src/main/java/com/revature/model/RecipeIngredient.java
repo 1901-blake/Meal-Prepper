@@ -23,14 +23,27 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class RecipeIngredient {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "recipe_id")
-	private int recipe;
+	@Column(name  = "id")
+	private int id;
 	
-	@Column(name = "measure_id")
-	private int measurements;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "recipe_id")
+	private Recipe recipe;
 	
-	@Column(name = "ingredient_id")
-	private int ingredients;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "measure_id")
+    private Measure measure;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ingredient_id")
+    private Ingredient ingredient;
+	
+/*	@Column(name = "measure_id")
+	private int measurements;*/
+	
+	/*@Column(name = "ingredient_id")
+	private int ingredients;*/
 
 	private int amount;
 
@@ -39,36 +52,36 @@ public class RecipeIngredient {
 		// TODO Auto-generated constructor stub
 	}
 
-	public RecipeIngredient(int recipe, int measurements, int ingredients, int amount) {
+	public RecipeIngredient(Recipe recipe, Measure measure, Ingredient ingredient, int amount) {
 		super();
 		this.recipe = recipe;
-		this.measurements = measurements;
-		this.ingredients = ingredients;
+		this.measure = measure;
+		this.ingredient = ingredient;
 		this.amount = amount;
 	}
 
-	public int getRecipe() {
+	public Recipe getRecipe() {
 		return recipe;
 	}
 
-	public void setRecipe(int recipe) {
+	public void setRecipe(Recipe recipe) {
 		this.recipe = recipe;
 	}
 
-	public int getMeasurements() {
-		return measurements;
+	public Measure getMeasure() {
+		return measure;
 	}
 
-	public void setMeasurements(int measurements) {
-		this.measurements = measurements;
+	public void setMeasure(Measure measure) {
+		this.measure = measure;
 	}
 
-	public int getIngredients() {
-		return ingredients;
+	public Ingredient getIngredient() {
+		return ingredient;
 	}
 
-	public void setIngredients(int ingredients) {
-		this.ingredients = ingredients;
+	public void setIngredient(Ingredient ingredient) {
+		this.ingredient = ingredient;
 	}
 
 	public int getAmount() {
@@ -84,9 +97,9 @@ public class RecipeIngredient {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + amount;
-		result = prime * result + ingredients;
-		result = prime * result + measurements;
-		result = prime * result + recipe;
+		result = prime * result + ((ingredient == null) ? 0 : ingredient.hashCode());
+		result = prime * result + ((measure == null) ? 0 : measure.hashCode());
+		result = prime * result + ((recipe == null) ? 0 : recipe.hashCode());
 		return result;
 	}
 
@@ -101,14 +114,24 @@ public class RecipeIngredient {
 		RecipeIngredient other = (RecipeIngredient) obj;
 		if (amount != other.amount)
 			return false;
-		if (ingredients != other.ingredients)
+		if (ingredient == null) {
+			if (other.ingredient != null)
+				return false;
+		} else if (!ingredient.equals(other.ingredient))
 			return false;
-		if (measurements != other.measurements)
+		if (measure == null) {
+			if (other.measure != null)
+				return false;
+		} else if (!measure.equals(other.measure))
 			return false;
-		if (recipe != other.recipe)
+		if (recipe == null) {
+			if (other.recipe != null)
+				return false;
+		} else if (!recipe.equals(other.recipe))
 			return false;
 		return true;
 	}
 
+	
 
 }
