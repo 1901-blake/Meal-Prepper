@@ -13,35 +13,34 @@ import com.revature.services.UsersService;
 
 @RestController
 @RequestMapping("users")
-
 public class UsersController {
 	
 	@Autowired
-	private UsersService UsersService;
+	private UsersService usersService;
 
 	@GetMapping
 	public List<Users> findAll() {
-		return UsersService.findAll();
+		return usersService.findAll();
 	}
 
 	@GetMapping("{id}")
 	public Users findById(@PathVariable int id) {
-		return UsersService.findById(id);
+		return usersService.findById(id);
 	}
 	
 	@GetMapping("{username}")
 	public List<Users> findByUsername(@PathVariable String username) {
-		return UsersService.findByUsername(username);
+		return usersService.findByUsername(username);
 	}
 	
 	@GetMapping("{firstname}")
 	public List<Users> findByFirstname(@PathVariable String firstname) {
-		return UsersService.findByFirstname(firstname);
+		return usersService.findByFirstname(firstname);
 	}
 	
 	@GetMapping("{lastname}")
 	public List<Users> findByLastname(@PathVariable String lastname) {
-		return UsersService.findByLastname(lastname);
+		return usersService.findByLastname(lastname);
 	}
 
 }

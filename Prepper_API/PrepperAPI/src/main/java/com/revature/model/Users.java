@@ -13,8 +13,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Table(name = "users")
@@ -34,59 +36,87 @@ public class Users {
 	private String lastname;
 	private String email;
 	
+	@OneToMany(mappedBy = "user")
+	@JsonIgnore
+    private Set<Ratings> newuser;
+	
+	
 	public Users() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Users(int id, String username, String firstname, String lastname, String email) {
+
+	public Users(int id, String username, String firstname, String lastname, String email, Set<Ratings> newuser) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.email = email;
+		this.newuser = newuser;
 	}
+
 
 	public int getId() {
 		return id;
 	}
 
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 
 	public String getUsername() {
 		return username;
 	}
 
+
 	public void setUsername(String username) {
 		this.username = username;
 	}
+
 
 	public String getFirstname() {
 		return firstname;
 	}
 
+
 	public void setFirstname(String firstname) {
 		this.firstname = firstname;
 	}
+
 
 	public String getLastname() {
 		return lastname;
 	}
 
+
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
 	}
+
 
 	public String getEmail() {
 		return email;
 	}
 
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+
+	public Set<Ratings> getNewuser() {
+		return newuser;
+	}
+
+
+	public void setNewuser(Set<Ratings> newuser) {
+		this.newuser = newuser;
+	}
+
 
 	@Override
 	public int hashCode() {
@@ -96,9 +126,11 @@ public class Users {
 		result = prime * result + ((firstname == null) ? 0 : firstname.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((lastname == null) ? 0 : lastname.hashCode());
+		result = prime * result + ((newuser == null) ? 0 : newuser.hashCode());
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -125,6 +157,11 @@ public class Users {
 			if (other.lastname != null)
 				return false;
 		} else if (!lastname.equals(other.lastname))
+			return false;
+		if (newuser == null) {
+			if (other.newuser != null)
+				return false;
+		} else if (!newuser.equals(other.newuser))
 			return false;
 		if (username == null) {
 			if (other.username != null)

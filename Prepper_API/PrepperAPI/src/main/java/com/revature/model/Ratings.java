@@ -19,31 +19,33 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@Table(name = "measure")
+@Table(name = "ratings")
 @Entity
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-
-public class Measure {
+public class Ratings {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
+	@Column(name = "id")//creating a primary key	
 	private int id;
-	private String name;
 	
-	@OneToMany(mappedBy = "measure")
-	@JsonIgnore
-    private Set<RecipeIngredient> newmeasurement;
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private Users user;
 	
-	public Measure() {
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "Recipe_id")
+    private Recipe recipe;
+
+	public Ratings() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Measure(int id, String name, Set<RecipeIngredient> newmeasurement) {
+	public Ratings(int id, Users user, Recipe recipe) {
 		super();
 		this.id = id;
-		this.name = name;
-		this.newmeasurement = newmeasurement;
+		this.user = user;
+		this.recipe = recipe;
 	}
 
 	public int getId() {
@@ -54,20 +56,20 @@ public class Measure {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public Users getUser() {
+		return user;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setUser(Users user) {
+		this.user = user;
 	}
 
-	public Set<RecipeIngredient> getNewmeasurement() {
-		return newmeasurement;
+	public Recipe getRecipe() {
+		return recipe;
 	}
 
-	public void setNewmeasurement(Set<RecipeIngredient> newmeasurement) {
-		this.newmeasurement = newmeasurement;
+	public void setRecipe(Recipe recipe) {
+		this.recipe = recipe;
 	}
 
 	@Override
@@ -75,8 +77,8 @@ public class Measure {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + id;
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((newmeasurement == null) ? 0 : newmeasurement.hashCode());
+		result = prime * result + ((recipe == null) ? 0 : recipe.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
 
@@ -88,22 +90,23 @@ public class Measure {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Measure other = (Measure) obj;
+		Ratings other = (Ratings) obj;
 		if (id != other.id)
 			return false;
-		if (name == null) {
-			if (other.name != null)
+		if (recipe == null) {
+			if (other.recipe != null)
 				return false;
-		} else if (!name.equals(other.name))
+		} else if (!recipe.equals(other.recipe))
 			return false;
-		if (newmeasurement == null) {
-			if (other.newmeasurement != null)
+		if (user == null) {
+			if (other.user != null)
 				return false;
-		} else if (!newmeasurement.equals(other.newmeasurement))
+		} else if (!user.equals(other.user))
 			return false;
 		return true;
 	}
 	
-
+	
+	
 
 }
