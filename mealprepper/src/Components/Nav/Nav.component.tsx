@@ -10,6 +10,11 @@ import { Link } from 'react-router-dom';
 import NavLink from 'reactstrap/lib/NavLink';
 import { toggle1, toggle } from '../../Actions/Nav.action';
 import {Nav} from 'reactstrap';
+import SignInButton from '../AuthComponents/SignInButton/SignInButton';
+import SignUpButton from '../AuthComponents/SignUpButton/SignUpButton';
+import ForgotPasswordButton from '../AuthComponents/ForgotPasswordButton/ForgotPasswordButton';
+import SignOutButton from '../AuthComponents/SignOutButton/SignOutButton';
+import ChangePasswordButton from '../AuthComponents/ChangePasswordButton/ChangePasswordButton';
 
 
 export interface INavProps {
@@ -71,8 +76,20 @@ export class NavComponent extends React.Component<INavProps, any> {
                                 <NavLink>
                                     <Link to="/userinfo">User Info</Link></NavLink>
                             </DropdownItem>
+                            <DropdownItem>
+                                <NavLink>
+                                    <Link to="/update">Update User Profile</Link></NavLink>
+                            </DropdownItem>
                         </DropdownMenu>
                     </Dropdown>
+                    <NavLink><SignInButton /></NavLink>
+                    <NavLink><SignUpButton /></NavLink>
+                    <NavLink><SignOutButton /></NavLink>
+                    <NavLink><ForgotPasswordButton /></NavLink>
+                    <NavLink><SignUpButton /></NavLink>
+                    <NavLink><ChangePasswordButton /></NavLink>
+                    
+                    
                 </Nav>
             </div>
         );

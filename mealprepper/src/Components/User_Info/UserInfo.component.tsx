@@ -1,11 +1,8 @@
 import React from "react";
 import { connect } from 'react-redux';
-import {IState, state } from "../../reducers";
+import { IState, state } from "../../reducers";
+import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 
-const divStyle = {
-    margin: '40px',
-    border: '3px solid pink',
-};
 
 //takein the state from store and any function needed in action
 export interface IUserInfoProps {
@@ -20,11 +17,12 @@ export class UserInfoComponent extends React.Component<any, any> {
         this.state = {
         }
     }
-    
+
     render() {
         return (
-            <div>
-            </div>
+        <div>
+            
+        </div>
         )
     }
 }
@@ -37,7 +35,7 @@ const mapStateToProps = (state: IState) => {
 }
 //add function when added in setting.action
 const mapDispatchToProps = {
-    
+
 }
 
 //change the component if you copied and paste
