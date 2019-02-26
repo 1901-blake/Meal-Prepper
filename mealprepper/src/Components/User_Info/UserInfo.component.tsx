@@ -50,7 +50,7 @@ export class UserInfoComponent extends React.Component<IUserInfoProps, any> {
                             <Input type="text" name="username" placeholder="Username" value={this.props.userinfo.username} onChange={() => this.props.updateUsername(event)} />
                         </FormGroup>
                         <Button onClick={() => this.props.handleSubmit(event, this.props.userinfo.username, this.props.userinfo.firstname, this.props.userinfo.lastname, 
-                            this.props.userinfo.email)}>Submit</Button>
+                            this.props.userinfo.email)}>Update</Button>
                     </Form>
                     {this.props.userinfo.feedback}
                 </div>
