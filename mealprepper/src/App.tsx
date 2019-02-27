@@ -36,7 +36,7 @@ class App extends Component {
           <div>
             <NavComponent />
 
-            <Route exact path="/home" component={GroceryListComponent} />
+            <Route exact path="" component={HomeComponent} />
 
             <Route exact path="/grocerylist" component={GroceryListComponent} />
 
@@ -46,7 +46,7 @@ class App extends Component {
             <Route exact path="/weeklyinfo" component={WeeklyViewComponent} />
 
             <Route exact path="/recipehistory" component={RecipeHistoryComponent} />
-
+            <Route exact path="/recipeInput" component={EnterNewRecipeComponent} />
             <Route exact path="/favorites" component={FavoriteComponent} />
 
             <Route exact path="/setting" component={SettingComponent} />
