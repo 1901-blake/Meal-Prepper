@@ -42,9 +42,6 @@ export class NavComponent extends React.Component<INavProps, any> {
                         <img src={logodark} height="50" className="d-inline-block align-top" alt="prepper" />
                     </Link>
                     <NavItem>
-                        <NavLink><Link to="">Home</Link></NavLink>
-                    </NavItem>
-                    <NavItem>
                         <NavLink><Link to="/about" >About</Link></NavLink>
                     </NavItem>
                     <NavItem>
@@ -87,13 +84,13 @@ export class NavComponent extends React.Component<INavProps, any> {
                                 <NavLink>
                                     <Link to="/userinfo">User Info</Link></NavLink>
                             </DropdownItem>
+                            <SignInButton/>
+                            <SignUpButton/>
+                            <SignOutButton/>
+                            <ForgotPasswordButton/>
+                            <SignUpButton/>
+                            <ChangePasswordButton/>
                         </DropdownMenu>
-                        <SignInButton/>
-                        <SignUpButton/>
-                        <SignOutButton/>
-                        <ForgotPasswordButton/>
-                        <SignUpButton/>
-                        <ChangePasswordButton/>
                     </Dropdown>
                 </Nav>
             </div>

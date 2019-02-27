@@ -24,6 +24,7 @@ export class SettingComponent extends React.Component<any, any> {
     render() {
         return (
             <div>
+                Settings Component
             </div>
         )
     }
