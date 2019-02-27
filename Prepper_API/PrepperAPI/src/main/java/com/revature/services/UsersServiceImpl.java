@@ -42,22 +42,4 @@ public class UsersServiceImpl implements UsersService{
 		return usersRepo.getOne(id);
 	}
 
-	@Override
-	public List<Users> findByUsername(String usernamename) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Users> findByFirstname(String firstname) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Users> findByLastname(String lastname) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

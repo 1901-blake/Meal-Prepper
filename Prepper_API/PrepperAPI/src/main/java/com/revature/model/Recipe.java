@@ -43,8 +43,12 @@ public class Recipe {
 	
 		
 	public Recipe() {
-		super();
-		// TODO Auto-generated constructor stub
+		this.id = 0;
+		this.name = "";
+		this.description = "";
+		this.instructions = "";
+		this.newmeasurement = new HashSet<RecipeIngredient> ();
+		this.newrecipe = new HashSet<Ratings>();
 	}
 
 

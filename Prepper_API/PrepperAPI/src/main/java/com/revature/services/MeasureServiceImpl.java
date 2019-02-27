@@ -16,8 +16,7 @@ public class MeasureServiceImpl implements MeasureService{
 
 	@Override
 	public Measure save(Measure m) {
-		// TODO Auto-generated method stub
-		return null;
+		return measureRepo.save(m);
 	}
 
 	@Override
@@ -44,8 +43,7 @@ public class MeasureServiceImpl implements MeasureService{
 
 	@Override
 	public List<Measure> findByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		return measureRepo.findByName(name);
 	}
 
 }

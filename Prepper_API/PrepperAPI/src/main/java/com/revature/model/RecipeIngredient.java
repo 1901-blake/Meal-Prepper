@@ -43,7 +43,6 @@ public class RecipeIngredient {
 
 	public RecipeIngredient() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public RecipeIngredient(Recipe recipe, Measure measure, Ingredient ingredient, int amount) {

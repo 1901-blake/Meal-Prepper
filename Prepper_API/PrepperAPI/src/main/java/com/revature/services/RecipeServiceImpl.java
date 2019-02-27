@@ -6,7 +6,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.revature.model.Ingredient;
 import com.revature.model.Recipe;
+import com.revature.model.RecipeIngredient;
+import com.revature.repos.RecipeIngredientRepo;
 import com.revature.repos.RecipeRepo;
 
 @Service
@@ -17,8 +20,12 @@ public class RecipeServiceImpl implements RecipeService{
 
 	@Override
 	public Recipe save(Recipe r) {
-		// TODO Auto-generated method stub
-		return null;
+		return recipeRepo.save(r);
+	}	
+	
+	@Override
+	public Ingredient save(Ingredient i) {
+		return recipeRepo.save(i);
 	}
 
 	@Override
@@ -54,7 +61,9 @@ public class RecipeServiceImpl implements RecipeService{
 	public List<Recipe> findByInstruction(String instructions) {
 		// TODO Auto-generated method stub
 		return null;
-	}	
+	}
+
 	
+
 	
 }
