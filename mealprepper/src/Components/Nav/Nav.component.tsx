@@ -1,5 +1,4 @@
 import React from 'react';
-import Nav from 'reactstrap/lib/Nav';
 import NavItem from 'reactstrap/lib/NavItem';
 import { INavState, IState } from '../../reducers';
 import { connect } from 'react-redux';
@@ -10,6 +9,17 @@ import DropdownItem from 'reactstrap/lib/DropdownItem';
 import { Link } from 'react-router-dom';
 import NavLink from 'reactstrap/lib/NavLink';
 import { toggle1, toggle } from '../../Actions/Nav.action';
+
+import logodark from '../../assets/logo-dark.png'
+import logolight from '../../assets/logo-light.png'
+
+import { Nav } from 'reactstrap';
+import SignInButton from '../AuthComponents/SignInButton/SignInButton';
+import SignUpButton from '../AuthComponents/SignUpButton/SignUpButton';
+import ForgotPasswordButton from '../AuthComponents/ForgotPasswordButton/ForgotPasswordButton';
+import SignOutButton from '../AuthComponents/SignOutButton/SignOutButton';
+import ChangePasswordButton from '../AuthComponents/ChangePasswordButton/ChangePasswordButton';
+
 
 
 export interface INavProps {
@@ -27,14 +37,17 @@ export class NavComponent extends React.Component<INavProps, any> {
     render() {
         return (
             <div>
-                <Nav pills>
+                <Nav className="navbar navbar-expand-lg navbar-dark bg-dark" pills>
+                    <Link to="" className="navbar-brand">
+                        <img src={logodark} height="50" className="d-inline-block align-top" alt="prepper" />
+                    </Link>
                     <NavItem>
                         <NavLink><Link to="">Home</Link></NavLink>
                     </NavItem>
                     <NavItem>
                         <NavLink><Link to="/about" >About</Link></NavLink>
                     </NavItem>
-                     <NavItem>
+                    <NavItem>
                         <NavLink><Link to="/grocerylist" >Grocery List</Link></NavLink>
                     </NavItem>
                     <Dropdown nav isOpen={this.props.nav.dropdown1} toggle={this.props.toggle}>
@@ -48,12 +61,15 @@ export class NavComponent extends React.Component<INavProps, any> {
                             </DropdownItem>
                             <DropdownItem>
                                 <NavLink>
-                                <Link to="/dailyinfo">Daily View</Link></NavLink>
+                                    <Link to="/dailyinfo">Daily View</Link></NavLink>
                             </DropdownItem>
                         </DropdownMenu>
                     </Dropdown>
                     <NavItem>
                         <NavLink><Link to="/recipehistory" >Recipe History</Link></NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink><Link to="/recipeInput" >Enter New Recipe</Link></NavLink>
                     </NavItem>
                     <NavItem>
                         <NavLink><Link to="/favorites" >Favorites</Link></NavLink>
@@ -65,13 +81,19 @@ export class NavComponent extends React.Component<INavProps, any> {
                         <DropdownMenu left>
                             <DropdownItem>
                                 <NavLink>
-                                <Link to="/setting">Settings</Link></NavLink>            
+                                    <Link to="/setting">Settings</Link></NavLink>
                             </DropdownItem>
                             <DropdownItem>
                                 <NavLink>
                                     <Link to="/userinfo">User Info</Link></NavLink>
                             </DropdownItem>
                         </DropdownMenu>
+                        <SignInButton/>
+                        <SignUpButton/>
+                        <SignOutButton/>
+                        <ForgotPasswordButton/>
+                        <SignUpButton/>
+                        <ChangePasswordButton/>
                     </Dropdown>
                 </Nav>
             </div>
