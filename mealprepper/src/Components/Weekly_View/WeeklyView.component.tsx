@@ -1,8 +1,9 @@
 import React from "react";
 import { connect } from 'react-redux';
-import { IState, state } from "../../reducers";
-import Alert from "reactstrap/lib/Alert";
+import { IState, state, IWeeklyViewState } from "../../reducers";
 import Modal from 'react-modal';
+import { loadWeeklyPlan } from "../../Actions/WeeklyView.action";
+import { Recipe } from "../../Model/Recipe";
 
 
 const divStyle = {
@@ -33,51 +34,55 @@ const divStyle = {
 
 //takein the state from store and any function needed in action
 export interface IWeeklyViewProps {
-    // weeklyview: IWeeklyViewState,
+    weeklyview: IWeeklyViewState,
+    loadWeeklyPlan: (number) => void
 }
 
 //change the prop intake to the interface props and also change the class name if copied and paste
-export class WeeklyViewComponent extends React.Component<any, any> {
+export class WeeklyViewComponent extends React.Component<IWeeklyViewProps, any> {
 
     constructor(props) {
         super(props);
         this.state = {
-            modalebool: false
+            modalebool: false,
+            dailyview: Recipe
         }
     }
 
-    toggleModol = (event) => {
+    toggleModol = (selectedcard: Recipe) => {
         this.setState({ modalebool: !this.state.modalebool });
+        
+        if (selectedcard != null) {
+            this.setState({ dailyview: selectedcard });
+        }
 
-        console.log('you clciked on me hip hip horaay');
     }
-
+    componentDidMount() {
+        console.log('componentDidMount loadWeeklyPlan');
+        this.props.loadWeeklyPlan(0);
+    }
     render() {
         return (
             <div>
 
                 <div style={divStyle.row}>
-                    {/* need to get the selected */}
-                    <div style={divStyle.card} onClick={this.toggleModol}>
-                        <h3>first card</h3>
-                        <p>this is a paragragh to test the width of the card)</p>
-
-
-
-                    </div>
-
-                    <div style={divStyle.card}>
-                        <h3>second card</h3>
-                    </div>
-
-                    <div style={divStyle.card}>
-                        <h3>third card</h3>
-                    </div>
+                    {
+                        this.props.weeklyview.weeklyrecipe.map((r) => (
+                            <div style={divStyle.card} onClick={this.toggleModol.bind(this, r)}>
+                                <h3>{r.name}</h3>
+                                <p>{r.description}</p>
+                            </div>
+                        ))
+                    }
                 </div>
+
                 <Modal isOpen={this.state.modalebool} onRequestClose={this.toggleModol}>
-                    <button onClick={this.toggleModol}> X </button>
-                    Hello from modal
-                    </Modal>
+                    <button onClick={this.toggleModol.bind(this, this.state.dailyview)}> X </button>
+                    <p>{this.state.dailyview.recipe_id}</p>
+                    <p>{this.state.dailyview.name}</p>
+                    <p>{this.state.dailyview.description}</p>
+                    <p>{this.state.dailyview.instructions}</p>
+                </Modal>
             </div>
         )
     }
@@ -86,12 +91,12 @@ export class WeeklyViewComponent extends React.Component<any, any> {
 //uncommit this when the store has info for the current component
 const mapStateToProps = (state: IState) => {
     return {
-        // weeklyview: state.weeklyview
+        weeklyview: state.weeklyview
     }
 }
 //add function when added in setting.action
 const mapDispatchToProps = {
-
+    loadWeeklyPlan
 }
 
 //change the component if you copied and paste

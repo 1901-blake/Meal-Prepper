@@ -6,13 +6,12 @@ const initialState: IWeeklyViewState = {
     weeklyrecipe: [],
 }
 
-export const recipeHistoryReducer = (state = initialState, action: any) => {
+export const weeklyViewReducer = (state = initialState, action: any) => {
     switch (action.type) {
         case weeklyViewTypes.LOAD_WEEK_PLAN:
             return {
                 ...state,
-
-                weeklyrecipe: state.weeklyrecipe,
+                weeklyrecipe: action.payload.weeklyrecipe,
             }
     }
 
