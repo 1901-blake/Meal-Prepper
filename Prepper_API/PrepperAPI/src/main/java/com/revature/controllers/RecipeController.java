@@ -1,6 +1,8 @@
 package com.revature.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.validation.Valid;
 
@@ -12,10 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.revature.model.Ingredient;
-import com.revature.model.Measure;
 import com.revature.model.Recipe;
-import com.revature.services.MeasureService;
 import com.revature.services.RecipeService;
 
 @RestController
@@ -24,8 +23,8 @@ public class RecipeController {
 	
 	@Autowired
 	private RecipeService recipeService;
-	@Autowired
-	private MeasureService measureService;
+//	@Autowired
+//	private MeasureService measureService;
 
 	@GetMapping
 	public List<Recipe> findAll() {
@@ -37,22 +36,24 @@ public class RecipeController {
 		return recipeService.findById(id);
 	}
 	
-	@PostMapping("/recipe")
+	@GetMapping("generate/{numOfRecipes}")
+	public List<Recipe> findRandomRecipes(@PathVariable int numOfRecipes) {
+		List<Recipe> fullList = recipeService.findAll();
+		List<Recipe> buildList = new ArrayList<Recipe> ();
+		
+		Random rand = new Random();
+		
+		for (int i = 0; i < numOfRecipes; i++) {
+	        int randomIndex = rand.nextInt(fullList.size());
+	        buildList.add(fullList.get(randomIndex));
+	    }
+		
+		return buildList;
+	}
+	
+	
+	@PostMapping("/createRecipe")
 	public Recipe newRecipe(@Valid @RequestBody Recipe recipe) {
 		return recipeService.save(recipe);
 	}
-	
-	@PostMapping("/measure")
-	public Measure newMeasure(@Valid @RequestBody Measure measure) {
-		return measureService.save(measure);
-	}
-	
-	@PostMapping("/ingredient")
-	public Ingredient newIngredient(@Valid @RequestBody Ingredient i) {
-		return recipeService.save(i);
-	}
-	
-	
-	
-	
 }
