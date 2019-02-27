@@ -12,6 +12,13 @@ interface IEnterNewRecipeProps {
     updateIngredient: (event) => void
 }
 
+const BackgroundImagePage = () => {
+    return (
+        <div className="bg"></div>
+    );
+  }
+
+// export default BackgroundImagePage;
 
 export class EnterNewRecipeComponent extends React.Component<IEnterNewRecipeProps, any> {
 
@@ -21,7 +28,8 @@ export class EnterNewRecipeComponent extends React.Component<IEnterNewRecipeProp
 
     render() {
         return (
-            <div>
+            <div className="bg">
+                {/* {BackgroundImagePage()} */}
                 <form>
                     <div className="form-row">
                         <div className="form-group col-md-4">
