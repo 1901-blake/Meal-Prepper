@@ -14,6 +14,8 @@ import { recipeHistoryReducer } from './RecipeHistory.reducer';
 
 
 import { userInfoReducer } from './userinfo.reducer';
+import { weeklyViewReducer } from './weeklyview.reducer';
+import { favoriteReducer } from './Favorite.reducer';
 
 
 export interface INavState {
@@ -25,6 +27,7 @@ export interface IAboutStateState {
 export interface IDailyState {
 }
 export interface IFavoriteState {
+  favoriteRecipeArr : Recipe[]
 }
 export interface IEnterNewRecipeState {
   ingredArr: rTuple[]
@@ -59,11 +62,11 @@ export interface IGRocState {
 export interface IState {
   // about: IAboutState,
   // daily: IDailyState
-  // favorite: IFavoriteState
+  favorite: IFavoriteState
   nav: INavState,
   groc: IGRocState,
   newRecipe: IEnterNewRecipeState,
-  // weeklyview: IWeeklyViewState
+  weeklyview: IWeeklyViewState
     // favorite: IFavoriteState
     recipehistory: IRecipeHistoryState
     userinfo: IUserInfoState
@@ -74,9 +77,11 @@ export interface IState {
 
 
 export const state = combineReducers<IState>({
+  favorite: favoriteReducer,
   nav: navReducer,
   groc: grocReducer,
   newRecipe: enterNewRecipeReducer,
+  weeklyview: weeklyViewReducer,
   recipehistory : recipeHistoryReducer,
   userinfo: userInfoReducer
 })

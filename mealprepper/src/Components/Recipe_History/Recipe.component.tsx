@@ -35,6 +35,9 @@ export class RecipeHistoryComponent extends React.Component<IRecipeHistoryProps,
                     <thead >
                         <th style = {divStyle}>id</th>
                         <th style = {divStyle}>name</th>
+                        <th style = {divStyle}>description</th>
+                        <th style = {divStyle}>instructions</th>
+
                     </thead>
                     <tbody >
                         {
@@ -42,6 +45,8 @@ export class RecipeHistoryComponent extends React.Component<IRecipeHistoryProps,
                                 <tr >
                                     <td style = {divStyle}>{r.recipe_id}</td>
                                     <td style = {divStyle}>{r.name}</td>
+                                    <td style = {divStyle}>{r.description}</td>
+                                    <td style = {divStyle}>{r.instructions}</td>
                                 </tr>
                             ))
                         }

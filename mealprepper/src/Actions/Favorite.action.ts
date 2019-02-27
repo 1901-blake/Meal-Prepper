@@ -1,14 +1,15 @@
 import { Recipe } from "../Model/Recipe";
 
-export const weeklyViewTypes = {
-    LOAD_WEEK_PLAN: 'LOAD_WEEK_PLAN',
+export const favoriteTypes = {
+    LOAD_FAVORITE_PLAN: 'LOAD_FAVORITE_PLAN',
 }
 
-export const loadWeeklyPlan = (amount: number) => async (dispatch) => {
-    console.log('loadWeeklyPlan loading');
+export const favoritePlan = () => async (dispatch) => {
+    console.log('favoritePlan loading');
+
     const resp = await fetch('http://localhost:5500/recipe');
     
-    console.log('resp in loadWeeklyPlan.action has a status of: ' + resp.status);
+    console.log('resp in favoritePlan.action has a status of: ' + resp.status);
 
     if (resp.status == 200) {
 
@@ -28,9 +29,9 @@ export const loadWeeklyPlan = (amount: number) => async (dispatch) => {
         dispatch({
 
             payload: {
-                weeklyrecipe: temprecipe
+                favoriteRecipe: temprecipe
             },
-            type: weeklyViewTypes.LOAD_WEEK_PLAN
+            type: favoriteTypes.LOAD_FAVORITE_PLAN
         })
     }
 
