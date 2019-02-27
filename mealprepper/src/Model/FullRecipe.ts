@@ -1,21 +1,19 @@
+import { Ingredients } from "./Ingredients";
+
 export class FullRecipe {
     id: number;
     name: string;
     description: string;
     instructions: string;
-    amount: number;
-    measure: string;
-    ingredient: string;
+    ingredients: Ingredients[];
 
 
     constructor(id: number, name: string, description: string, instructions: string,
-        amount: number, measure: string, ingredient: string) {
+        ingredients: Ingredients[]) {
             this.id = id;
             this.name = name;
             this.description = description;
             this.instructions = instructions;
-            this.measure = measure;
-            this.amount = amount;
-            this.ingredient = ingredient;
+            this.ingredients = ingredients;
         }
 }

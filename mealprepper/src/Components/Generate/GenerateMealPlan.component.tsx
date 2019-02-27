@@ -7,12 +7,17 @@ import Table from "reactstrap/lib/Table";
 
 interface IGenerateMealPlanProps {
     generate: IGenerateMealPlanState,
+
     generateRecipes: () => Promise<void>
 }
 
 export class GenerateMealPlanComponent extends React.Component<IGenerateMealPlanProps, any> {
     constructor(props) {
         super(props);
+    }
+
+    getIngredients() {
+        
     }
 
     componentDidMount() {
@@ -42,9 +47,15 @@ export class GenerateMealPlanComponent extends React.Component<IGenerateMealPlan
                                 <td>{meal.name}</td>
                                 <td>{meal.description}</td>
                                 <td>{meal.instructions}</td>
-                                <td>{meal.amount}</td>
-                                <td>{meal.measure}</td>
-                                <td>{meal.ingredient}</td>
+                                <td>{meal.ingredients.map(ele => (
+                                    <pre>{ele.amount}</pre>
+                                ))}</td>
+                                <td>{meal.ingredients.map(ele => (
+                                    <pre>{ele.measure.name}</pre>
+                                ))}</td>
+                                <td>{meal.ingredients.map(ele => (
+                                    <pre>{ele.ingredient.name}</pre>
+                                ))}</td>
                             </tr>
                         ))}
                         </tbody>

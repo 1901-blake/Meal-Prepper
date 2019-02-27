@@ -1,4 +1,4 @@
-export class Ingredient {
+export class Measure {
     id: number;
     name: string;
 

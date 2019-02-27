@@ -1,7 +1,6 @@
 import { combineReducers } from 'redux';
 import { navReducer } from './nav.reducer';
 import { grocReducer } from './groceryList.reducer';
-import { Ingredients } from '../Model/Ingredient';
 import { Recipe } from '../Model/Recipe';
 import { enterNewRecipeReducer } from './EnterNewRecipe.reducer';
 import { recipeHistoryReducer } from './RecipeHistory.reducer';
@@ -59,7 +58,7 @@ export interface IWeeklyViewState {
 
 
 export interface IGRocState {
-  arrayingredient: Ingredients[]
+//   arrayingredient: Ingredients[]
   amount: number
 }
 export interface IState {
