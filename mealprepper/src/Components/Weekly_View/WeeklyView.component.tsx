@@ -1,14 +1,27 @@
 import React from "react";
 import { connect } from 'react-redux';
 import { IState, state } from "../../reducers";
+import Alert from "reactstrap/lib/Alert";
+import Modal from 'react-modal';
+
 
 const divStyle = {
     // zoom: 1,
     //display: 'inline',
 
-    border: '3px solid black',
-    padding: '16px',
-    backgroundColor: '#f1f1f1',
+    row: {
+        display: 'flex',
+    },
+    card: {
+        maxWidth: '275px',
+        height: '675px',
+
+        border: '2px solid black',
+
+        backgroundColor: '#f1f1f1',
+        margin: '3px',
+    },
+
     // width: '100%',
     // display: 'block',
     // marginBottom: '20px',
@@ -29,22 +42,42 @@ export class WeeklyViewComponent extends React.Component<any, any> {
     constructor(props) {
         super(props);
         this.state = {
+            modalebool: false
         }
     }
 
-    addweekplan = (event) => {
+    toggleModol = (event) => {
+        this.setState({ modalebool: !this.state.modalebool });
+
+        console.log('you clciked on me hip hip horaay');
     }
 
     render() {
         return (
             <div>
-                
-                {
-                    <div style={divStyle}>
-                        <h3>first card</h3>
-                    </div>
-                }
 
+                <div style={divStyle.row}>
+                    {/* need to get the selected */}
+                    <div style={divStyle.card} onClick={this.toggleModol}>
+                        <h3>first card</h3>
+                        <p>this is a paragragh to test the width of the card)</p>
+
+
+
+                    </div>
+
+                    <div style={divStyle.card}>
+                        <h3>second card</h3>
+                    </div>
+
+                    <div style={divStyle.card}>
+                        <h3>third card</h3>
+                    </div>
+                </div>
+                <Modal isOpen={this.state.modalebool} onRequestClose={this.toggleModol}>
+                    <button onClick={this.toggleModol}> X </button>
+                    Hello from modal
+                    </Modal>
             </div>
         )
     }
