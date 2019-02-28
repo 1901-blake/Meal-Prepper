@@ -7,7 +7,7 @@ import com.revature.model.Measure;
 
 public interface MeasureService {
 	
-	Measure save(Measure m);
+	Measure save(Measure measure);
 	Measure update(Measure m);
 	Measure delete(Measure m);
 	
@@ -15,6 +15,4 @@ public interface MeasureService {
 	Measure findById(int id);
 	List<Measure> findByName(String name);
 	
-
-
 }

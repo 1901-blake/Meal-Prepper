@@ -27,15 +27,8 @@ public class Users {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
-	private String username;
-	
-	@Column(name = "first_name")
-	private String firstname;
-	
-	@Column(name = "last_name")
-	private String lastname;
-	private String email;
-	
+	private String subkey;
+
 	@OneToMany(mappedBy = "user")
 	@JsonIgnore
     private Set<Ratings> newuser;
@@ -47,13 +40,10 @@ public class Users {
 	}
 
 
-	public Users(int id, String username, String firstname, String lastname, String email, Set<Ratings> newuser) {
+	public Users(int id, String subkey, Set<Ratings> newuser) {
 		super();
 		this.id = id;
-		this.username = username;
-		this.firstname = firstname;
-		this.lastname = lastname;
-		this.email = email;
+		this.subkey = subkey;
 		this.newuser = newuser;
 	}
 
@@ -68,43 +58,13 @@ public class Users {
 	}
 
 
-	public String getUsername() {
-		return username;
+	public String getSubkey() {
+		return subkey;
 	}
 
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-
-	public String getFirstname() {
-		return firstname;
-	}
-
-
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
-	}
-
-
-	public String getLastname() {
-		return lastname;
-	}
-
-
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
-	}
-
-
-	public String getEmail() {
-		return email;
-	}
-
-
-	public void setEmail(String email) {
-		this.email = email;
+	public void setSubkey(String subkey) {
+		this.subkey = subkey;
 	}
 
 
@@ -122,12 +82,9 @@ public class Users {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((firstname == null) ? 0 : firstname.hashCode());
 		result = prime * result + id;
-		result = prime * result + ((lastname == null) ? 0 : lastname.hashCode());
 		result = prime * result + ((newuser == null) ? 0 : newuser.hashCode());
-		result = prime * result + ((username == null) ? 0 : username.hashCode());
+		result = prime * result + ((subkey == null) ? 0 : subkey.hashCode());
 		return result;
 	}
 
@@ -141,32 +98,17 @@ public class Users {
 		if (getClass() != obj.getClass())
 			return false;
 		Users other = (Users) obj;
-		if (email == null) {
-			if (other.email != null)
-				return false;
-		} else if (!email.equals(other.email))
-			return false;
-		if (firstname == null) {
-			if (other.firstname != null)
-				return false;
-		} else if (!firstname.equals(other.firstname))
-			return false;
 		if (id != other.id)
-			return false;
-		if (lastname == null) {
-			if (other.lastname != null)
-				return false;
-		} else if (!lastname.equals(other.lastname))
 			return false;
 		if (newuser == null) {
 			if (other.newuser != null)
 				return false;
 		} else if (!newuser.equals(other.newuser))
 			return false;
-		if (username == null) {
-			if (other.username != null)
+		if (subkey == null) {
+			if (other.subkey != null)
 				return false;
-		} else if (!username.equals(other.username))
+		} else if (!subkey.equals(other.subkey))
 			return false;
 		return true;
 	}
