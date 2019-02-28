@@ -11,7 +11,9 @@ export const enterNewRecipeTypes = {
     UPDATE_INGREDIENT: 'ENTER_NEW_RECIPE_UPDATE_INGREDIENT', 
     UPDATE_RECIPE_NAME: 'ENTER_NEW_RECIPE_UPDATE_RECIPE_NAME',
     UPDATE_DESCRIPTION: 'ENTER_NEW_RECIPE_UPDATE_DESCRIPTION', 
-    UPDATE_INSTRUCTIONS: 'ENTER_NEW_RECIPE_UPDATE_INSTRUCTIONS'
+    UPDATE_INSTRUCTIONS: 'ENTER_NEW_RECIPE_UPDATE_INSTRUCTIONS', 
+    POPULATE_INGREDIENT: 'ENTER_NEW_RECIPE_POPULATE_INGREDIENT', 
+    POPULATE_MEASUREMENT: 'ENTER_NEW_RECIPE_POPULATE_MEASUREMENT'
 }
 
 export const submitRecipe = (event, recipeName: string, description: string, instructions: string, ingredients: Ingredients[]) => async (dispatch) => {
@@ -44,6 +46,40 @@ export const submitRecipe = (event, recipeName: string, description: string, ins
             }, 
             type: enterNewRecipeTypes.SUBMIT_RECIPE
         })
+    }
+}
+
+export const populateIngredient = () => async (dispatch) => {
+    try {
+        let ingred = await recipeClient.get('http://localhost:5500/ingredient');
+        let list = ingred.data;
+        console.log(list);
+
+        dispatch({
+            payload: {
+                ingredientPop: list
+            }, 
+            type: enterNewRecipeTypes.POPULATE_INGREDIENT
+        })
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+export const populateMeasure = () => async (dispatch) => {
+    try {
+        let measure = await recipeClient.get('http://localhost:5500/measure');
+        let list = measure.data;
+        console.log(list);
+
+        dispatch({
+            payload: {
+                measurePop: list
+            }, 
+            type: enterNewRecipeTypes.POPULATE_MEASUREMENT
+        })
+    } catch (err) {
+        console.log(err);
     }
 }
 

@@ -13,18 +13,39 @@ const initialState: IEnterNewRecipeState = {
     recipeName: '', 
     description: '',
     instructions: '', 
-    status: 0
+    status: 0, 
+    measurePop: [], 
+    ingredientPop: []
 }
 
 export const enterNewRecipeReducer = (state = initialState, action: any) => {
     switch (action.type) {
         case enterNewRecipeTypes.ADD_INGREDIENT: 
             let newIngredArr = [...state.ingredArr];
-            let measureObj = new Measure(0, action.payload.measure);
-            let ingredientObj = new Ingredient(0, action.payload.ingredient);
-            let ingred: Ingredients = new Ingredients(measureObj, ingredientObj, action.payload.amount);
-            newIngredArr.push(ingred);
+            let tempMeasure = action.payload.measure;
+            let tempIngredient = action.payload.ingredient;
 
+            let arrMeasure = [...state.measurePop];
+            let checkMeasure = arrMeasure.find(function(element) {
+                return element.name === tempMeasure
+            });
+
+            let arrIngredient = [...state.ingredientPop];
+            let checkIngredient = arrIngredient.find(function(element) {
+                return element.name === tempIngredient
+            });
+            console.log(checkMeasure);
+            console.log(checkIngredient);
+
+            if (checkIngredient && checkMeasure) {
+                let ingred: Ingredients = new Ingredients(checkMeasure, checkIngredient, action.payload.amount);
+                newIngredArr.push(ingred);
+            } else {
+                let measureObj = new Measure(0, action.payload.measure);
+                let ingredientObj = new Ingredient(0, action.payload.ingredient);
+                let ingred: Ingredients = new Ingredients(measureObj, ingredientObj, action.payload.amount);
+                newIngredArr.push(ingred);
+            }
             return {
                 ...state, 
                 ingredArr: newIngredArr
@@ -63,6 +84,16 @@ export const enterNewRecipeReducer = (state = initialState, action: any) => {
             return {
                 ...state, 
                 status: action.payload.status
+            }
+        case enterNewRecipeTypes.POPULATE_INGREDIENT:
+            return {
+                ...state,
+                ingredientPop: action.payload.ingredientPop
+            }
+        case enterNewRecipeTypes.POPULATE_MEASUREMENT:
+            return {
+                ...state,
+                measurePop: action.payload.measurePop
             }
         }
     return state;
