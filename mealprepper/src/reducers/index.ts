@@ -9,6 +9,7 @@ import { weeklyViewReducer } from './weeklyview.reducer';
 import { favoriteReducer } from './Favorite.reducer';
 import { FullRecipe } from '../Model/FullRecipe';
 import { generateMealPlanReducer } from './GenerateMealPlan.reducer';
+import { Ingredients } from '../Model/Ingredients';
 
 
 export interface rTuple {
@@ -58,7 +59,7 @@ export interface IWeeklyViewState {
 
 
 export interface IGRocState {
-//   arrayingredient: Ingredients[]
+  arrayingredient: Ingredients[]
   amount: number
 }
 export interface IState {

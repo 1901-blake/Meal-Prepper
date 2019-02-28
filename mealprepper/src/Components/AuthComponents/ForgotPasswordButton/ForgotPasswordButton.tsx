@@ -11,7 +11,8 @@ import Input from 'reactstrap/lib/Input';
 import { Auth } from 'aws-amplify';
 
 export interface ForgotPasswordButtonProps {
-    
+    className? : string,
+    color? : string
 }
  
 export interface ForgotPasswordButtonState {
@@ -94,7 +95,8 @@ class ForgotPasswordButton extends React.Component<ForgotPasswordButtonProps, Fo
     render() { 
         return ( 
             <React.Fragment>
-                <Button color="forgot-password" onClick={this.toggle}>Forgot Password</Button>
+                <Button color={this.props.color} className={this.props.className}
+                onClick={this.toggle}>Forgot Password</Button>
                 <Modal isOpen={this.state.modal} toggle={this.toggle}>
                     <ModalHeader>
                         Forgot Password
@@ -127,7 +129,7 @@ class ForgotPasswordButton extends React.Component<ForgotPasswordButtonProps, Fo
                         </Form>
                     </ModalBody>
                     <ModalFooter className="justify-content-center">
-                        <Button color="forgot-password" 
+                        <Button color={this.props.color} className={this.props.className}
                         disabled={(this.state.newPassword !== this.state.confirmPassword 
                             || this.state.newPassword === '' 
                             || this.state.confirmPassword === '')}

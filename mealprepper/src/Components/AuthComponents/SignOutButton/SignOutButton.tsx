@@ -3,7 +3,8 @@ import * as React from 'react';
 import Button from "reactstrap/lib/Button";
 
 export interface SignOutButtonProps {
-    
+    className? : string,
+    color? : string
 }
  
 export interface SignOutButtonState {
@@ -22,7 +23,8 @@ class SignOutButton extends React.Component<SignOutButtonProps, SignOutButtonSta
     render() { 
         return ( 
             <React.Fragment>
-                <Button color="signOut" onClick={this.signout}>Sign Out</Button>
+                <Button color={this.props.color} className={this.props.className}
+                onClick={this.signout}>Sign Out</Button>
             </React.Fragment>
          );
     }
