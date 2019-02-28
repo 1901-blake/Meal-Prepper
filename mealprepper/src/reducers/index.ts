@@ -9,10 +9,12 @@ import { weeklyViewReducer } from './weeklyview.reducer';
 import { favoriteReducer } from './Favorite.reducer';
 import { FullRecipe } from '../Model/FullRecipe';
 import { generateMealPlanReducer } from './GenerateMealPlan.reducer';
+import { Ingredient } from '../Model/Ingredient';
+import { Measure } from '../Model/Measure';
 
 
 export interface rTuple {
-  rTuple: [number, string, string]
+  rTuple: [number, Ingredient, Measure]
 }
 
 export interface INavState {
@@ -34,8 +36,8 @@ export interface IFavoriteState {
 export interface IEnterNewRecipeState {
   ingredArr: rTuple[]
   amount: number
-  measure: string
-  ingredient: string
+  measure: Measure
+  ingredient: Ingredient
 }
 export interface IRecipeHistoryState {
   recipehistoryarray: Recipe[];

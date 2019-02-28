@@ -2,14 +2,17 @@ import React from "react";
 import { IEnterNewRecipeState, IState } from "../../reducers";
 import { addIngredient, updateAmount, updateIngredient, updateMeasure } from "../../Actions/EnterNewRecipe.action";
 import { connect } from "react-redux";
+import { Measure } from "../../Model/Measure";
+import { Ingredient } from "../../Model/Ingredient";
 
 
 interface IEnterNewRecipeProps {
     newRecipe: IEnterNewRecipeState,
-    addIngredient: (amount: number, measure: string, ingredient: string) => void, 
+    addIngredient: (amount: number, measure: Measure, ingredient: Ingredient) => void, 
     updateAmount: (event) => void, 
     updateMeasure: (event) => void, 
-    updateIngredient: (event) => void
+    updateIngredient: (event) => void,
+    
 }
 
 const BackgroundImagePage = () => {
@@ -37,8 +40,8 @@ export class EnterNewRecipeComponent extends React.Component<IEnterNewRecipeProp
                             <input type="text" className="form-control" id="recipeName" placeholder="Recipe Name" required />
                         </div>
                         <div className="form-group col-md-4">
-                            <label htmlFor="recipeCategory">Category</label>
-                            <input type="text" className="form-control" id="recipeCategory" placeholder="Category" required />
+                            <label htmlFor="recipeDescription">Description</label>
+                            <input type="text" className="form-control" id="recipeDescription" placeholder="Description" required />
                         </div>
                     </div>
                     <div className="form-group">
