@@ -59,6 +59,43 @@ body, html {
   // font-style: italic;
 }
 
+
+#locator {
+  position: relative;
+  visibility: visible;
+  left: 0%;
+  top: 55%;
+  z-index: 200;
+}
+
+.locater-img {
+  position: relative;
+  visibility: visible;
+  left: 18%;
+  margin-top: 15%;
+  width: 15%;
+  z-index: 100;
+}
+
+.navItems {
+  color: white;
+  text-align: center;
+  }
+
+.navItems:hover {
+    color: white;
+    // background-color: white;
+  }
+
+.dropdownItems {
+  color: black;
+  text-align: left;
+}
+
+.tableHeaders {
+  color: white;
+}
+
 .Modalstyle {
   top: 50%;
   left: 50%;
@@ -68,3 +105,4 @@ body, html {
 }
 
 #locator { position: absolute; visibility: visible; left: 20px; top: 600px; height: 100px; width: 150px; z-index: 200; }
+
