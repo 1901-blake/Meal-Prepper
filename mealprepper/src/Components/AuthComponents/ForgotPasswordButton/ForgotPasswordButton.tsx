@@ -107,7 +107,8 @@ class ForgotPasswordButton extends React.Component<ForgotPasswordButtonProps, Fo
                             <FormGroup >
                                 <Input id="email" type="text" placeholder="Email"
                                 value={this.state.email} onChange={this.changeEmail} />
-                                <Button color="forogt-password" onClick={() => this.sendEmail(this.state.email)}>Send Recovery Email</Button>
+                                <Button color={this.props.color} className={this.props.className}
+                                onClick={() => this.sendEmail(this.state.email)}>Send Recovery Email</Button>
                             </FormGroup>
                         </Form>
                         <Form>

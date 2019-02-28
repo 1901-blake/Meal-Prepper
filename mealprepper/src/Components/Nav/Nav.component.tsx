@@ -81,7 +81,7 @@ export class NavComponent extends React.Component<INavProps, any> {
                                     <Link to="/userinfo">User Info</Link></NavLink>
                             </DropdownItem>
                         </DropdownMenu>
-                        <SignInButton/>
+                        <SignInButton />
                         <SignUpButton/>
                         <SignOutButton/>
                         <ForgotPasswordButton/>

@@ -18,7 +18,11 @@ export interface SignupButtonState {
         lastName : string,
         password : string,
         confirmPassword : string
-    }
+    },
+    regex : {
+        minimum : RegExp;
+    },
+    showPassTip : boolean
 }
  
 class SignUpButton extends React.Component<SignupButtonProps, SignupButtonState> {
@@ -33,7 +37,11 @@ class SignUpButton extends React.Component<SignupButtonProps, SignupButtonState>
                 email : '',
                 password : '',
                 confirmPassword : ''
-            }
+            },
+            regex : {
+                minimum :new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})")
+            },
+            showPassTip:false
         };
     }
 
@@ -48,7 +56,8 @@ class SignUpButton extends React.Component<SignupButtonProps, SignupButtonState>
                 email : '',
                 password : '',
                 confirmPassword : ''
-            }
+            },
+            showPassTip : false
         }));
     }
 
@@ -59,9 +68,20 @@ class SignUpButton extends React.Component<SignupButtonProps, SignupButtonState>
     }
 
     updatePassword = (event: any) => {
-        this.setState({
-            credentials:{...this.state.credentials, password  : event.currentTarget.value}
-        })
+        if (this.state.regex.minimum.test(event.currentTarget.value)){
+            // Password is good enough.
+            this.setState({
+                credentials:{...this.state.credentials, password  : event.currentTarget.value},
+                showPassTip : false
+            })
+        } else {
+            // Password isn't good enough.
+            this.setState({
+                credentials:{...this.state.credentials, password  : event.currentTarget.value},
+                showPassTip : true
+            })
+        }
+        
     }
 
     updateConfirmPassword = (event: any) => {
@@ -101,9 +121,21 @@ class SignUpButton extends React.Component<SignupButtonProps, SignupButtonState>
         }
         try {
             const data = await Auth.signUp(info);
-            this,this.toggle();
+            this.toggle();
         } catch (err) {
             console.log(err);
+        }
+    }
+
+    renderPassTipLabel = () => {
+        console.log(`showPassTip: ${this.state.showPassTip}`)
+        if(this.state.showPassTip) {
+            console.log('Render password advice.')
+            return (
+                <Label className="text-danger" size="sm">Passwords are required to have at least one capital letter, lowercase letter, number, and special character !@#$%^&*</Label>
+            )
+        } else {
+            return;
         }
     }
     
@@ -142,6 +174,7 @@ class SignUpButton extends React.Component<SignupButtonProps, SignupButtonState>
                                 <Label for="passwordInput">Password</Label>
                                 <Input type="password" name="passwordInput" id="password" placeholder="Password"
                                  value={this.state.credentials.password} onChange={this.updatePassword} />
+                                 {this.renderPassTipLabel()}
                             </FormGroup>
                             <FormGroup>
                                 <Label for="confirmPasswordInput">Confirm Password</Label>
@@ -155,7 +188,8 @@ class SignUpButton extends React.Component<SignupButtonProps, SignupButtonState>
                         onClick={() => this.signUp(this.state.credentials)}
                         disabled={(this.state.credentials.password !== this.state.credentials.confirmPassword 
                             || this.state.credentials.password === '' 
-                            || this.state.credentials.confirmPassword === '')}>Sign Up</Button>
+                            || this.state.credentials.confirmPassword === ''
+                            || !this.state.regex.minimum.test(this.state.credentials.password))}>Sign Up</Button>
                     </ModalFooter>
                 </Modal>
             </React.Fragment>
