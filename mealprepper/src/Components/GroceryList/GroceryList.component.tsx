@@ -45,7 +45,8 @@ export class GroceryListComponent extends React.Component<IGrocProps, any> {
 
     render() {
         return (
-            <div>
+            <div className="bg">
+            <h1 className="tableHeaders">Grocery List</h1>
                 <table style={divStyle} id="groceryTable">
 
                     <thead style={divStyle}>

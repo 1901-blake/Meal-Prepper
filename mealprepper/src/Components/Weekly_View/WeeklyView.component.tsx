@@ -63,7 +63,7 @@ export class WeeklyViewComponent extends React.Component<IWeeklyViewProps, any> 
     }
     render() {
         return (
-            <div>
+            <div className="bg">
 
                 <div style={divStyle.row}>
                     {

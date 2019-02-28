@@ -23,7 +23,7 @@ export class DailyComponent extends React.Component<any, any> {
     
     render() {
         return (
-            <div>
+            <div className="bg">
             </div>
         )
     }

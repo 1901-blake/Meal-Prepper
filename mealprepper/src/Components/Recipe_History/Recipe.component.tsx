@@ -30,7 +30,7 @@ export class RecipeHistoryComponent extends React.Component<IRecipeHistoryProps,
 
     render() {
         return (
-            <div>
+            <div className="bg">
                 <table >
                     <thead >
                         <th style = {divStyle}>id</th>

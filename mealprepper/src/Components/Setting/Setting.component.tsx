@@ -23,7 +23,7 @@ export class SettingComponent extends React.Component<any, any> {
     
     render() {
         return (
-            <div>
+            <div className="bg">
                 Settings Component
             </div>
         )

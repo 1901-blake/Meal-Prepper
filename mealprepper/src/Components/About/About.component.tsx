@@ -23,7 +23,7 @@ export class AboutComponent extends React.Component<any, any> {
     
     render() {
         return (
-            <div>
+            <div className="bg">
                 About Component
             </div>
         )

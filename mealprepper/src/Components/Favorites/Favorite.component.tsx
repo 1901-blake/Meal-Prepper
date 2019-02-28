@@ -40,7 +40,8 @@ export class FavoriteComponent extends React.Component<IFavoriteProps, any> {
     }
     render() {
         return (
-            <div>
+            <div className="bg">
+            <h1 className="tableHeaders">Favorites</h1>
                 <table style={divStyle.table}>
                     <thead>
 
