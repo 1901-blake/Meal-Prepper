@@ -64,7 +64,8 @@ body, html {
   position: relative;
   visibility: visible;
   left: 0%;
-  top: 55%;
+  margin-top: 27%;
+  width: 75%;
   z-index: 200;
 }
 
@@ -72,7 +73,7 @@ body, html {
   position: relative;
   visibility: visible;
   left: 18%;
-  margin-top: 15%;
+  margin-top: -15%;
   width: 15%;
   z-index: 100;
 }
@@ -103,6 +104,3 @@ body, html {
   bottom: auto;
   background-color: papayawhip;
 }
-
-#locator { position: absolute; visibility: visible; left: 20px; top: 600px; height: 100px; width: 150px; z-index: 200; }
-
