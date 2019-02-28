@@ -132,7 +132,7 @@ class SignUpButton extends React.Component<SignupButtonProps, SignupButtonState>
         if(this.state.showPassTip) {
             console.log('Render password advice.')
             return (
-                <Label className="text-danger" size="sm">Passwords are required to have at least one capital letter, lowercase letter, number, and special character !@#$%^&*</Label>
+                <Label className="text-danger" size="sm">Passwords are required to have at least one capital letter, lowercase letter, number, and special character !@#$%^&* and must be at least 8 characters long</Label>
             )
         } else {
             return;
