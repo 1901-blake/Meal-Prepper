@@ -8,6 +8,7 @@ import Modal from 'reactstrap/lib/Modal';
 import ModalBody from 'reactstrap/lib/ModalBody';
 import ModalFooter from 'reactstrap/lib/ModalFooter';
 import ModalHeader from 'reactstrap/lib/ModalHeader';
+import { ToastContainer, toast } from 'react-toastify';
 
 export interface SignInButtonProps {
     className? : string,
@@ -63,9 +64,10 @@ class SignInButton extends React.Component<SignInButtonProps, SignInButtonState>
     signIn = async (credentials: any) => {
         try {
             const data = await Auth.signIn(credentials.email, credentials.password)
+            toast('Successfully logged in.');
             this.toggle();
         } catch (err) {
-            console.log(err);
+            toast(`Failed to log in. \n${err.message}`);
         }
     }
 

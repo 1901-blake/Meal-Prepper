@@ -3,6 +3,7 @@ import { Button, Modal, Form, FormGroup, Label, Input, ModalFooter } from 'react
 import ModalHeader from 'reactstrap/lib/ModalHeader';
 import ModalBody from 'reactstrap/lib/ModalBody';
 import { Auth } from 'aws-amplify';
+import { toast } from 'react-toastify';
 
 export interface SignupButtonProps {
     className? : string,
@@ -20,7 +21,7 @@ export interface SignupButtonState {
         confirmPassword : string
     },
     regex : {
-        minimum : RegExp;
+        minimum : RegExp
     },
     showPassTip : boolean,
     signUpText : string,
@@ -42,7 +43,7 @@ class SignUpButton extends React.Component<SignupButtonProps, SignupButtonState>
                 confirmPassword : ''
             },
             regex : {
-                minimum :new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})")
+                minimum : new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})")
             },
             showPassTip:false,
             signUpText : 'Sign Up',
@@ -90,7 +91,6 @@ class SignUpButton extends React.Component<SignupButtonProps, SignupButtonState>
                 showPassTip : true
             })
         }
-        
     }
 
     updateConfirmPassword = (event: any) => {
@@ -138,6 +138,7 @@ class SignUpButton extends React.Component<SignupButtonProps, SignupButtonState>
             this.setSignUpButtonText('...');
             const data = await Auth.signUp(info);
             this.setSignUpButtonText('Success');
+            toast('Successfully signed up.')
             this.toggle();
         } catch (err) {
             console.log(err)

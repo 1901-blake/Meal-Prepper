@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Button, Modal, ModalHeader, Form, FormGroup, Label, Input, ModalFooter } from 'reactstrap';
 import ModalBody from 'reactstrap/lib/ModalBody';
 import { Auth } from 'aws-amplify';
+import { toast } from 'react-toastify';
 
 export interface ChangePasswordButtonProps {
     className? : string,
@@ -12,7 +13,11 @@ export interface ChangePasswordButtonState {
     modal : boolean,
     oldPassword : string,
     newPassword : string,
-    confirmPassword : string
+    confirmPassword : string,
+    regex : {
+        minimum : RegExp
+    },
+    showPassTip : boolean
 }
  
 class ChangePasswordButton extends React.Component<ChangePasswordButtonProps, ChangePasswordButtonState> {
@@ -22,7 +27,11 @@ class ChangePasswordButton extends React.Component<ChangePasswordButtonProps, Ch
             modal : false,
             oldPassword : '',
             newPassword : '',
-            confirmPassword : ''
+            confirmPassword : '',
+            regex : {
+                minimum : new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})")
+            },
+            showPassTip : false
         }
     }
     
@@ -31,7 +40,8 @@ class ChangePasswordButton extends React.Component<ChangePasswordButtonProps, Ch
             modal: !prevState.modal,
             oldPassword : '',
             newPassword : '',
-            confirmPassword : ''
+            confirmPassword : '',
+            showPassTip : false
         }));
     }
 
@@ -42,9 +52,17 @@ class ChangePasswordButton extends React.Component<ChangePasswordButtonProps, Ch
     }
 
     updateNewPassword = (event: any) => {
-        this.setState({
-            newPassword : event.currentTarget.value
-        });
+        if (this.state.regex.minimum.test(event.currentTarget.value)){
+            this.setState({
+                newPassword : event.currentTarget.value,
+                showPassTip : false
+            });
+        } else {
+            this.setState({
+                newPassword : event.currentTarget.value,
+                showPassTip : true
+            });
+        }
     }
 
     updateConfirmPassword = (event: any) => {
@@ -57,9 +75,24 @@ class ChangePasswordButton extends React.Component<ChangePasswordButtonProps, Ch
         try {
             const user = await Auth.currentAuthenticatedUser();
             const data = await Auth.changePassword(user, oldPassword, newPassword);
+            toast('Successfully changed password.')
             this.toggle();
         } catch (err) {
-            console.log(err);
+            if(err.message) {
+                toast(`Failed to change password.\n${err.message}`)
+            } else {
+                toast(`Failed to change password.\n${err}`)
+            }
+        }
+    }
+
+    renderPassTipLabel = () => {
+        if(this.state.showPassTip) {
+            return (
+                <Label className="text-danger" size="sm">Passwords are required to have at least one capital letter, lowercase letter, number, and special character !@#$%^&* and must be at least 8 characters long</Label>
+            )
+        } else {
+            return;
         }
     }
     
@@ -83,6 +116,7 @@ class ChangePasswordButton extends React.Component<ChangePasswordButtonProps, Ch
                                 <Label>New Password</Label>
                                 <Input type="password" id="newPassword" 
                                 value={this.state.newPassword} placeholder="New Password" onChange={this.updateNewPassword}/>
+                                {this.renderPassTipLabel()}
                             </FormGroup>
                             <FormGroup>
                                 <Label>Confirm Password</Label>
@@ -95,7 +129,8 @@ class ChangePasswordButton extends React.Component<ChangePasswordButtonProps, Ch
                         <Button type="submit" color={this.props.color} className={this.props.className} 
                         disabled={(this.state.newPassword !== this.state.confirmPassword 
                             || this.state.newPassword === '' 
-                            || this.state.confirmPassword === '')}
+                            || this.state.confirmPassword === ''
+                            || !this.state.regex.minimum.test(this.state.newPassword))}
                         onClick={() => this.changePassword(this.state.oldPassword, this.state.newPassword)}>Change Password</Button>
                     </ModalFooter>
                 </Modal>
