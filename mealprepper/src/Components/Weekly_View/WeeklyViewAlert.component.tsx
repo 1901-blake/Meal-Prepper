@@ -25,7 +25,7 @@ export class WeeklyViewComponent extends React.Component<any, any> {
 
     render() {
         return (
-            <div>
+            <div className="bg">
 
             </div>
         )

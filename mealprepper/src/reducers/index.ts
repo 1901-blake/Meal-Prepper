@@ -9,11 +9,16 @@ import { weeklyViewReducer } from './weeklyview.reducer';
 import { favoriteReducer } from './Favorite.reducer';
 import { FullRecipe } from '../Model/FullRecipe';
 import { generateMealPlanReducer } from './GenerateMealPlan.reducer';
+import { Ingredient } from '../Model/Ingredient';
+import { Measure } from '../Model/Measure';
+import { Ingredients } from '../Model/Ingredients';
+import { Ingredients } from '../Model/Ingredients';
 
 
 export interface rTuple {
   rTuple: [number, string, string]
 }
+
 
 export interface INavState {
   dropdown1: boolean
@@ -32,10 +37,14 @@ export interface IFavoriteState {
   favoriteRecipeArr: Recipe[]
 }
 export interface IEnterNewRecipeState {
-  ingredArr: rTuple[]
+  ingredArr: Ingredients[]
   amount: number
-  measure: string
-  ingredient: string
+  measure: Measure
+  ingredient: Ingredient, 
+  recipeName: string, 
+  description: string, 
+  instructions: string, 
+  status: number
 }
 export interface IRecipeHistoryState {
   recipehistoryarray: Recipe[];
@@ -58,7 +67,7 @@ export interface IWeeklyViewState {
 
 
 export interface IGRocState {
-//   arrayingredient: Ingredients[]
+  arrayingredient: Ingredients[]
   amount: number
 }
 export interface IState {

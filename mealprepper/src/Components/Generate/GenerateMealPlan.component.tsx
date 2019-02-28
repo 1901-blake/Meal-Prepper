@@ -51,7 +51,7 @@ export class GenerateMealPlanComponent extends React.Component<IGenerateMealPlan
                                     <pre>{ele.measure.name}</pre>
                                 ))}</td>
                                 <td>{meal.ingredients.map(ele => (
-                                    <pre>{ele.ingredient.name}</pre>
+                                        <pre>{ele.ingredient.name}</pre>
                                 ))}</td>
                             </tr>
                         ))}

@@ -45,7 +45,7 @@ export class NavComponent extends React.Component<INavProps, any> {
                         <NavLink><Link to="/grocerylist" >Grocery List</Link></NavLink>
                     </NavItem>
                     <Dropdown nav isOpen={this.props.nav.dropdown1} toggle={this.props.toggle}>
-                        <DropdownToggle nav>
+                        <DropdownToggle nav className="navItems">
                             Meal Plan
                         </DropdownToggle>
                         <DropdownMenu left>
@@ -59,27 +59,33 @@ export class NavComponent extends React.Component<INavProps, any> {
                         </DropdownMenu>
                     </Dropdown>
                     <NavItem>
-                        <NavLink><Link to="/recipehistory" >Recipe History</Link></NavLink>
+                        <NavLink><Link to="/recipehistory" className="navItems">Recipe History</Link></NavLink>
                     </NavItem>
                     <NavItem>
-                        <NavLink><Link to="/recipeInput" >Enter New Recipe</Link></NavLink>
+                        <NavLink><Link to="/recipeInput" className="navItems">Enter New Recipe</Link></NavLink>
                     </NavItem>
                     <NavItem>
-                        <NavLink><Link to="/favorites" >Favorites</Link></NavLink>
+                        <NavLink><Link to="/favorites" className="navItems">Favorites</Link></NavLink>
                     </NavItem>
                     <Dropdown nav isOpen={this.props.nav.dropdown2} toggle={this.props.toggle1}>
-                        <DropdownToggle nav>
+                        <DropdownToggle nav className="navItems">
                             Profile
                         </DropdownToggle>
                         <DropdownMenu left>
                             <DropdownItem>
                                 <NavLink>
-                                    <Link to="/setting">Settings</Link></NavLink>
+                                    <Link to="/setting" className="dropdownItems">Settings</Link></NavLink>
                             </DropdownItem>
                             <DropdownItem>
                                 <NavLink>
-                                    <Link to="/userinfo">User Info</Link></NavLink>
+                                    <Link to="/userinfo" className="dropdownItems">User Info</Link></NavLink>
                             </DropdownItem>
+                            <SignInButton/>
+                            <SignUpButton/>
+                            <SignOutButton/>
+                            <ForgotPasswordButton/>
+                            <SignUpButton/>
+                            <ChangePasswordButton/>
                         </DropdownMenu>
                         <SignInButton />
                         <SignUpButton/>

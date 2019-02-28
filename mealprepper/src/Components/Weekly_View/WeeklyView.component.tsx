@@ -38,6 +38,8 @@ export interface IWeeklyViewProps {
     loadWeeklyPlan: (number) => void
 }
 
+Modal.setAppElement('#root');
+
 //change the prop intake to the interface props and also change the class name if copied and paste
 export class WeeklyViewComponent extends React.Component<IWeeklyViewProps, any> {
 
@@ -51,7 +53,7 @@ export class WeeklyViewComponent extends React.Component<IWeeklyViewProps, any> 
 
     toggleModol = (selectedcard: Recipe) => {
         this.setState({ modalebool: !this.state.modalebool });
-        
+
         if (selectedcard != null) {
             this.setState({ dailyview: selectedcard });
         }
@@ -63,7 +65,7 @@ export class WeeklyViewComponent extends React.Component<IWeeklyViewProps, any> 
     }
     render() {
         return (
-            <div>
+            <div className="bg">
 
                 <div style={divStyle.row}>
                     {
@@ -76,13 +78,16 @@ export class WeeklyViewComponent extends React.Component<IWeeklyViewProps, any> 
                     }
                 </div>
 
-                <Modal isOpen={this.state.modalebool} onRequestClose={this.toggleModol}>
-                    <button onClick={this.toggleModol.bind(this, this.state.dailyview)}> X </button>
-                    <p>{this.state.dailyview.recipe_id}</p>
-                    <p>{this.state.dailyview.name}</p>
-                    <p>{this.state.dailyview.description}</p>
-                    <p>{this.state.dailyview.instructions}</p>
-                </Modal>
+                <div >
+
+                    <Modal isOpen={this.state.modalebool} className="Modalstyle" onRequestClose={this.toggleModol}>
+                        <button onClick={this.toggleModol.bind(this, this.state.dailyview)}> X </button>
+                        <p>{this.state.dailyview.recipe_id}</p>
+                        <p>{this.state.dailyview.name}</p>
+                        <p>{this.state.dailyview.description}</p>
+                        <p>{this.state.dailyview.instructions}</p>
+                    </Modal>
+                </div>
             </div>
         )
     }

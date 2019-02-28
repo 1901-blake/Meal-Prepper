@@ -16,8 +16,7 @@ public class RatingsServiceImpl implements RatingsService{
 
 	@Override
 	public Ratings save(Ratings a) {
-		// TODO Auto-generated method stub
-		return null;
+		return ratingsRepo.save(a);
 	}
 
 	@Override

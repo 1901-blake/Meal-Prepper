@@ -21,8 +21,8 @@ export class GroceryListComponent extends React.Component<IGrocProps, any> {
         super(props);
         this.state = {
             tempamount: 0,
-            tempname: ''
-
+            tempname: '',
+            linebool: false
         }
     }
 
@@ -36,16 +36,30 @@ export class GroceryListComponent extends React.Component<IGrocProps, any> {
     }
 
     tempfunc = () => {
-        this.props.addGroceryRow(this.state.tempname,this.state.tempamount);
+        this.props.addGroceryRow(this.state.tempname, this.state.tempamount);
     }
 
+    togglelinestyle = (event) => {
+        console.log('togglelinestyle event value : ' + event.target.checked);
+        if (event.target.checked) {
+            this.setState({ linebool: true });
+        }
+        else {
+            this.setState({ linebool: false });
+
+        }
+    }
     componentDidMount() {
         this.props.loadGroceryRow();
     }
 
     render() {
+        
+        let linebool = this.state.linebool;
+
         return (
-            <div>
+            <div className="bg">
+            <h1 className="tableHeaders">Grocery List</h1>
                 <table style={divStyle} id="groceryTable">
 
                     <thead style={divStyle}>
@@ -58,21 +72,25 @@ export class GroceryListComponent extends React.Component<IGrocProps, any> {
 
                     <tbody>
                         <tr style={divStyle}>
-                            {/* <td> <input type="checkbox" /> </td> */}
                             <td> <button onClick={this.tempfunc}>+</button> </td>
-                            <td> <input type="text" placeholder="ingredient name" onChange={this.changename}/> </td>
+                            <td> <input type="text" placeholder="ingredient name" onChange={this.changename} /> </td>
                             <td> <input type="number" placeholder="amount" onChange={this.changeamount} /> </td>
                         </tr>
-                        {/* {
+                        {
                             this.props.groc.arrayingredient.map((r) => (
                                 //dont forget Key
                                 <tr >
-                                    <td><input type="checkbox" /></td>
-                                    <td>{r.name}</td>
-                                    <td>{r.id}</td>
+                                    <td><input type="checkbox" onChange={this.togglelinestyle} /></td>
+                                    {/* {
+                                        linebool ?
+                                            (<td style={{ textDecorationLine: 'line-through', textDecorationStyle: 'solid' }} >{r.ingredient.name}</td>) :
+                                            (<td style={{ textDecorationLine: '', textDecorationStyle: 'solid' }}>{r.ingredient.name}</td>)
+                                    } */}
+                                    <td>{r.ingredient.name}</td>
+                                    <td>{r.amount}</td>
                                 </tr>
                             ))
-                        } */}
+                        }
                     </tbody>
 
                 </table>
