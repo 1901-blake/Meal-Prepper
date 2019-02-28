@@ -50,7 +50,6 @@ export class FavoriteComponent extends React.Component<IFavoriteProps, any> {
                         {
                             this.props.favorite.favoriteRecipeArr.map((r) => (
                                 <tr>
-                                    <td ><input style={divStyle.star} type="checkbox" checked={true} /></td>
                                     <td style={divStyle.row}> {r.name} </td>
                                     <td style={divStyle.row}> {r.description}</td>
                                     <td style={divStyle.row}> {r.instructions}</td>
