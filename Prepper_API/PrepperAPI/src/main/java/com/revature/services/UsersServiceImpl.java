@@ -41,4 +41,9 @@ public class UsersServiceImpl implements UsersService{
 		return usersRepo.getOne(id);
 	}
 
+	@Override
+	public List<Users> findBySubkey(String key) {
+		return usersRepo.findBySubkey(key);
+	}
+
 }
