@@ -30,13 +30,13 @@ public class Ingredient {
 	private int id;
 	private String name;
 	
-	@OneToMany(mappedBy = "ingredient")
+	/*@OneToMany(mappedBy = "ingredient")
 	@JsonIgnore
     private Set<RecipeIngredient> newingredient;
-	
+	*/
 	public Ingredient() {
-		super();
-		// TODO Auto-generated constructor stub
+		this.id = 0;
+		this.name = "";
 	}
 
 	public Ingredient(int id, String name) {

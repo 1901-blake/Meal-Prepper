@@ -3,6 +3,7 @@ package com.revature.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,6 +16,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Table(name = "recipeingredient")
@@ -28,14 +30,15 @@ public class RecipeIngredient {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "recipe_id")
+	@JsonIgnore
 	private Recipe recipe;
 	
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER, cascade=CascadeType.PERSIST)
     @JoinColumn(name = "measure_id")
     private Measure measure;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER, cascade=CascadeType.PERSIST)
     @JoinColumn(name = "ingredient_id")
     private Ingredient ingredient;
 
@@ -43,7 +46,6 @@ public class RecipeIngredient {
 
 	public RecipeIngredient() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public RecipeIngredient(Recipe recipe, Measure measure, Ingredient ingredient, int amount) {
@@ -125,7 +127,4 @@ public class RecipeIngredient {
 			return false;
 		return true;
 	}
-
-	
-
 }

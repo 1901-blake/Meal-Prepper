@@ -28,19 +28,5 @@ public class UsersController {
 		return usersService.findById(id);
 	}
 	
-	@GetMapping("{username}")
-	public List<Users> findByUsername(@PathVariable String username) {
-		return usersService.findByUsername(username);
-	}
-	
-	@GetMapping("{firstname}")
-	public List<Users> findByFirstname(@PathVariable String firstname) {
-		return usersService.findByFirstname(firstname);
-	}
-	
-	@GetMapping("{lastname}")
-	public List<Users> findByLastname(@PathVariable String lastname) {
-		return usersService.findByLastname(lastname);
-	}
 
 }

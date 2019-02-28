@@ -8,8 +8,5 @@ import com.revature.model.Users;
 
 public interface UsersRepo extends JpaRepository<Users, Integer> {
 	
-	List<Users> findByUsername(String username);
-	List<Users> findByFirstname(String firstname);
-	List<Users> findByLastname(String lastname);
 
 }

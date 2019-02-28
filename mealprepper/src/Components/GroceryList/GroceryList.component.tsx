@@ -64,7 +64,7 @@ export class GroceryListComponent extends React.Component<IGrocProps, any> {
                             <td> <input type="text" placeholder="ingredient name" onChange={this.changename}/> </td>
                             <td> <input type="number" placeholder="amount" onChange={this.changeamount} /> </td>
                         </tr>
-                        {
+                        {/* {
                             this.props.groc.arrayingredient.map((r) => (
                                 //dont forget Key
                                 <tr >
@@ -73,7 +73,7 @@ export class GroceryListComponent extends React.Component<IGrocProps, any> {
                                     <td>{r.id}</td>
                                 </tr>
                             ))
-                        }
+                        } */}
                     </tbody>
 
                 </table>

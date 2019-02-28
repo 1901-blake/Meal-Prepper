@@ -1,6 +1,5 @@
 import React from 'react';
-import SignInButton from '../AuthComponents/SignInButton/SignInButton';
-import LGLogo from '../../assets/large-logo.png'
+import LGLogo from '../../assets/large-logo.png';
 
 export class HomeComponent extends React.Component {
 
@@ -9,7 +8,8 @@ export class HomeComponent extends React.Component {
       <div className="bg jumbotron">
         <div id="locator">
           <h1 className="display-1 font-italic">Welcome to Prepper!</h1>
-          {/* <SignInButton/> */}
+          <p className="lead text-dark bg-light font-weight-normal text-center">The automatic weekly meal-plan generator based on your preferences and dietary needs</p>
+          <a className="btn btn-outline-dark btn-lg" href="#" role="button">Sign-In</a>
         </div>
         <div>
             <img src={LGLogo} className="locater-img"/>
@@ -17,4 +17,5 @@ export class HomeComponent extends React.Component {
       </div>
     )
   }
+  
 }

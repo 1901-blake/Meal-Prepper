@@ -13,8 +13,4 @@ public interface UsersService {
 	
 	List<Users> findAll();
 	Users findById(int id);
-	List<Users> findByUsername(String usernamename);
-	List<Users> findByFirstname(String firstname);
-	List<Users> findByLastname(String lastname);
-
 }

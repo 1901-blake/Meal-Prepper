@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.revature.model.Ingredient;
 import com.revature.model.RecipeIngredient;
 import com.revature.repos.RecipeIngredientRepo;
 
@@ -12,12 +13,11 @@ import com.revature.repos.RecipeIngredientRepo;
 public class RecipeIngredientServiceImpl implements RecipeIngredientService{
 
 	@Autowired
-	private RecipeIngredientRepo recipeingredientRepo;
+	private RecipeIngredientRepo recipeIngredientRepo;
 	
 	@Override
 	public RecipeIngredient save(RecipeIngredient r) {
-		// TODO Auto-generated method stub
-		return null;
+		return recipeIngredientRepo.save(r);
 	}
 
 	@Override
@@ -34,7 +34,12 @@ public class RecipeIngredientServiceImpl implements RecipeIngredientService{
 
 	@Override
 	public List<RecipeIngredient> findAll() {
-		return recipeingredientRepo.findAll();
+		return recipeIngredientRepo.findAll();
+	}
+
+	@Override
+	public RecipeIngredient findById(int id) {
+		return recipeIngredientRepo.getOne(id);
 	}
 
 }
