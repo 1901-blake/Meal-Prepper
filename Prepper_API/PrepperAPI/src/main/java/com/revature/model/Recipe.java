@@ -33,7 +33,9 @@ public class Recipe {
 	@OneToMany(mappedBy = "recipe", cascade=CascadeType.PERSIST)
     private List<RecipeIngredient> ingredients;
 	
-	@OneToMany(mappedBy = "recipe")
+	
+	//I may not need this relationship
+	@OneToMany(mappedBy = "recipe", cascade=CascadeType.PERSIST)
 	@JsonIgnore
     private List<Ratings> newrecipe;
 	

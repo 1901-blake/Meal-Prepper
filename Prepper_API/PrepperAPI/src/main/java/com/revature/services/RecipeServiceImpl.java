@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.revature.model.Ingredient;
 import com.revature.model.Recipe;
+import com.revature.model.RecipeIngredient;
 import com.revature.repos.RecipeIngredientRepo;
 import com.revature.repos.RecipeRepo;
 
@@ -71,5 +72,6 @@ public class RecipeServiceImpl implements RecipeService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 }
