@@ -11,11 +11,7 @@ import { FullRecipe } from '../Model/FullRecipe';
 import { generateMealPlanReducer } from './GenerateMealPlan.reducer';
 import { Ingredient } from '../Model/Ingredient';
 import { Measure } from '../Model/Measure';
-
-
-export interface rTuple {
-  rTuple: [number, Ingredient, Measure]
-}
+import { Ingredients } from '../Model/Ingredients';
 
 export interface INavState {
   dropdown1: boolean
@@ -34,10 +30,14 @@ export interface IFavoriteState {
   favoriteRecipeArr: Recipe[]
 }
 export interface IEnterNewRecipeState {
-  ingredArr: rTuple[]
+  ingredArr: Ingredients[]
   amount: number
   measure: Measure
-  ingredient: Ingredient
+  ingredient: Ingredient, 
+  recipeName: string, 
+  description: string, 
+  instructions: string, 
+  status: number
 }
 export interface IRecipeHistoryState {
   recipehistoryarray: Recipe[];

@@ -1,5 +1,7 @@
 import { Measure } from "../Model/Measure";
 import { Ingredient } from "../Model/Ingredient";
+import { Ingredients } from "../Model/Ingredients";
+import { recipeClient } from "../Axios/recipe.client";
 
 export const enterNewRecipeTypes = {
     ADD_INGREDIENT: 'ENTER_NEW_RECIPE_ADD_INGREDIENT', 
@@ -12,12 +14,43 @@ export const enterNewRecipeTypes = {
     UPDATE_INSTRUCTIONS: 'ENTER_NEW_RECIPE_UPDATE_INSTRUCTIONS'
 }
 
-export const submitRecipe = (event) => async (dispatch) => {
-    
+export const submitRecipe = (event, recipeName: string, description: string, instructions: string, ingredients: Ingredients[]) => async (dispatch) => {
+    try {
+        event.preventDefault();
+
+        console.log(description, instructions, recipeName, ingredients);
+
+        let recipe = await recipeClient.post('http://localhost:5500/recipe/createRecipe', {
+            description: description,
+            instructions: instructions, 
+            name: recipeName, 
+            ingredients: ingredients
+        });
+        
+        console.log(recipe);
+
+        dispatch({
+            payload: {
+                status: recipe.status
+            }, 
+            type: enterNewRecipeTypes.SUBMIT_RECIPE
+        })
+
+    } catch (err) {
+        console.log(err);
+        dispatch({
+            payload: {
+                status: 400
+            }, 
+            type: enterNewRecipeTypes.SUBMIT_RECIPE
+        })
+    }
 }
 
 export const addIngredient = (amount: number, measure: Measure, ingredient: Ingredient) => {
-    return {
+    console.log(measure);
+    console.log(ingredient);
+    return {        
         payload: {
             amount: amount, 
             measure: measure, 
