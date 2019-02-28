@@ -48,8 +48,6 @@ export const submitRecipe = (event, recipeName: string, description: string, ins
 }
 
 export const addIngredient = (amount: number, measure: Measure, ingredient: Ingredient) => {
-    console.log(measure);
-    console.log(ingredient);
     return {        
         payload: {
             amount: amount, 

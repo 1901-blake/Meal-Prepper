@@ -9,13 +9,13 @@ import { Ingredients } from "../../Model/Ingredients";
 
 interface IEnterNewRecipeProps {
     newRecipe: IEnterNewRecipeState,
-    addIngredient: (amount: number, measure: Measure, ingredient: Ingredient) => void, 
-    updateAmount: (event) => void, 
-    updateMeasure: (event) => void, 
+    addIngredient: (amount: number, measure: Measure, ingredient: Ingredient) => void,
+    updateAmount: (event) => void,
+    updateMeasure: (event) => void,
     updateIngredient: (event) => void,
-    updateRecipeName: (event) => void, 
-    updateInstructions: (event) => void, 
-    updateDescription: (event) => void, 
+    updateRecipeName: (event) => void,
+    updateInstructions: (event) => void,
+    updateDescription: (event) => void,
     submitRecipe: (event, recipeName: string, description: string, instructions: string, ingredients: Ingredients[]) => Promise<void>
 }
 
@@ -23,7 +23,7 @@ const BackgroundImagePage = () => {
     return (
         <div className="bg"></div>
     );
-  }
+}
 
 // export default BackgroundImagePage;
 
@@ -50,42 +50,36 @@ export class EnterNewRecipeComponent extends React.Component<IEnterNewRecipeProp
                     </div>
                     <div className="form-group">
                         <label htmlFor="recipeInstructions">Instructions</label>
-                        <textarea className="form-control" id="recipeInstructions" cols={8} rows={10} placeholder="Enter recipe instructions/steps here:" 
+                        <textarea className="form-control" id="recipeInstructions" cols={8} rows={10} placeholder="Enter recipe instructions/steps here:"
                             onChange={() => this.props.updateInstructions(event)} required></textarea>
                     </div>
-                    <button type="submit" className="btn btn-danger mr-1" onClick={() => this.props.submitRecipe(event, this.props.newRecipe.recipeName, 
+                    <button type="submit" className="btn btn-danger mr-1" onClick={() => this.props.submitRecipe(event, this.props.newRecipe.recipeName,
                         this.props.newRecipe.description, this.props.newRecipe.instructions, this.props.newRecipe.ingredArr)}>Submit Recipe</button>
                     <button type="reset" className="btn btn-secondary mr-1">Reset</button>
                     <span>{this.props.newRecipe.status}</span>
-                    <button type="button" className="btn btn-success" onClick={() => this.props.addIngredient(this.props.newRecipe.amount, this.props.newRecipe.measure, 
+                    <button type="button" className="btn btn-success" onClick={() => this.props.addIngredient(this.props.newRecipe.amount, this.props.newRecipe.measure,
                         this.props.newRecipe.ingredient)} >Add Ingredient</button>
 
                     <div className="form-row" id="container">
                         <div className="form-group col-md-1">
-                            <label htmlFor="ingredientAmount">Ingredient Amount</label>
+                            <label htmlFor="ingredientAmount">Amount</label>
                             <input type="number" className="form-control" id="ingredientAmount" onChange={() => this.props.updateAmount(event)} required />
                         </div>
                         <div className="form-group col-md-2">
-                            <label htmlFor="unitOfMeasure">Unit of Measure</label>
-                            <select id="unitOfMeasure" className="form-control" onChange={() => this.props.updateMeasure(event)}>
-                                <option selected>Choose...</option>
-                                <option>Can</option>
-                                <option>Cup</option>
-                                <option>Each</option>
-                                <option>Gallon</option>
-                                <option>Gram</option>
-                                <option>Liter</option>
-                                <option>Milliliter</option>
-                                <option>Ounce</option>
-                                <option>Package</option>
-                                <option>Pint</option>
-                                <option>Pound</option>
-                                <option>Quart</option>
-                                <option>Stick</option>
-                                <option>Tablespoon</option>
-                                <option>Teaspoon</option>
-                                <option>To Taste</option>
-                            </select>
+                            <label>Unit of Measure:
+                                <input list="measurements" id="measure-choice" name="measure-choice" />
+                            </label>
+                            
+
+                                <datalist id="measurements">
+                                <select>
+                                    <option value="Chocolate" />
+                                    <option value="Coconut" />
+                                    <option value="Mint" />
+                                    <option value="Strawberry" />
+                                    <option value="Vanilla" />  
+                                </select>
+                                </datalist>
                         </div>
                         <div className="form-group col-md-3">
                             <label htmlFor="ingredient">Ingredient</label>
@@ -128,12 +122,12 @@ const mapStateToProps = (state: IState) => {
 
 const mapDispatchToProps = {
     addIngredient,
-    updateAmount, 
-    updateIngredient, 
-    updateMeasure, 
-    updateInstructions, 
-    updateDescription, 
-    updateRecipeName, 
+    updateAmount,
+    updateIngredient,
+    updateMeasure,
+    updateInstructions,
+    updateDescription,
+    updateRecipeName,
     submitRecipe
 }
 
