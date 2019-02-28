@@ -5,7 +5,8 @@ import ModalBody from 'reactstrap/lib/ModalBody';
 import { Auth } from 'aws-amplify';
 
 export interface SignupButtonProps {
-    
+    className? : string,
+    color? : string
 }
  
 export interface SignupButtonState {
@@ -109,7 +110,8 @@ class SignUpButton extends React.Component<SignupButtonProps, SignupButtonState>
     render() { 
         return ( 
             <React.Fragment>
-                <Button color="signUp" onClick={this.toggle}>Sign Up</Button>
+                <Button color={this.props.color} className={this.props.className}
+                onClick={this.toggle}>Sign Up</Button>
                 <Modal isOpen={this.state.modal} toggle={this.toggle}>
                     <ModalHeader>
                         Sign Up
@@ -149,7 +151,8 @@ class SignUpButton extends React.Component<SignupButtonProps, SignupButtonState>
                         </Form>
                     </ModalBody>
                     <ModalFooter className="justify-content-center">
-                        <Button color="signUp" onClick={() => this.signUp(this.state.credentials)}
+                        <Button color={this.props.color} className={this.props.className}
+                        onClick={() => this.signUp(this.state.credentials)}
                         disabled={(this.state.credentials.password !== this.state.credentials.confirmPassword 
                             || this.state.credentials.password === '' 
                             || this.state.credentials.confirmPassword === '')}>Sign Up</Button>

@@ -4,7 +4,8 @@ import ModalBody from 'reactstrap/lib/ModalBody';
 import { Auth } from 'aws-amplify';
 
 export interface ChangePasswordButtonProps {
-    
+    className? : string,
+    color? : string
 }
  
 export interface ChangePasswordButtonState {
@@ -65,7 +66,8 @@ class ChangePasswordButton extends React.Component<ChangePasswordButtonProps, Ch
     render() { 
         return ( 
             <React.Fragment>
-                <Button color="change-pasword" onClick={this.toggle}>Change Password</Button>
+                <Button color={this.props.color} className={this.props.className}
+                onClick={this.toggle}>Change Password</Button>
                 <Modal isOpen={this.state.modal} toggle={this.toggle}>
                     <ModalHeader>
                         Sign In
@@ -90,7 +92,7 @@ class ChangePasswordButton extends React.Component<ChangePasswordButtonProps, Ch
                         </Form>
                     </ModalBody>
                     <ModalFooter className="justify-content-center">
-                        <Button type="submit" color="changePassword" 
+                        <Button type="submit" color={this.props.color} className={this.props.className} 
                         disabled={(this.state.newPassword !== this.state.confirmPassword 
                             || this.state.newPassword === '' 
                             || this.state.confirmPassword === '')}
