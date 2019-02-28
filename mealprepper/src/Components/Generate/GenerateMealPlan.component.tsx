@@ -3,6 +3,7 @@ import { IState, IGenerateMealPlanState } from "../../reducers";
 import { connect } from "react-redux";
 import { generateRecipes } from "../../Actions/GenerateMealPlan.action";
 import Table from "reactstrap/lib/Table";
+import Button from "reactstrap/lib/Button";
 
 
 interface IGenerateMealPlanProps {
@@ -16,10 +17,6 @@ export class GenerateMealPlanComponent extends React.Component<IGenerateMealPlan
         super(props);
     }
 
-    getIngredients() {
-        
-    }
-
     componentDidMount() {
         this.props.generateRecipes();
     }
@@ -27,7 +24,7 @@ export class GenerateMealPlanComponent extends React.Component<IGenerateMealPlan
     render() {
         return (
             <div>
-                <div>
+                <div className="generat-meal-table">
                     <Table>
                         <thead>
                             <tr>
@@ -60,6 +57,7 @@ export class GenerateMealPlanComponent extends React.Component<IGenerateMealPlan
                         ))}
                         </tbody>
                     </Table>
+                    <Button>Submit</Button>
                 </div>
             </div>
         )
