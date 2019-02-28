@@ -1,6 +1,6 @@
 import React from "react";
 import { IEnterNewRecipeState, IState } from "../../reducers";
-import { addIngredient, updateAmount, updateIngredient, updateMeasure, updateRecipeName, updateInstructions, updateDescription, submitRecipe } from "../../Actions/EnterNewRecipe.action";
+import { addIngredient, updateAmount, updateIngredient, updateMeasure, updateRecipeName, updateInstructions, updateDescription, submitRecipe, populateIngredient, populateMeasure } from "../../Actions/EnterNewRecipe.action";
 import { connect } from "react-redux";
 import { Measure } from "../../Model/Measure";
 import { Ingredient } from "../../Model/Ingredient";
@@ -10,6 +10,8 @@ import { Ingredients } from "../../Model/Ingredients";
 interface IEnterNewRecipeProps {
     newRecipe: IEnterNewRecipeState,
     addIngredient: (amount: number, measure: Measure, ingredient: Ingredient) => void,
+    populateIngredient: () => Promise<void>,
+    populateMeasure: () => Promise<void>, 
     updateAmount: (event) => void,
     updateMeasure: (event) => void,
     updateIngredient: (event) => void,
@@ -19,18 +21,16 @@ interface IEnterNewRecipeProps {
     submitRecipe: (event, recipeName: string, description: string, instructions: string, ingredients: Ingredients[]) => Promise<void>
 }
 
-const BackgroundImagePage = () => {
-    return (
-        <div className="bg"></div>
-    );
-}
-
-// export default BackgroundImagePage;
 
 export class EnterNewRecipeComponent extends React.Component<IEnterNewRecipeProps, any> {
 
     constructor(props) {
         super(props);
+    }
+
+    componentDidMount() {
+        this.props.populateIngredient();
+        this.props.populateMeasure();
     }
 
     render() {
@@ -51,8 +51,6 @@ export class EnterNewRecipeComponent extends React.Component<IEnterNewRecipeProp
                         <label htmlFor="recipeInstructions">Instructions</label>
                         <textarea className="form-control" id="recipeInstructions" cols={8} rows={10} placeholder="Enter recipe instructions/steps here:"
                             onChange={() => this.props.updateInstructions(event)} required></textarea>
-
-                        <textarea className="form-control overflow-auto" id="recipeInstructions" cols={8} rows={10} placeholder="Enter recipe instructions/steps here:" required></textarea>
                     </div>
                     <button type="submit" className="btn btn-danger mr-1" onClick={() => this.props.submitRecipe(event, this.props.newRecipe.recipeName,
                         this.props.newRecipe.description, this.props.newRecipe.instructions, this.props.newRecipe.ingredArr)}>Submit Recipe</button>
@@ -68,23 +66,30 @@ export class EnterNewRecipeComponent extends React.Component<IEnterNewRecipeProp
                         </div>
                         <div className="form-group col-md-2">
                             <label>Unit of Measure:
-                                <input list="measurements" id="measure-choice" name="measure-choice" />
+                                <input list="measurements" id="measure-choice" name="measure-choice" onChange={() => this.props.updateMeasure(event)} />
                             </label>
-                            
-
                                 <datalist id="measurements">
-                                <select>
-                                    <option value="Chocolate" />
-                                    <option value="Coconut" />
-                                    <option value="Mint" />
-                                    <option value="Strawberry" />
-                                    <option value="Vanilla" />  
-                                </select>
+                                    <select>
+                                        {this.props.newRecipe.measurePop.map(ele => (
+                                            <option value={ele.name} />
+                                        ))}
+                                    </select>
                                 </datalist>
                         </div>
                         <div className="form-group col-md-3">
-                            <label htmlFor="ingredient">Ingredient</label>
-                            <input type="text" className="form-control" id="ingredient" placeholder="Ingredient" onChange={() => this.props.updateIngredient(event)} required />
+                            <label htmlFor="ingredient">Ingredient:
+                                <input list="ingredient-list" onChange={() => this.props.updateIngredient(event)} />
+                            </label>
+                            <datalist id="ingredient-list">
+                                <select>
+                                    {
+                                        this.props.newRecipe.ingredientPop.map(ele => (
+                                            <option value={ele.name} />
+                                        ))
+                                    }
+                                </select>
+                            </datalist>
+                            
                         </div>
                     </div>
                 </form>
@@ -99,7 +104,7 @@ export class EnterNewRecipeComponent extends React.Component<IEnterNewRecipeProp
                         </thead>
                         <tbody>
                             {
-                                this.props.newRecipe.ingredArr.map((ele) => (
+                                this.props.newRecipe.ingredArr.map(ele => (
                                     <tr>
                                         <td>{ele.amount}</td>
                                         <td>{ele.measure.name}</td>
@@ -123,6 +128,8 @@ const mapStateToProps = (state: IState) => {
 
 const mapDispatchToProps = {
     addIngredient,
+    populateIngredient,
+    populateMeasure,
     updateAmount,
     updateIngredient,
     updateMeasure,
