@@ -22,7 +22,10 @@ export interface SignupButtonState {
     regex : {
         minimum : RegExp;
     },
-    showPassTip : boolean
+    showPassTip : boolean,
+    signUpText : string,
+    showError : boolean,
+    errorText : string
 }
  
 class SignUpButton extends React.Component<SignupButtonProps, SignupButtonState> {
@@ -41,7 +44,10 @@ class SignUpButton extends React.Component<SignupButtonProps, SignupButtonState>
             regex : {
                 minimum :new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})")
             },
-            showPassTip:false
+            showPassTip:false,
+            signUpText : 'Sign Up',
+            showError : false,
+            errorText : ''
         };
     }
 
@@ -57,7 +63,10 @@ class SignUpButton extends React.Component<SignupButtonProps, SignupButtonState>
                 password : '',
                 confirmPassword : ''
             },
-            showPassTip : false
+            showPassTip : false,
+            signUpText : 'Sign Up',
+            showError : false,
+            errorText : ''
         }));
     }
 
@@ -108,6 +117,12 @@ class SignUpButton extends React.Component<SignupButtonProps, SignupButtonState>
         })
     }
 
+    setSignUpButtonText = (text: string) => {
+        this.setState({
+            signUpText : text
+        });
+    }
+
     signUp = async (credentials: any) => {
         const info = {
             username : credentials.username,
@@ -120,17 +135,29 @@ class SignUpButton extends React.Component<SignupButtonProps, SignupButtonState>
             }
         }
         try {
+            this.setSignUpButtonText('...');
             const data = await Auth.signUp(info);
+            this.setSignUpButtonText('Success');
             this.toggle();
         } catch (err) {
-            console.log(err);
+            console.log(err)
+            if (err.message) {
+                this.setState({
+                    showError : true,
+                    errorText : err.message
+                })
+            } else {
+                this.setState({
+                    showError : true,
+                    errorText : err
+                })
+            }
+            this.setSignUpButtonText('Sign Up');
         }
     }
 
     renderPassTipLabel = () => {
-        console.log(`showPassTip: ${this.state.showPassTip}`)
         if(this.state.showPassTip) {
-            console.log('Render password advice.')
             return (
                 <Label className="text-danger" size="sm">Passwords are required to have at least one capital letter, lowercase letter, number, and special character !@#$%^&* and must be at least 8 characters long</Label>
             )
@@ -148,6 +175,7 @@ class SignUpButton extends React.Component<SignupButtonProps, SignupButtonState>
                     <ModalHeader>
                         Sign Up
                     </ModalHeader>
+                    {this.state.showError && <div className="error-message-div">{this.state.errorText}</div>}
                     <ModalBody>
                         <Form onSubmit={() => this.signUp(this.state.credentials)}>
                             <FormGroup>
@@ -189,7 +217,7 @@ class SignUpButton extends React.Component<SignupButtonProps, SignupButtonState>
                         disabled={(this.state.credentials.password !== this.state.credentials.confirmPassword 
                             || this.state.credentials.password === '' 
                             || this.state.credentials.confirmPassword === ''
-                            || !this.state.regex.minimum.test(this.state.credentials.password))}>Sign Up</Button>
+                            || !this.state.regex.minimum.test(this.state.credentials.password))}>{this.state.signUpText}</Button>
                     </ModalFooter>
                 </Modal>
             </React.Fragment>
