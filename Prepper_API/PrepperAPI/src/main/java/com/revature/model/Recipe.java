@@ -25,7 +25,6 @@ public class Recipe {
 	@Column(name = "id")//creating a primary key	
 	private int id;
 
-	//columns in Recipe table
 	private String name;
 	private String description;
 	private String instructions;
@@ -33,17 +32,13 @@ public class Recipe {
 	@OneToMany(mappedBy = "recipe", cascade=CascadeType.PERSIST)
     private List<RecipeIngredient> ingredients;
 	
-	
-	//I may not need this relationship
 	@OneToMany(mappedBy = "recipe", cascade=CascadeType.PERSIST)
 	@JsonIgnore
     private List<Ratings> newrecipe;
-	
 		
 	public Recipe() {
 		super();
 	}
-
 
 	public Recipe(int id, String name, String description, String instructions, List<RecipeIngredient> ingredients,
 			List<Ratings> newrecipe) {

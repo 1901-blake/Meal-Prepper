@@ -1,23 +1,12 @@
 package com.revature.model;
 
-
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Table(name = "ingredient")
@@ -30,10 +19,6 @@ public class Ingredient {
 	private int id;
 	private String name;
 	
-	/*@OneToMany(mappedBy = "ingredient")
-	@JsonIgnore
-    private Set<RecipeIngredient> newingredient;
-	*/
 	public Ingredient() {
 		this.id = 0;
 		this.name = "";
@@ -45,7 +30,6 @@ public class Ingredient {
 		this.name = name;
 	}
 	
-	//getters and setter
 	public int getId() {
 		return id;
 	}
