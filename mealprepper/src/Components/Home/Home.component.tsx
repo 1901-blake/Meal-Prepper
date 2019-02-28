@@ -1,4 +1,5 @@
 import React from 'react';
+import LGLogo from '../../assets/large-logo.png';
 
 export class HomeComponent extends React.Component {
 
@@ -10,7 +11,11 @@ export class HomeComponent extends React.Component {
           <p className="lead text-dark bg-light font-weight-normal text-center">The automatic weekly meal-plan generator based on your preferences and dietary needs</p>
           <a className="btn btn-outline-dark btn-lg" href="#" role="button">Sign-In</a>
         </div>
+        <div>
+            <img src={LGLogo} className="locater-img"/>
+          </div>
       </div>
     )
   }
+  
 }

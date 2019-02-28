@@ -36,7 +36,6 @@ export class EnterNewRecipeComponent extends React.Component<IEnterNewRecipeProp
     render() {
         return (
             <div className="bg">
-                {/* {BackgroundImagePage()} */}
                 <form>
                     <div className="form-row">
                         <div className="form-group col-md-4">
@@ -52,6 +51,8 @@ export class EnterNewRecipeComponent extends React.Component<IEnterNewRecipeProp
                         <label htmlFor="recipeInstructions">Instructions</label>
                         <textarea className="form-control" id="recipeInstructions" cols={8} rows={10} placeholder="Enter recipe instructions/steps here:"
                             onChange={() => this.props.updateInstructions(event)} required></textarea>
+
+                        <textarea className="form-control overflow-auto" id="recipeInstructions" cols={8} rows={10} placeholder="Enter recipe instructions/steps here:" required></textarea>
                     </div>
                     <button type="submit" className="btn btn-danger mr-1" onClick={() => this.props.submitRecipe(event, this.props.newRecipe.recipeName,
                         this.props.newRecipe.description, this.props.newRecipe.instructions, this.props.newRecipe.ingredArr)}>Submit Recipe</button>
@@ -88,7 +89,7 @@ export class EnterNewRecipeComponent extends React.Component<IEnterNewRecipeProp
                     </div>
                 </form>
                 <div>
-                    <table>
+                    <table className="table table-striped table-hover table-light">
                         <thead>
                             <tr>
                                 <th scope="col">Amount</th>

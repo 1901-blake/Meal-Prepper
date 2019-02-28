@@ -12,6 +12,13 @@ import { generateMealPlanReducer } from './GenerateMealPlan.reducer';
 import { Ingredient } from '../Model/Ingredient';
 import { Measure } from '../Model/Measure';
 import { Ingredients } from '../Model/Ingredients';
+import { Ingredients } from '../Model/Ingredients';
+
+
+export interface rTuple {
+  rTuple: [number, string, string]
+}
+
 
 export interface INavState {
   dropdown1: boolean
@@ -60,7 +67,7 @@ export interface IWeeklyViewState {
 
 
 export interface IGRocState {
-//   arrayingredient: Ingredients[]
+  arrayingredient: Ingredients[]
   amount: number
 }
 export interface IState {

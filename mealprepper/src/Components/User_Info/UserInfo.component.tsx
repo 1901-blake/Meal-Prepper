@@ -29,7 +29,7 @@ export class UserInfoComponent extends React.Component<IUserInfoProps, any> {
 
     render() {
         return (
-            <div>
+            <div className="bg">
                 <h1 className="update-profile-heading">Update Profile Information</h1>
                 <div className="user-info-class">
                     <Form className="update-profile-form">

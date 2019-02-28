@@ -1,8 +1,6 @@
 package com.revature.model;
 
-import java.util.HashSet;
-import java.util.Set;
-
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,10 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -28,24 +23,29 @@ public class Ratings {
 	@Column(name = "id")//creating a primary key	
 	private int id;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private Users user;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "Recipe_id")
-    private Recipe recipe;
+	/*@ManyToOne(fetch = FetchType.LAZY)
+	@JsonIgnore
+    @JoinColumn(name = "Recipe_id")*/
+	@Column(name = "Recipe_id")
+    private int recipe;
+	
+	private Integer rating;
 
 	public Ratings() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Ratings(int id, Users user, Recipe recipe) {
+	public Ratings(int id, Users user, int recipe, Integer rating) {
 		super();
 		this.id = id;
 		this.user = user;
 		this.recipe = recipe;
+		this.rating = rating;
 	}
 
 	public int getId() {
@@ -64,12 +64,20 @@ public class Ratings {
 		this.user = user;
 	}
 
-	public Recipe getRecipe() {
+	public int getRecipe() {
 		return recipe;
 	}
 
-	public void setRecipe(Recipe recipe) {
+	public void setRecipe(int recipe) {
 		this.recipe = recipe;
+	}
+
+	public Integer getRating() {
+		return rating;
+	}
+
+	public void setRating(Integer rating) {
+		this.rating = rating;
 	}
 
 	@Override
@@ -77,7 +85,8 @@ public class Ratings {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + id;
-		result = prime * result + ((recipe == null) ? 0 : recipe.hashCode());
+		result = prime * result + rating;
+		result = prime * result + recipe;
 		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
@@ -93,10 +102,9 @@ public class Ratings {
 		Ratings other = (Ratings) obj;
 		if (id != other.id)
 			return false;
-		if (recipe == null) {
-			if (other.recipe != null)
-				return false;
-		} else if (!recipe.equals(other.recipe))
+		if (rating != other.rating)
+			return false;
+		if (recipe != other.recipe)
 			return false;
 		if (user == null) {
 			if (other.user != null)
@@ -105,8 +113,6 @@ public class Ratings {
 			return false;
 		return true;
 	}
-	
-	
-	
 
+	
 }
