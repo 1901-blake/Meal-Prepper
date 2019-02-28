@@ -1,27 +1,24 @@
 package com.revature.model;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Table(name = "recipe")
 @Entity
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+@JsonFilter("depth_5")
 public class Recipe {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,23 +30,21 @@ public class Recipe {
 	private String description;
 	private String instructions;
 	
-	@OneToMany(mappedBy = "measure")
-	@JsonIgnore
-    private Set<RecipeIngredient> newmeasurement;
+	@OneToMany(mappedBy = "recipe", cascade=CascadeType.PERSIST)
+    private List<RecipeIngredient> newmeasurement;
 	
 	@OneToMany(mappedBy = "recipe")
 	@JsonIgnore
-    private Set<Ratings> newrecipe;
+    private List<Ratings> newrecipe;
 	
 		
 	public Recipe() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 
-	public Recipe(int id, String name, String description, String instructions, Set<RecipeIngredient> newmeasurement,
-			Set<Ratings> newrecipe) {
+	public Recipe(int id, String name, String description, String instructions, List<RecipeIngredient> newmeasurement,
+			List<Ratings> newrecipe) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -100,22 +95,22 @@ public class Recipe {
 	}
 
 
-	public Set<RecipeIngredient> getNewmeasurement() {
+	public List<RecipeIngredient> getNewmeasurement() {
 		return newmeasurement;
 	}
 
 
-	public void setNewmeasurement(Set<RecipeIngredient> newmeasurement) {
+	public void setNewmeasurement(List<RecipeIngredient> newmeasurement) {
 		this.newmeasurement = newmeasurement;
 	}
 
 
-	public Set<Ratings> getNewrecipe() {
+	public List<Ratings> getNewrecipe() {
 		return newrecipe;
 	}
 
 
-	public void setNewrecipe(Set<Ratings> newrecipe) {
+	public void setNewrecipe(List<Ratings> newrecipe) {
 		this.newrecipe = newrecipe;
 	}
 
@@ -128,8 +123,6 @@ public class Recipe {
 		result = prime * result + id;
 		result = prime * result + ((instructions == null) ? 0 : instructions.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((newmeasurement == null) ? 0 : newmeasurement.hashCode());
-		result = prime * result + ((newrecipe == null) ? 0 : newrecipe.hashCode());
 		return result;
 	}
 
@@ -160,17 +153,6 @@ public class Recipe {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (newmeasurement == null) {
-			if (other.newmeasurement != null)
-				return false;
-		} else if (!newmeasurement.equals(other.newmeasurement))
-			return false;
-		if (newrecipe == null) {
-			if (other.newrecipe != null)
-				return false;
-		} else if (!newrecipe.equals(other.newrecipe))
-			return false;
 		return true;
 	}
-	
 }

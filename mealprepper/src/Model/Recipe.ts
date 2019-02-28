@@ -1,10 +1,11 @@
-import { Ingredients } from "./Ingredient";
+import { Ingredients } from "./Ingredients";
 
 export class Recipe {
     recipe_id : number; // database name is recipe_id
     name : string;// database name is name
     description : string;// database name is description
     instructions : string;// database name is instructions
+
 
 
     constructor(recipe_id = 0,name = '',description = '',instructions = '') {

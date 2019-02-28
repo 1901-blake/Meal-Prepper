@@ -18,7 +18,7 @@ export const loadWeeklyPlan = (amount: number) => async (dispatch) => {
 
         //loop through the array of recipes from body
         for (let index = 0; index < body.length; index++) {
-            temprecipe[index] = new Recipe()
+            temprecipe[index] = new Recipe();
             temprecipe[index].recipe_id = body[index].id;
             temprecipe[index].name = body[index].name;
             temprecipe[index].description = body[index].description;

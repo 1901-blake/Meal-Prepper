@@ -1,4 +1,8 @@
-import { Ingredients } from "../Model/Ingredient";
+import { Ingredient } from "../Model/Ingredient";
+import { Ingredients } from "../Model/Ingredients";
+import { Measure } from "../Model/Measure";
+import { recipeClient } from "../Axios/recipe.client";
+
 
 export const groceryTypes = {
     ADD_ROW: 'ADD_ROW',
@@ -7,31 +11,45 @@ export const groceryTypes = {
 }
 
 export const loadGroceryRow = () => async (dispatch) => {
-
-    const resp = await fetch('http://api.icndb.com/jokes/random?limitTo=[nerdy]');
+    console.log('loadGroceryRow action loading');
+    const resp = await fetch('http://localhost:5500/recipeingredient');
+    // recipeClient.
     const body = await resp.json();
-    let tempingrdient  = new Ingredients();
-    tempingrdient.name = body.value.joke;
-    dispatch({
+    console.log('resp status in loadGroceryRow is ' + resp.status);
 
-        payload: {
-            Ingredientname: tempingrdient,
-        },
-        type: groceryTypes.ADD_ROW
-    })
+    if (resp.status == 200) {
+
+        let tempingrdient : Ingredients[] = [];
+        for (let index = 0; index < body.length; index++) {
+
+            tempingrdient[index] = new Ingredients(body[index].measure, body[index].ingredient, body[index].amount);
+        }
+
+        // tempingrdient.ingredient.name = body.value.joke;
+        dispatch({
+
+            payload: {
+                Ingredientname: tempingrdient,
+            },
+            type: groceryTypes.LOAD_ROW
+        })
+    }
+
 }
 
-export const addGroceryRow = (Ingredientname : string, amount: number) => (dispatch) => {
+export const addGroceryRow = (Ingredientname: string, amount: number) => (dispatch) => {
 
-    let tempingrdient  = new Ingredients();
-    tempingrdient.name = Ingredientname;
-    tempingrdient.id = amount
-    console.log(tempingrdient.name);
+    let fullfillmeasure = new Measure(0, '');
+    let fullfillingredient = new Ingredient(0, Ingredientname);
+
+
+    let tempingrdient = new Ingredients(fullfillmeasure, fullfillingredient, amount);
+    console.log(tempingrdient.ingredient.name);
     dispatch({
 
         payload: {
             temo: tempingrdient,
         },
-        type: groceryTypes.LOAD_ROW
+        type: groceryTypes.ADD_ROW
     })
 }

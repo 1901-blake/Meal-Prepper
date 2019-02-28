@@ -39,13 +39,13 @@ export class GroceryListComponent extends React.Component<IGrocProps, any> {
         this.props.addGroceryRow(this.state.tempname, this.state.tempamount);
     }
 
-    togglelinestyle = (event) =>{
-        console.log('togglelinestyle event value : '+event.target.checked);
+    togglelinestyle = (event) => {
+        console.log('togglelinestyle event value : ' + event.target.checked);
         if (event.target.checked) {
-            this.setState({linebool : true });
+            this.setState({ linebool: true });
         }
-        else{
-            this.setState({linebool : false });
+        else {
+            this.setState({ linebool: false });
 
         }
     }
@@ -54,7 +54,9 @@ export class GroceryListComponent extends React.Component<IGrocProps, any> {
     }
 
     render() {
+        
         let linebool = this.state.linebool;
+
         return (
             <div>
                 <table style={divStyle} id="groceryTable">
@@ -69,7 +71,6 @@ export class GroceryListComponent extends React.Component<IGrocProps, any> {
 
                     <tbody>
                         <tr style={divStyle}>
-                            {/* <td> <input type="checkbox" /> </td> */}
                             <td> <button onClick={this.tempfunc}>+</button> </td>
                             <td> <input type="text" placeholder="ingredient name" onChange={this.changename} /> </td>
                             <td> <input type="number" placeholder="amount" onChange={this.changeamount} /> </td>
@@ -79,15 +80,16 @@ export class GroceryListComponent extends React.Component<IGrocProps, any> {
                                 //dont forget Key
                                 <tr >
                                     <td><input type="checkbox" onChange={this.togglelinestyle} /></td>
-                                    {
-                                        linebool ? (<td style={{ textDecorationLine: 'line-through', textDecorationStyle: 'solid' }} >{r.name}</td>) :
-                                        (<td style={{ textDecorationLine: '', textDecorationStyle: 'solid' }}>{r.name}</td>)
-                                    }
-                                    <td>{r.id}</td>
+                                    {/* {
+                                        linebool ?
+                                            (<td style={{ textDecorationLine: 'line-through', textDecorationStyle: 'solid' }} >{r.ingredient.name}</td>) :
+                                            (<td style={{ textDecorationLine: '', textDecorationStyle: 'solid' }}>{r.ingredient.name}</td>)
+                                    } */}
+                                    <td>{r.ingredient.name}</td>
+                                    <td>{r.amount}</td>
                                 </tr>
                             ))
                         }
-
                     </tbody>
 
                 </table>

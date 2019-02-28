@@ -42,12 +42,6 @@ export class NavComponent extends React.Component<INavProps, any> {
                         <img src={logodark} height="50" className="d-inline-block align-top" alt="prepper" />
                     </Link>
                     <NavItem>
-                        <NavLink><Link to="">Home</Link></NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink><Link to="/about" >About</Link></NavLink>
-                    </NavItem>
-                    <NavItem>
                         <NavLink><Link to="/grocerylist" >Grocery List</Link></NavLink>
                     </NavItem>
                     <Dropdown nav isOpen={this.props.nav.dropdown1} toggle={this.props.toggle}>
@@ -55,13 +49,12 @@ export class NavComponent extends React.Component<INavProps, any> {
                             Meal Plan
                         </DropdownToggle>
                         <DropdownMenu left>
+                        <DropdownItem>
+                            <NavLink><Link to="/generate">Generate Meal Plan</Link></NavLink>
+                        </DropdownItem>
                             <DropdownItem>
                                 <NavLink>
                                     <Link to="/weeklyinfo">Weekly View</Link></NavLink>
-                            </DropdownItem>
-                            <DropdownItem>
-                                <NavLink>
-                                    <Link to="/dailyinfo">Daily View</Link></NavLink>
                             </DropdownItem>
                         </DropdownMenu>
                     </Dropdown>
@@ -92,7 +85,6 @@ export class NavComponent extends React.Component<INavProps, any> {
                         <SignUpButton/>
                         <SignOutButton/>
                         <ForgotPasswordButton/>
-                        <SignUpButton/>
                         <ChangePasswordButton/>
                     </Dropdown>
                 </Nav>

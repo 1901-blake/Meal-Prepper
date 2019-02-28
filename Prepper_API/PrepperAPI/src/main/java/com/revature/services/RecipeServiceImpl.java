@@ -1,24 +1,40 @@
 package com.revature.services;
 
-
 import java.util.List;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.revature.model.Ingredient;
 import com.revature.model.Recipe;
+import com.revature.repos.RecipeIngredientRepo;
 import com.revature.repos.RecipeRepo;
 
 @Service
-public class RecipeServiceImpl implements RecipeService{
-	
+public class RecipeServiceImpl implements RecipeService {
+
 	@Autowired
 	private RecipeRepo recipeRepo;
 
+	@Autowired
+	private RecipeIngredientRepo recipeIngredientRepo;
+
+	@Transactional
 	@Override
 	public Recipe save(Recipe r) {
-		// TODO Auto-generated method stub
-		return null;
+		r.getNewmeasurement().forEach(measure -> {
+//			recipeIngredientRepo.save(measure);
+			System.out.println(measure);
+			measure.setRecipe(r);
+		});
+		return recipeRepo.save(r);
+	}
+
+	@Override
+	public Ingredient save(Ingredient i) {
+		return recipeRepo.save(i);
 	}
 
 	@Override
@@ -41,7 +57,7 @@ public class RecipeServiceImpl implements RecipeService{
 	@Override
 	public Recipe findById(int id) {
 		return recipeRepo.getOne(id);
-	
+
 	}
 
 	@Override
@@ -54,7 +70,6 @@ public class RecipeServiceImpl implements RecipeService{
 	public List<Recipe> findByInstruction(String instructions) {
 		// TODO Auto-generated method stub
 		return null;
-	}	
-	
-	
+	}
+
 }

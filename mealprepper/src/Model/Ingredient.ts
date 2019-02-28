@@ -1,9 +1,9 @@
-export class Ingredients {
+export class Ingredient {
     id: number;
     name: string;
-  
-    constructor(id = 0, name = '') {
-      this.id = id;
-      this.name = name;
+
+    constructor(id: number, name: string) {
+        this.id = id;
+        this.name = name;
     }
-  }
+}
