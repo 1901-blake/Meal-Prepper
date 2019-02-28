@@ -12,7 +12,7 @@ import { generateMealPlanReducer } from './GenerateMealPlan.reducer';
 import { Ingredient } from '../Model/Ingredient';
 import { Measure } from '../Model/Measure';
 import { Ingredients } from '../Model/Ingredients';
-import { Ingredients } from '../Model/Ingredients';
+// import { Ingredients } from '../Model/Ingredients';
 
 
 export interface rTuple {
