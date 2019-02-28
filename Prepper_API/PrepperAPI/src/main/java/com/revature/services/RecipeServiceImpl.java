@@ -9,8 +9,6 @@ import org.springframework.stereotype.Service;
 
 import com.revature.model.Ingredient;
 import com.revature.model.Recipe;
-import com.revature.model.RecipeIngredient;
-import com.revature.repos.RecipeIngredientRepo;
 import com.revature.repos.RecipeRepo;
 
 @Service
@@ -19,14 +17,10 @@ public class RecipeServiceImpl implements RecipeService {
 	@Autowired
 	private RecipeRepo recipeRepo;
 
-	@Autowired
-	private RecipeIngredientRepo recipeIngredientRepo;
-
 	@Transactional
 	@Override
 	public Recipe save(Recipe r) {
 		r.getIngredients().forEach(measure -> {
-//			recipeIngredientRepo.save(measure);
 			System.out.println(measure);
 			measure.setRecipe(r);
 		});

@@ -25,7 +25,7 @@ export const enterNewRecipeReducer = (state = initialState, action: any) => {
             let tempMeasure = action.payload.measure;
             let tempIngredient = action.payload.ingredient;
 
-            console.log(`${tempMeasure} \n ${tempIngredient}`);
+            console.log(`${tempMeasure}\n ${tempIngredient}`);
 
             // let measureObj = new Measure(0, action.payload.measure);
             // let ingredientObj = new Ingredient(0, action.payload.ingredient);

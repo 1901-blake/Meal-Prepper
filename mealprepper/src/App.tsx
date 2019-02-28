@@ -17,6 +17,8 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { Route } from 'react-router';
 import GenerateMealPlanComponent from './Components/Generate/GenerateMealPlan.component';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 Amplify.configure({
   Auth : {
@@ -49,7 +51,7 @@ class App extends Component {
             <Route exact path="/setting" component={SettingComponent} />
             <Route exact path="/userinfo" component={UserInfoComponent} />
 
-
+            <ToastContainer autoClose={3000} />
 
           </div>
         </BrowserRouter>

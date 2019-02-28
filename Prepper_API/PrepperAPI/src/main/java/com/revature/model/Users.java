@@ -2,7 +2,6 @@ package com.revature.model;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,7 +28,6 @@ public class Users {
 	@OneToMany(mappedBy = "recipe")
 	@JsonIgnore
     private List<Ratings> ratinginfo;
-	
 	
 	public Users() {
 		super();
@@ -93,6 +91,4 @@ public class Users {
 			return false;
 		return true;
 	}
-
-	
 }
