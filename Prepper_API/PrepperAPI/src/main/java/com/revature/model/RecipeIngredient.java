@@ -29,11 +29,11 @@ public class RecipeIngredient {
 	private Recipe recipe;
 	
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade=CascadeType.PERSIST)
+	@ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.MERGE)
     @JoinColumn(name = "measure_id")
     private Measure measure;
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade=CascadeType.PERSIST)
+	@ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.MERGE)
     @JoinColumn(name = "ingredient_id")
     private Ingredient ingredient;
 
