@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.revature.model.Ingredient;
 import com.revature.model.Recipe;
+import com.revature.model.RecipeIngredient;
 
 public interface RecipeService {
 	
@@ -15,7 +16,7 @@ public interface RecipeService {
 	Recipe findById(int id);
 	List<Recipe> findAll();
 	List<Recipe> findByName(String name);
-	List<Recipe> findByInstruction(String instructions);	
+	List<Recipe> findByInstruction(String instructions);
 
 
 }

@@ -23,8 +23,6 @@ public class RecipeController {
 	
 	@Autowired
 	private RecipeService recipeService;
-//	@Autowired
-//	private MeasureService measureService;
 
 	@GetMapping
 	public List<Recipe> findAll() {
@@ -36,6 +34,7 @@ public class RecipeController {
 		return recipeService.findById(id);
 	}
 	
+	//generate random number of recipes
 	@GetMapping("generate/{numOfRecipes}")
 	public List<Recipe> findRandomRecipes(@PathVariable int numOfRecipes) {
 		List<Recipe> fullList = recipeService.findAll();
@@ -50,10 +49,12 @@ public class RecipeController {
 		
 		return buildList;
 	}
-	
-	
+		
+	//create new recipe
 	@PostMapping("/createRecipe")
 	public Recipe newRecipe(@Valid @RequestBody Recipe recipe) {
 		return recipeService.save(recipe);
 	}
+	
+	
 }

@@ -16,8 +16,7 @@ public class UsersServiceImpl implements UsersService{
 	
 	@Override
 	public Users save(Users u) {
-		// TODO Auto-generated method stub
-		return null;
+		return usersRepo.save(u);
 	}
 
 	@Override
