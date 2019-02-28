@@ -31,7 +31,7 @@ public class Recipe {
 	private String instructions;
 	
 	@OneToMany(mappedBy = "recipe", cascade=CascadeType.PERSIST)
-    private List<RecipeIngredient> newmeasurement;
+    private List<RecipeIngredient> ingredients;
 	
 	@OneToMany(mappedBy = "recipe")
 	@JsonIgnore
@@ -43,14 +43,14 @@ public class Recipe {
 	}
 
 
-	public Recipe(int id, String name, String description, String instructions, List<RecipeIngredient> newmeasurement,
+	public Recipe(int id, String name, String description, String instructions, List<RecipeIngredient> ingredients,
 			List<Ratings> newrecipe) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.instructions = instructions;
-		this.newmeasurement = newmeasurement;
+		this.ingredients = ingredients;
 		this.newrecipe = newrecipe;
 	}
 
@@ -95,13 +95,13 @@ public class Recipe {
 	}
 
 
-	public List<RecipeIngredient> getNewmeasurement() {
-		return newmeasurement;
+	public List<RecipeIngredient> getIngredients() {
+		return ingredients;
 	}
 
 
-	public void setNewmeasurement(List<RecipeIngredient> newmeasurement) {
-		this.newmeasurement = newmeasurement;
+	public void setIngredients(List<RecipeIngredient> ingredients) {
+		this.ingredients = ingredients;
 	}
 
 

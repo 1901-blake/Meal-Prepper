@@ -24,7 +24,7 @@ public class RecipeServiceImpl implements RecipeService {
 	@Transactional
 	@Override
 	public Recipe save(Recipe r) {
-		r.getNewmeasurement().forEach(measure -> {
+		r.getIngredients().forEach(measure -> {
 //			recipeIngredientRepo.save(measure);
 			System.out.println(measure);
 			measure.setRecipe(r);
