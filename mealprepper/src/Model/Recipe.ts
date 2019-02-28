@@ -1,4 +1,4 @@
-import { Ingredients } from "./Ingredient";
+import { Ingredients } from "./Ingredients";
 
 export class Recipe {
     recipe_id : number; // database name is recipe_id
@@ -7,7 +7,9 @@ export class Recipe {
     instructions : string;// database name is instructions
 
 
-    constructor(recipe_id = 0,name = '',description = '',instructions = '') {
+
+    constructor(recipe_id = 0,name = '',description = '',instructions = '', 
+        ingredients: Ingredients) {
         this.recipe_id = recipe_id;
         this.name = name;
         this.description = description;
