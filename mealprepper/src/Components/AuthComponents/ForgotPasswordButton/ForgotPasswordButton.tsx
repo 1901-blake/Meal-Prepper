@@ -10,6 +10,7 @@ import Label from 'reactstrap/lib/Label';
 import Input from 'reactstrap/lib/Input';
 import { Auth } from 'aws-amplify';
 import { toast } from 'react-toastify';
+import { CircularProgress } from '@material-ui/core';
 
 export interface ForgotPasswordButtonProps {
     className? : string,
@@ -25,7 +26,9 @@ export interface ForgotPasswordButtonState {
     regex : {
         minimum : RegExp
     },
-    showPassTip : boolean
+    showPassTip : boolean,
+    emailProgressIsHidden : boolean,
+    passwordProgressIsHidden : boolean
 }
  
 class ForgotPasswordButton extends React.Component<ForgotPasswordButtonProps, ForgotPasswordButtonState> {
@@ -40,7 +43,9 @@ class ForgotPasswordButton extends React.Component<ForgotPasswordButtonProps, Fo
             regex : {
                 minimum : new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})")
             },
-            showPassTip : false
+            showPassTip : false,
+            emailProgressIsHidden : true,
+            passwordProgressIsHidden : true
          };
     }
 
@@ -51,7 +56,9 @@ class ForgotPasswordButton extends React.Component<ForgotPasswordButtonProps, Fo
             confirmationCode : '',
             newPassword : '',
             confirmPassword : '',
-            showPassTip : false
+            showPassTip : false,
+            emailProgressIsHidden : true,
+            passwordProgressIsHidden : true
         })
     }
 
@@ -89,9 +96,12 @@ class ForgotPasswordButton extends React.Component<ForgotPasswordButtonProps, Fo
 
     sendEmail = async (email : string) => {
         try {
+            this.setState({emailProgressIsHidden : false});
             const data = await Auth.forgotPassword(email);
+            this.setState({emailProgressIsHidden : true});
             toast('Email sent.');
         } catch (err) {
+            this.setState({emailProgressIsHidden : true});
             if (err.message) {
                 toast(`Email failed to send. ${err.message}`);
             } else {
@@ -112,11 +122,14 @@ class ForgotPasswordButton extends React.Component<ForgotPasswordButtonProps, Fo
 
     changePassword = async(email: string, code: string, newPassword: string) => {
         try {
+            this.setState({passwordProgressIsHidden : false});
             const data = await Auth.forgotPasswordSubmit(email, code, newPassword);
+            this.setState({passwordProgressIsHidden : true});
             console.log(data);
             toast("Successfully changed password.")
             this.toggle();
         } catch (err) {
+            this.setState({passwordProgressIsHidden : true});
             if (err.message) {
                 toast(`Failed to change password.\n${err.message}`)
             } else {
@@ -142,6 +155,7 @@ class ForgotPasswordButton extends React.Component<ForgotPasswordButtonProps, Fo
                                 value={this.state.email} onChange={this.changeEmail} />
                                 <Button color={this.props.color} className={this.props.className}
                                 onClick={() => this.sendEmail(this.state.email)}>Send Recovery Email</Button>
+                                <CircularProgress hidden={this.state.emailProgressIsHidden} className="p-2"/>
                             </FormGroup>
                         </Form>
                         <Form>
@@ -171,6 +185,7 @@ class ForgotPasswordButton extends React.Component<ForgotPasswordButtonProps, Fo
                             || !this.state.regex.minimum.test(this.state.newPassword))}
                         onClick={() => this.changePassword(this.state.email, this.state.confirmationCode, this.state.newPassword)}
                         >Change Password</Button>
+                        <CircularProgress hidden={this.state.passwordProgressIsHidden} />
                     </ModalFooter>
                 </Modal>
             </React.Fragment>

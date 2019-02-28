@@ -4,6 +4,7 @@ import ModalHeader from 'reactstrap/lib/ModalHeader';
 import ModalBody from 'reactstrap/lib/ModalBody';
 import { Auth } from 'aws-amplify';
 import { toast } from 'react-toastify';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 export interface SignupButtonProps {
     className? : string,
@@ -26,7 +27,8 @@ export interface SignupButtonState {
     showPassTip : boolean,
     signUpText : string,
     showError : boolean,
-    errorText : string
+    errorText : string,
+    progressIsHidden : boolean
 }
  
 class SignUpButton extends React.Component<SignupButtonProps, SignupButtonState> {
@@ -48,7 +50,8 @@ class SignUpButton extends React.Component<SignupButtonProps, SignupButtonState>
             showPassTip:false,
             signUpText : 'Sign Up',
             showError : false,
-            errorText : ''
+            errorText : '',
+            progressIsHidden : true
         };
     }
 
@@ -67,7 +70,8 @@ class SignUpButton extends React.Component<SignupButtonProps, SignupButtonState>
             showPassTip : false,
             signUpText : 'Sign Up',
             showError : false,
-            errorText : ''
+            errorText : '',
+            progressIsHidden : true
         }));
     }
 
@@ -136,11 +140,14 @@ class SignUpButton extends React.Component<SignupButtonProps, SignupButtonState>
         }
         try {
             this.setSignUpButtonText('...');
+            this.setState({progressIsHidden : false});
             const data = await Auth.signUp(info);
+            this.setState({progressIsHidden : true});
             this.setSignUpButtonText('Success');
-            toast('Successfully signed up.')
+            toast('Successfully signed up. Check your email.');
             this.toggle();
         } catch (err) {
+            this.setState({progressIsHidden : true});
             console.log(err)
             if (err.message) {
                 this.setState({
@@ -219,6 +226,7 @@ class SignUpButton extends React.Component<SignupButtonProps, SignupButtonState>
                             || this.state.credentials.password === '' 
                             || this.state.credentials.confirmPassword === ''
                             || !this.state.regex.minimum.test(this.state.credentials.password))}>{this.state.signUpText}</Button>
+                        <CircularProgress hidden={this.state.progressIsHidden}/>
                     </ModalFooter>
                 </Modal>
             </React.Fragment>

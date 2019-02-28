@@ -3,6 +3,7 @@ import { Button, Modal, ModalHeader, Form, FormGroup, Label, Input, ModalFooter 
 import ModalBody from 'reactstrap/lib/ModalBody';
 import { Auth } from 'aws-amplify';
 import { toast } from 'react-toastify';
+import { CircularProgress } from '@material-ui/core';
 
 export interface ChangePasswordButtonProps {
     className? : string,
@@ -17,7 +18,8 @@ export interface ChangePasswordButtonState {
     regex : {
         minimum : RegExp
     },
-    showPassTip : boolean
+    showPassTip : boolean,
+    progressIsHidden : boolean
 }
  
 class ChangePasswordButton extends React.Component<ChangePasswordButtonProps, ChangePasswordButtonState> {
@@ -31,7 +33,8 @@ class ChangePasswordButton extends React.Component<ChangePasswordButtonProps, Ch
             regex : {
                 minimum : new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})")
             },
-            showPassTip : false
+            showPassTip : false,
+            progressIsHidden : true
         }
     }
     
@@ -41,7 +44,8 @@ class ChangePasswordButton extends React.Component<ChangePasswordButtonProps, Ch
             oldPassword : '',
             newPassword : '',
             confirmPassword : '',
-            showPassTip : false
+            showPassTip : false,
+            progressIsHidden : true
         }));
     }
 
@@ -73,11 +77,14 @@ class ChangePasswordButton extends React.Component<ChangePasswordButtonProps, Ch
 
     changePassword = async (oldPassword: string, newPassword: string) => {
         try {
+            this.setState({progressIsHidden : false});
             const user = await Auth.currentAuthenticatedUser();
             const data = await Auth.changePassword(user, oldPassword, newPassword);
+            this.setState({progressIsHidden : true});
             toast('Successfully changed password.')
             this.toggle();
         } catch (err) {
+            this.setState({progressIsHidden : true});
             if(err.message) {
                 toast(`Failed to change password.\n${err.message}`)
             } else {
@@ -132,6 +139,7 @@ class ChangePasswordButton extends React.Component<ChangePasswordButtonProps, Ch
                             || this.state.confirmPassword === ''
                             || !this.state.regex.minimum.test(this.state.newPassword))}
                         onClick={() => this.changePassword(this.state.oldPassword, this.state.newPassword)}>Change Password</Button>
+                        <CircularProgress hidden={this.state.progressIsHidden} />
                     </ModalFooter>
                 </Modal>
             </React.Fragment>
