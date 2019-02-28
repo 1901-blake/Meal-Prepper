@@ -25,13 +25,27 @@ export const enterNewRecipeReducer = (state = initialState, action: any) => {
             let tempMeasure = action.payload.measure;
             let tempIngredient = action.payload.ingredient;
 
-            console.log(`${tempMeasure}\n ${tempIngredient}`);
+            let arrMeasure = [...state.measurePop];
+            let checkMeasure = arrMeasure.find(function(element) {
+                return element.name === tempMeasure
+            });
 
-            // let measureObj = new Measure(0, action.payload.measure);
-            // let ingredientObj = new Ingredient(0, action.payload.ingredient);
-            // let ingred: Ingredients = new Ingredients(measureObj, ingredientObj, action.payload.amount);
-            // newIngredArr.push(ingred);
+            let arrIngredient = [...state.ingredientPop];
+            let checkIngredient = arrIngredient.find(function(element) {
+                return element.name === tempIngredient
+            });
+            console.log(checkMeasure);
+            console.log(checkIngredient);
 
+            if (checkIngredient && checkMeasure) {
+                let ingred: Ingredients = new Ingredients(checkMeasure, checkIngredient, action.payload.amount);
+                newIngredArr.push(ingred);
+            } else {
+                let measureObj = new Measure(0, action.payload.measure);
+                let ingredientObj = new Ingredient(0, action.payload.ingredient);
+                let ingred: Ingredients = new Ingredients(measureObj, ingredientObj, action.payload.amount);
+                newIngredArr.push(ingred);
+            }
             return {
                 ...state, 
                 ingredArr: newIngredArr
