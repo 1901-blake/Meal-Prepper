@@ -10,7 +10,8 @@ import ModalFooter from 'reactstrap/lib/ModalFooter';
 import ModalHeader from 'reactstrap/lib/ModalHeader';
 
 export interface SignInButtonProps {
-
+    className? : string,
+    color? : string
 }
  
 export interface SignInButtonState {
@@ -71,7 +72,8 @@ class SignInButton extends React.Component<SignInButtonProps, SignInButtonState>
     render() { 
         return (  
             <React.Fragment>
-                <Button color="signIn" onClick={this.toggle}>Sign In</Button>
+                <Button color={this.props.color} className={this.props.className} 
+                onClick={this.toggle}>Sign In</Button>
                 <Modal isOpen={this.state.modal} toggle={this.toggle}>
                     <ModalHeader>
                         Sign In
@@ -91,7 +93,7 @@ class SignInButton extends React.Component<SignInButtonProps, SignInButtonState>
                         </Form>
                     </ModalBody>
                     <ModalFooter className="justify-content-center">
-                        <Button type="submit" color="signIn" onClick={() => this.signIn(this.state.credentials)}>Sign in</Button>
+                        <Button type="submit" color={this.props.color} onClick={() => this.signIn(this.state.credentials)}>Sign in</Button>
                     </ModalFooter>
                 </Modal>
             </React.Fragment>
