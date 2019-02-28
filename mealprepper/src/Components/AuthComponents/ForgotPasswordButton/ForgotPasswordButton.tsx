@@ -9,6 +9,8 @@ import FormGroup from 'reactstrap/lib/FormGroup';
 import Label from 'reactstrap/lib/Label';
 import Input from 'reactstrap/lib/Input';
 import { Auth } from 'aws-amplify';
+import { toast } from 'react-toastify';
+import { CircularProgress } from '@material-ui/core';
 
 export interface ForgotPasswordButtonProps {
     className? : string,
@@ -20,8 +22,13 @@ export interface ForgotPasswordButtonState {
     email : string,
     confirmationCode : string,
     newPassword : string,
-    confirmPassword : string
-    concreteEmail : string
+    confirmPassword : string,
+    regex : {
+        minimum : RegExp
+    },
+    showPassTip : boolean,
+    emailProgressIsHidden : boolean,
+    passwordProgressIsHidden : boolean
 }
  
 class ForgotPasswordButton extends React.Component<ForgotPasswordButtonProps, ForgotPasswordButtonState> {
@@ -33,7 +40,12 @@ class ForgotPasswordButton extends React.Component<ForgotPasswordButtonProps, Fo
             confirmationCode : '',
             newPassword : '',
             confirmPassword : '',
-            concreteEmail : ''
+            regex : {
+                minimum : new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})")
+            },
+            showPassTip : false,
+            emailProgressIsHidden : true,
+            passwordProgressIsHidden : true
          };
     }
 
@@ -43,7 +55,10 @@ class ForgotPasswordButton extends React.Component<ForgotPasswordButtonProps, Fo
             email : '',
             confirmationCode : '',
             newPassword : '',
-            confirmPassword : ''
+            confirmPassword : '',
+            showPassTip : false,
+            emailProgressIsHidden : true,
+            passwordProgressIsHidden : true
         })
     }
 
@@ -60,9 +75,17 @@ class ForgotPasswordButton extends React.Component<ForgotPasswordButtonProps, Fo
     }
 
     changeNewPassword = (event: any) => {
-        this.setState({
-            newPassword : event.currentTarget.value
-        })
+        if (this.state.regex.minimum.test(event.currentTarget.value)){
+            this.setState({
+                newPassword : event.currentTarget.value,
+                showPassTip : false
+            })
+        } else {
+            this.setState({
+                newPassword : event.currentTarget.value,
+                showPassTip : true
+            })
+        }
     }
 
     changeConfirmPassword = (event: any) => {
@@ -73,22 +96,45 @@ class ForgotPasswordButton extends React.Component<ForgotPasswordButtonProps, Fo
 
     sendEmail = async (email : string) => {
         try {
+            this.setState({emailProgressIsHidden : false});
             const data = await Auth.forgotPassword(email);
-            this.setState({
-                concreteEmail : this.state.email
-            });
+            this.setState({emailProgressIsHidden : true});
+            toast('Email sent.');
         } catch (err) {
-            console.log(err);
+            this.setState({emailProgressIsHidden : true});
+            if (err.message) {
+                toast(`Email failed to send. ${err.message}`);
+            } else {
+                toast(`Email failed to send. ${err}`);
+            }
+        }
+    }
+
+    renderPassTipLabel = () => {
+        if(this.state.showPassTip) {
+            return (
+                <Label className="text-danger" size="sm">Passwords are required to have at least one capital letter, lowercase letter, number, and special character !@#$%^&* and must be at least 8 characters long</Label>
+            )
+        } else {
+            return;
         }
     }
 
     changePassword = async(email: string, code: string, newPassword: string) => {
         try {
+            this.setState({passwordProgressIsHidden : false});
             const data = await Auth.forgotPasswordSubmit(email, code, newPassword);
+            this.setState({passwordProgressIsHidden : true});
             console.log(data);
+            toast("Successfully changed password.")
             this.toggle();
         } catch (err) {
-            console.log(err);
+            this.setState({passwordProgressIsHidden : true});
+            if (err.message) {
+                toast(`Failed to change password.\n${err.message}`)
+            } else {
+                toast(`Failed to change password.\n${err}`)
+            }
         }
     }
 
@@ -107,7 +153,9 @@ class ForgotPasswordButton extends React.Component<ForgotPasswordButtonProps, Fo
                             <FormGroup >
                                 <Input id="email" type="text" placeholder="Email"
                                 value={this.state.email} onChange={this.changeEmail} />
-                                <Button color="forogt-password" onClick={() => this.sendEmail(this.state.email)}>Send Recovery Email</Button>
+                                <Button color={this.props.color} className={this.props.className}
+                                onClick={() => this.sendEmail(this.state.email)}>Send Recovery Email</Button>
+                                <CircularProgress hidden={this.state.emailProgressIsHidden} className="p-2"/>
                             </FormGroup>
                         </Form>
                         <Form>
@@ -120,6 +168,7 @@ class ForgotPasswordButton extends React.Component<ForgotPasswordButtonProps, Fo
                                 <Label>New Password</Label>
                                 <Input type="password" id="newPassword" placeholder="Password"
                                 value={this.state.newPassword} onChange={this.changeNewPassword} />
+                                {this.renderPassTipLabel()}
                             </FormGroup>
                             <FormGroup>
                                 <Label>Confrim Password </Label>
@@ -132,9 +181,11 @@ class ForgotPasswordButton extends React.Component<ForgotPasswordButtonProps, Fo
                         <Button color={this.props.color} className={this.props.className}
                         disabled={(this.state.newPassword !== this.state.confirmPassword 
                             || this.state.newPassword === '' 
-                            || this.state.confirmPassword === '')}
-                        onClick={() => this.changePassword(this.state.concreteEmail, this.state.confirmationCode, this.state.newPassword)}
+                            || this.state.confirmPassword === ''
+                            || !this.state.regex.minimum.test(this.state.newPassword))}
+                        onClick={() => this.changePassword(this.state.email, this.state.confirmationCode, this.state.newPassword)}
                         >Change Password</Button>
+                        <CircularProgress hidden={this.state.passwordProgressIsHidden} />
                     </ModalFooter>
                 </Modal>
             </React.Fragment>

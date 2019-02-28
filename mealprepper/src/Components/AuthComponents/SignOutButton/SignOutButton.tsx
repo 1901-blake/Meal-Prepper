@@ -1,6 +1,7 @@
 import { Auth } from "aws-amplify";
 import * as React from 'react';
 import Button from "reactstrap/lib/Button";
+import { toast } from "react-toastify";
 
 export interface SignOutButtonProps {
     className? : string,
@@ -14,9 +15,15 @@ export interface SignOutButtonState {
 class SignOutButton extends React.Component<SignOutButtonProps, SignOutButtonState> {
     signout = async () => {
         try {
+            toast('Successfully signed out.')
             const data = await Auth.signOut();
         } catch (err) {
-            console.log(err);
+            if (err.message) {
+                toast(`Failed to log out.\n${err.message}`)
+            } else {
+                toast(`Failed to log out.\n${err}`)
+
+            }
         }
     }
 
