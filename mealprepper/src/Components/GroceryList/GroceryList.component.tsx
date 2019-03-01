@@ -2,6 +2,8 @@ import React from "react";
 import { connect } from 'react-redux';
 import { IGRocState, IState, state, IGenerateMealPlanState } from "../../reducers";
 import { loadGroceryRow, addGroceryRow } from "../../Actions/GroceryList.action";
+import { FullRecipe } from "../../Model/FullRecipe";
+import { GroceryListrowComponent } from "./GroceryListrow.component";
 
 const divStyle = {
     margin: '40px',
@@ -11,7 +13,7 @@ const divStyle = {
 export interface IGrocProps {
     groc: IGRocState,
     generate: IGenerateMealPlanState,
-    loadGroceryRow: () => void,
+    loadGroceryRow: (generate: FullRecipe[]) => void,
     addGroceryRow: (Ingredientname: string, amount: number) => void
 
 }
@@ -30,6 +32,7 @@ export class GroceryListComponent extends React.Component<IGrocProps, any> {
 
 
     changeamount = (event) => {
+        console.log('col value: ' + event.target.parentNode.nodeName);
         this.setState({ tempamount: event.target.value });
     }
     changename = (event) => {
@@ -39,8 +42,8 @@ export class GroceryListComponent extends React.Component<IGrocProps, any> {
     addrowfunc = () => {
         if (this.state.tempname && this.state.tempamount) {
             this.props.addGroceryRow(this.state.tempname, this.state.tempamount);
-            
-        }else{
+
+        } else {
             console.log(this.props.generate.mealPlan[0].description);
         }
     }
@@ -57,17 +60,19 @@ export class GroceryListComponent extends React.Component<IGrocProps, any> {
     }
     componentDidMount() {
         console.log('componentDidMount loadGroceryList');
+        if (this.props.generate.mealPlan) {
 
-        this.props.loadGroceryRow();
+            this.props.loadGroceryRow(this.props.generate.mealPlan);
+        }
     }
 
     render() {
-        
+
         let linebool = this.state.linebool;
 
         return (
             <div className="bg">
-            <h1 className="tableHeaders">Grocery List</h1>
+                <h1 className="tableHeaders">Grocery List</h1>
                 <table style={divStyle} id="groceryTable">
 
                     <thead style={divStyle}>
@@ -84,19 +89,26 @@ export class GroceryListComponent extends React.Component<IGrocProps, any> {
                             <td> <input type="text" placeholder="ingredient name" onChange={this.changename} /> </td>
                             <td> <input type="number" placeholder="amount" onChange={this.changeamount} /> </td>
                         </tr>
-                        {
+
+                        {/* {
                             this.props.groc.arrayingredient.map((r) => (
                                 //dont forget Key
                                 <tr >
                                     <td><input type="checkbox" onChange={this.togglelinestyle} /></td>
-                                    {/* {
-                                        linebool ?
-                                            (<td style={{ textDecorationLine: 'line-through', textDecorationStyle: 'solid' }} >{r.ingredient.name}</td>) :
-                                            (<td style={{ textDecorationLine: '', textDecorationStyle: 'solid' }}>{r.ingredient.name}</td>)
-                                    } */}
                                     <td>{r.ingredient.name}</td>
                                     <td>{r.amount}</td>
                                 </tr>
+                            ))
+                        } */}
+
+                        {
+
+                            this.props.groc.arrayingredient.map((r) => (
+
+                                    <tr>
+                                        <GroceryListrowComponent ingredient={r.ingredient.name} amount={r.amount} />
+                                    </tr>
+
                             ))
                         }
                     </tbody>

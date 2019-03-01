@@ -2,6 +2,7 @@ import { Ingredient } from "../Model/Ingredient";
 import { Ingredients } from "../Model/Ingredients";
 import { Measure } from "../Model/Measure";
 import { recipeClient } from "../Axios/recipe.client";
+import { FullRecipe } from "../Model/FullRecipe";
 
 
 export const groceryTypes = {
@@ -10,19 +11,19 @@ export const groceryTypes = {
 
 }
 
-export const loadGroceryRow = () => async (dispatch) => {
+export const loadGroceryRow = (generate : FullRecipe[]) => async (dispatch) => {
     console.log('loadGroceryRow action loading');
-    const resp = await fetch('http://localhost:5500/recipeingredient');
-    // recipeClient.
-    const body = await resp.json();
-    console.log('resp status in loadGroceryRow is ' + resp.status);
 
-    if (resp.status == 200) {
+    if (generate) {
 
         let tempingrdient : Ingredients[] = [];
-        for (let index = 0; index < body.length; index++) {
 
-            tempingrdient[index] = new Ingredients(body[index].measure, body[index].ingredient, body[index].amount);
+        for (let index = 0; index < generate.length; index++) {
+
+            for (let ingindex = 0; ingindex < generate[index].ingredients.length; ingindex++) {
+
+                tempingrdient.push(new Ingredients(generate[index].ingredients[ingindex].measure, generate[index].ingredients[ingindex].ingredient,generate[index].ingredients[ingindex].amount));
+            }
         }
 
         // tempingrdient.ingredient.name = body.value.joke;
