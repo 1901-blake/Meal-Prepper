@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.revature.model.Ingredient;
 import com.revature.model.Recipe;
+import com.revature.repos.IngredientsRepo;
+import com.revature.repos.MeasureRepo;
 import com.revature.repos.RecipeRepo;
 
 @Service
@@ -16,14 +18,32 @@ public class RecipeServiceImpl implements RecipeService {
 
 	@Autowired
 	private RecipeRepo recipeRepo;
+	
+	@Autowired
+	private IngredientsRepo ingredientRepo;
 
+	@Autowired
+	private MeasureRepo measureRepo;
+	
 	@Transactional
 	@Override
 	public Recipe save(Recipe r) {
-		r.getIngredients().forEach(measure -> {
-			System.out.println(measure);
-			measure.setRecipe(r);
+		r.getIngredients().forEach(recipeIngredient -> {
+			
+			recipeIngredient.setRecipe(r);
+			
+			if (recipeIngredient.getIngredient().getId() == 0) {
+				ingredientRepo.save(recipeIngredient.getIngredient());
+			}
+			
+			if (recipeIngredient.getMeasure().getId() == 0) {
+				measureRepo.save(recipeIngredient.getMeasure());
+			}
+			
+			System.out.println(recipeIngredient);			
+			
 		});
+		
 		return recipeRepo.save(r);
 	}
 

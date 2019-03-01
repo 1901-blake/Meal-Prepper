@@ -70,6 +70,11 @@ public class Ingredient {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Ingredient [id=" + id + ", name=" + name + "]";
+	}
 	
 	
 }
