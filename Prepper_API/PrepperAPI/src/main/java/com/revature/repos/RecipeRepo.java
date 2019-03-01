@@ -11,6 +11,7 @@ import com.revature.model.RecipeIngredient;
 public interface RecipeRepo extends JpaRepository<Recipe, Integer> {
 	Ingredient save(Ingredient i);
 	List<Recipe> findByName(String name);
+	List<Recipe> findByDescription(String description);
 
 
 }
