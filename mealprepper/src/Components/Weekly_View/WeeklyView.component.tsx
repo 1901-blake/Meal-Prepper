@@ -4,31 +4,17 @@ import { IState, state, IWeeklyViewState } from "../../reducers";
 import Modal from 'react-modal';
 import { loadWeeklyPlan } from "../../Actions/WeeklyView.action";
 import { Recipe } from "../../Model/Recipe";
+import Tomato from "../../assets/Tomato.jpeg"
+import Button from "reactstrap/lib/Button";
+import Card from "reactstrap/lib/Card";
+import CardTitle from "reactstrap/lib/CardTitle";
+import CardText from "reactstrap/lib/CardText";
+import CardBody from "reactstrap/lib/CardBody";
+import CardImg from "reactstrap/lib/CardImg";
 
 
 const divStyle = {
-    // zoom: 1,
-    //display: 'inline',
-
-    row: {
-        display: 'flex',
-    },
-    card: {
-        maxWidth: '275px',
-        height: '675px',
-
-        border: '2px solid black',
-
-        backgroundColor: '#f1f1f1',
-        margin: '3px',
-    },
-
-    // width: '100%',
-    // display: 'block',
-    // marginBottom: '20px',
-
-    // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    // text-align: center;
+    
 
 };
 
@@ -66,27 +52,28 @@ export class WeeklyViewComponent extends React.Component<IWeeklyViewProps, any> 
     render() {
         return (
             <div className="bg">
-
-                <div style={divStyle.row}>
-                    {
-                        this.props.weeklyview.weeklyrecipe.map((r) => (
-                            <div style={divStyle.card} onClick={this.toggleModol.bind(this, r)}>
-                                <h3>{r.name}</h3>
-                                <p>{r.description}</p>
-                            </div>
-                        ))
-                    }
-                </div>
-
-                <div >
-
-                    <Modal isOpen={this.state.modalebool} className="Modalstyle" onRequestClose={this.toggleModol}>
-                        <button onClick={this.toggleModol.bind(this, this.state.dailyview)}> X </button>
-                        <p>{this.state.dailyview.recipe_id}</p>
-                        <p>{this.state.dailyview.name}</p>
-                        <p>{this.state.dailyview.description}</p>
-                        <p>{this.state.dailyview.instructions}</p>
-                    </Modal>
+                <div className="weekly-scroller">
+                        {
+                            this.props.weeklyview.weeklyrecipe.map((r) => (
+                                <Card className="weekly-div-card" onClick={this.toggleModol.bind(this, r)}>
+                                    <CardImg top width="100%" height="50%" src={Tomato} />
+                                    <Button color="weekly-delete" className="ml-auto">X</Button>
+                                    <CardBody className="too-much-text">
+                                        <CardTitle>{r.name}</CardTitle>
+                                        <CardText>{r.description}</CardText>
+                                    </CardBody>
+                                </Card>
+                            ))
+                        }
+                    <div>
+                        <Modal isOpen={this.state.modalebool} className="Modalstyle" onRequestClose={this.toggleModol}>
+                            <button onClick={this.toggleModol.bind(this, this.state.dailyview)}> X </button>
+                            <p>{this.state.dailyview.recipe_id}</p>
+                            <p>{this.state.dailyview.name}</p>
+                            <p>{this.state.dailyview.description}</p>
+                            <p>{this.state.dailyview.instructions}</p>
+                        </Modal>
+                    </div>
                 </div>
             </div>
         )
