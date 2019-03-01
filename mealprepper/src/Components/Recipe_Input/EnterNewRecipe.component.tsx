@@ -1,10 +1,13 @@
 import React from "react";
 import { IEnterNewRecipeState, IState } from "../../reducers";
-import { addIngredient, updateAmount, updateIngredient, updateMeasure, updateRecipeName, updateInstructions, updateDescription, submitRecipe, populateIngredient, populateMeasure } from "../../Actions/EnterNewRecipe.action";
+import { addIngredient, updateAmount, updateIngredient, updateMeasure, updateRecipeName, 
+    updateInstructions, updateDescription, submitRecipe, populateIngredient,
+    populateMeasure } from "../../Actions/EnterNewRecipe.action";
 import { connect } from "react-redux";
 import { Measure } from "../../Model/Measure";
 import { Ingredient } from "../../Model/Ingredient";
 import { Ingredients } from "../../Model/Ingredients";
+import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 
 
 interface IEnterNewRecipeProps {
@@ -18,7 +21,8 @@ interface IEnterNewRecipeProps {
     updateRecipeName: (event) => void,
     updateInstructions: (event) => void,
     updateDescription: (event) => void,
-    submitRecipe: (event, recipeName: string, description: string, instructions: string, ingredients: Ingredients[]) => Promise<void>
+    submitRecipe: (event, recipeName: string, description: string, instructions: string,
+        ingredients: Ingredients[]) => Promise<void>
 }
 
 
@@ -36,63 +40,90 @@ export class EnterNewRecipeComponent extends React.Component<IEnterNewRecipeProp
     render() {
         return (
             <div className="bg">
-                <form>
-                    <div className="form-row">
-                        <div className="form-group col-md-4">
-                            <label htmlFor="recipeName">Recipe Name</label>
-                            <input type="text" className="form-control" id="recipeName" placeholder="Recipe Name" onChange={() => this.props.updateRecipeName(event)} required />
+                <h1 className="update-profile-heading">Enter New Recipe</h1>
+                <div className="user-info-class">
+                <Form className="update-profile-form">
+                    <FormGroup className="form-row">
+                        {/* Recipe Name */}
+                        <label htmlFor="recipeName">Recipe Name</label>
+                        <input type="text" className="form-control" id="recipeName" placeholder="Recipe Name"
+                            onChange={() => this.props.updateRecipeName(event)} required />
+                        {/* Category */}
+                        <label htmlFor="recipeDescription">Category</label>
+                        <div className="input-group" id="recipeDescription" onChange={() => this.props.updateDescription(event)}>
+                            <div className="input-group-prepend">
+                                <div className="input-group-text">
+                                <input type="radio" name="Category" value="1"/>
+                                </div>
+                            </div>
+                            <input type="text" disabled className="form-control" placeholder="Breakfast"/>
+                            <div className="input-group-prepend">
+                                <div className="input-group-text">
+                                <input type="radio" name="Category" value="2"/>
+                                </div>
+                            </div>
+                            <input type="text" disabled className="form-control" placeholder="Lunch/Dinner"/>
+                            <div className="input-group-prepend">
+                                <div className="input-group-text">
+                                <input type="radio" name="Category" value="3"/>
+                                </div>
+                            </div>
+                            <input type="text" disabled className="form-control" placeholder="Dessert"/>
                         </div>
-                        <div className="form-group col-md-4">
-                            <label htmlFor="recipeDescription">Description</label>
-                            <input type="text" className="form-control" id="recipeDescription" placeholder="Description" onChange={() => this.props.updateDescription(event)} required />
-                        </div>
-                    </div>
-                    <div className="form-group">
+                        {/* Instructions */}
                         <label htmlFor="recipeInstructions">Instructions</label>
-                        <textarea className="form-control" id="recipeInstructions" cols={8} rows={10} placeholder="Enter recipe instructions/steps here:"
+                        <textarea className="form-control" id="recipeInstructions" cols={8} rows={10}
+                            placeholder="Enter recipe instructions/steps here:"
                             onChange={() => this.props.updateInstructions(event)} required></textarea>
-                    </div>
-                    <button type="submit" className="btn btn-danger mr-1" onClick={() => this.props.submitRecipe(event, this.props.newRecipe.recipeName,
-                        this.props.newRecipe.description, this.props.newRecipe.instructions, this.props.newRecipe.ingredArr)}>Submit Recipe</button>
-                    <button type="reset" className="btn btn-secondary mr-1">Reset</button>
-                    <span>{this.props.newRecipe.status}</span>
-                    <button type="button" className="btn btn-success" onClick={() => this.props.addIngredient(this.props.newRecipe.amount, this.props.newRecipe.measure,
-                        this.props.newRecipe.ingredient)} >Add Ingredient</button>
 
-                    <div className="form-row" id="container">
-                        <div className="form-group col-md-1">
-                            <label htmlFor="ingredientAmount">Amount</label>
-                            <input type="number" className="form-control" id="ingredientAmount" onChange={() => this.props.updateAmount(event)} required />
-                        </div>
-                        <div className="form-group col-md-2">
-                            <label>Unit of Measure:
-                                <input list="measurements" id="measure-choice" name="measure-choice" onChange={() => this.props.updateMeasure(event)} />
-                            </label>
+                        {/* Amount */}
+                        <div className="form-row">
+                            <div className="col">
+                                <label htmlFor="ingredientAmount">Amount</label>
+                                <input type="number" className="form-control" id="ingredientAmount"
+                                    onChange={() => this.props.updateAmount(event)} required />
+                            </div>
+
+                            {/* Unit of Measure */}
+                            <div className="col">
+                                <label htmlFor="measure-choice">Unit of Measure</label>
+                                    <input list="measurements" className="form-control" id="measure-choice" name="measure-choice"
+                                        onChange={() => this.props.updateMeasure(event)} />
                                 <datalist id="measurements">
-                                    <select>
-                                        {this.props.newRecipe.measurePop.map(ele => (
-                                            <option value={ele.name} />
-                                        ))}
-                                    </select>
+                                    {this.props.newRecipe.measurePop.map(ele => (
+                                        <option value={ele.name} />
+                                    ))}
                                 </datalist>
-                        </div>
-                        <div className="form-group col-md-3">
-                            <label htmlFor="ingredient">Ingredient:
-                                <input list="ingredient-list" onChange={() => this.props.updateIngredient(event)} />
-                            </label>
-                            <datalist id="ingredient-list">
-                                <select>
+                            </div>
+
+                            {/* Ingredient */}
+                            <div className="col">
+                                <label htmlFor="ingredient-list">Ingredient</label>
+                                    <input list="ingredient-list" className="form-control" onChange={() => this.props.updateIngredient(event)} />
+                                <datalist id="ingredient-list">
                                     {
                                         this.props.newRecipe.ingredientPop.map(ele => (
                                             <option value={ele.name} />
                                         ))
                                     }
-                                </select>
-                            </datalist>
-                            
+                                </datalist>
+                            </div>
                         </div>
-                    </div>
-                </form>
+
+                        {/* Submit Button, Reset Button, Add New Ingredient Button */}
+                        <div className="recEntryButtons">
+                            <button type="submit" className="btn btn-danger mr-1" onClick={() =>
+                                this.props.submitRecipe(event, this.props.newRecipe.recipeName,
+                                this.props.newRecipe.description, this.props.newRecipe.instructions,
+                                this.props.newRecipe.ingredArr)}>Submit Recipe</button>
+                            <button type="reset" className="btn btn-secondary mr-1">Reset</button>
+                            <button type="button" className="btn btn-success" onClick={() =>
+                                this.props.addIngredient(this.props.newRecipe.amount, this.props.newRecipe.measure,
+                                this.props.newRecipe.ingredient)} >Add Ingredient</button>
+                            <span color="red">{this.props.newRecipe.status}</span>
+                        </div>
+                    </FormGroup>
+                </Form>
                 <div>
                     <table className="table table-striped table-hover table-light">
                         <thead>
@@ -115,6 +146,7 @@ export class EnterNewRecipeComponent extends React.Component<IEnterNewRecipeProp
                         </tbody>
                     </table>
                 </div>
+            </div>
             </div>
         )
     }
