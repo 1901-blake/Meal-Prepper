@@ -9,7 +9,7 @@ export const loadrecipeHistoryRow = () => async (dispatch) => {
 
     // const tempuser = 0;
 
-    // const resp = await fetch('http://localhost:5500/recipe');
+    // const resp = await fetch('http://ec2-18-225-37-190.us-east-2.compute.amazonaws.com:5500/recipe');
     // console.log('resp has a status of: ' + resp.status);
 
 
