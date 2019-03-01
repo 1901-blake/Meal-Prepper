@@ -72,7 +72,12 @@ public class Measure {
 			return false;
 		return true;
 	}
-	
 
+	@Override
+	public String toString() {
+		return "Measure [id=" + id + ", name=" + name + "]";
+	}
+	
+	
 
 }

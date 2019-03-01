@@ -53,19 +53,19 @@ export class EnterNewRecipeComponent extends React.Component<IEnterNewRecipeProp
                         <div className="input-group" id="recipeDescription" onChange={() => this.props.updateDescription(event)}>
                             <div className="input-group-prepend">
                                 <div className="input-group-text">
-                                <input type="radio" name="Category" value="1"/>
+                                <input type="radio" name="Category" value="breakfast"/>
                                 </div>
                             </div>
                             <input type="text" disabled className="form-control" placeholder="Breakfast"/>
                             <div className="input-group-prepend">
                                 <div className="input-group-text">
-                                <input type="radio" name="Category" value="2"/>
+                                <input type="radio" name="Category" value="lunch-dinner"/>
                                 </div>
                             </div>
                             <input type="text" disabled className="form-control" placeholder="Lunch/Dinner"/>
                             <div className="input-group-prepend">
                                 <div className="input-group-text">
-                                <input type="radio" name="Category" value="3"/>
+                                <input type="radio" name="Category" value="dessert"/>
                                 </div>
                             </div>
                             <input type="text" disabled className="form-control" placeholder="Dessert"/>
