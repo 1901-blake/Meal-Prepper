@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from 'react-redux';
-import { IGRocState, IState, state } from "../../reducers";
+import { IGRocState, IState, state, IGenerateMealPlanState } from "../../reducers";
 import { loadGroceryRow, addGroceryRow } from "../../Actions/GroceryList.action";
 
 const divStyle = {
@@ -10,6 +10,7 @@ const divStyle = {
 
 export interface IGrocProps {
     groc: IGRocState,
+    generate: IGenerateMealPlanState,
     loadGroceryRow: () => void,
     addGroceryRow: (Ingredientname: string, amount: number) => void
 
@@ -35,8 +36,13 @@ export class GroceryListComponent extends React.Component<IGrocProps, any> {
         this.setState({ tempname: event.target.value });
     }
 
-    tempfunc = () => {
-        this.props.addGroceryRow(this.state.tempname, this.state.tempamount);
+    addrowfunc = () => {
+        if (this.state.tempname && this.state.tempamount) {
+            this.props.addGroceryRow(this.state.tempname, this.state.tempamount);
+            
+        }else{
+            console.log(this.props.generate.mealPlan[0].description);
+        }
     }
 
     togglelinestyle = (event) => {
@@ -50,6 +56,8 @@ export class GroceryListComponent extends React.Component<IGrocProps, any> {
         }
     }
     componentDidMount() {
+        console.log('componentDidMount loadGroceryList');
+
         this.props.loadGroceryRow();
     }
 
@@ -72,7 +80,7 @@ export class GroceryListComponent extends React.Component<IGrocProps, any> {
 
                     <tbody>
                         <tr style={divStyle}>
-                            <td> <button onClick={this.tempfunc}>+</button> </td>
+                            <td> <button onClick={this.addrowfunc}>+</button> </td>
                             <td> <input type="text" placeholder="ingredient name" onChange={this.changename} /> </td>
                             <td> <input type="number" placeholder="amount" onChange={this.changeamount} /> </td>
                         </tr>
@@ -101,7 +109,8 @@ export class GroceryListComponent extends React.Component<IGrocProps, any> {
 
 const mapStateToProps = (state: IState) => {
     return {
-        groc: state.groc
+        groc: state.groc,
+        generate: state.generate
     }
 }
 
