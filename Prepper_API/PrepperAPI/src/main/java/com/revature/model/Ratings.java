@@ -1,5 +1,6 @@
 package com.revature.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,23 +11,27 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Table(name = "ratings")
 @Entity
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+@JsonFilter("depth_5")
 public class Ratings {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")//creating a primary key	
 	private int id;
 	
-    @Column(name = "user_id")
-    private int user;
+	@ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.MERGE)
+    @JoinColumn(name = "user_id")
+    private Users user;
 	
-	@Column(name = "Recipe_id")
-    private int recipe;
+	@ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.MERGE)
+	@JoinColumn(name = "Recipe_id")
+    private Recipe recipe;
 	
 	private Integer rating;
 
@@ -35,7 +40,7 @@ public class Ratings {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Ratings(int id, int user, int recipe, Integer rating) {
+	public Ratings(int id, Users user, Recipe recipe, Integer rating) {
 		super();
 		this.id = id;
 		this.user = user;
@@ -51,19 +56,19 @@ public class Ratings {
 		this.id = id;
 	}
 
-	public int getUser() {
+	public Users getUser() {
 		return user;
 	}
 
-	public void setUser(int user) {
+	public void setUser(Users user) {
 		this.user = user;
 	}
 
-	public int getRecipe() {
+	public Recipe getRecipe() {
 		return recipe;
 	}
 
-	public void setRecipe(int recipe) {
+	public void setRecipe(Recipe recipe) {
 		this.recipe = recipe;
 	}
 
@@ -81,8 +86,8 @@ public class Ratings {
 		int result = 1;
 		result = prime * result + id;
 		result = prime * result + ((rating == null) ? 0 : rating.hashCode());
-		result = prime * result + recipe;
-		result = prime * result + user;
+		result = prime * result + ((recipe == null) ? 0 : recipe.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
 
@@ -102,11 +107,18 @@ public class Ratings {
 				return false;
 		} else if (!rating.equals(other.rating))
 			return false;
-		if (recipe != other.recipe)
+		if (recipe == null) {
+			if (other.recipe != null)
+				return false;
+		} else if (!recipe.equals(other.recipe))
 			return false;
-		if (user != other.user)
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
 			return false;
 		return true;
 	}
+
 
 }

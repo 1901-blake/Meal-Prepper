@@ -41,4 +41,5 @@ public class UsersController {
 	public Users history(@Valid @RequestBody Users history) {
 		return usersService.save(history);
 	}
+	
 }

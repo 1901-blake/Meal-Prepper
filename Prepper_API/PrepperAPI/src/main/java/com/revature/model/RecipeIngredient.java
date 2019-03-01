@@ -31,22 +31,22 @@ public class RecipeIngredient {
 	private Recipe recipe;
 	
 	
-	@ManyToOne
+	/*@ManyToOne
 	@JoinColumn(name="ID", insertable=false, updatable=false)
 	private Measure measure;
 	
 	@ManyToOne
 	@JoinColumn(name="ID", insertable=false, updatable=false)
 	private Ingredient ingredient;
+	*/
 	
-	
-	/*@ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.MERGE)
     @JoinColumn(name = "measure_id")
     private Measure measure;
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.MERGE)
     @JoinColumn(name = "ingredient_id")
-    private Ingredient ingredient;*/
+    private Ingredient ingredient;
 
 	private int amount;
 
