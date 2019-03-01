@@ -14,6 +14,8 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
+
 @Table(name = "recipeingredient")
 @Entity
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
@@ -29,18 +31,29 @@ public class RecipeIngredient {
 	private Recipe recipe;
 	
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.MERGE)
+	@ManyToOne
+	@JoinColumn(name="ID", insertable=false, updatable=false)
+	private Measure measure;
+	
+	@ManyToOne
+	@JoinColumn(name="ID", insertable=false, updatable=false)
+	private Ingredient ingredient;
+	
+	
+	/*@ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
     @JoinColumn(name = "measure_id")
     private Measure measure;
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.MERGE)
+	@ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
     @JoinColumn(name = "ingredient_id")
-    private Ingredient ingredient;
+    private Ingredient ingredient;*/
 
 	private int amount;
 
 	public RecipeIngredient() {
 		super();
+		System.out.println(recipe);
+		
 	}
 
 	public RecipeIngredient(Recipe recipe, Measure measure, Ingredient ingredient, int amount) {
