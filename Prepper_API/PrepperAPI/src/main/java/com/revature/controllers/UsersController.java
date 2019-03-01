@@ -27,6 +27,10 @@ public class UsersController {
 	public Users findById(@PathVariable int id) {
 		return usersService.findById(id);
 	}
+	
+	@GetMapping("subkey/{key}")
+	public List<Users> findBySubkey(@PathVariable String key) {
+		return usersService.findBySubkey(key);
+	}
 		
-
 }

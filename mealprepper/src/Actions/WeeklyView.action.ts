@@ -6,7 +6,7 @@ export const weeklyViewTypes = {
 
 export const loadWeeklyPlan = (amount: number) => async (dispatch) => {
     console.log('loadWeeklyPlan loading');
-    const resp = await fetch('http://localhost:5500/recipe');
+    const resp = await fetch('http://ec2-18-225-37-190.us-east-2.compute.amazonaws.com:5500/recipe');
     
     console.log('resp in loadWeeklyPlan.action has a status of: ' + resp.status);
 
