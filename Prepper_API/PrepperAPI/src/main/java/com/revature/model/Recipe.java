@@ -30,13 +30,14 @@ public class Recipe {
 	private String description;
 	private String instructions;
 	
-	@OneToMany(cascade=CascadeType.ALL)
+	/*@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="ID")
-	private List<RecipeIngredient> ingredients;
+	private List<RecipeIngredient> ingredients;*/
 	
-	/*@OneToMany(mappedBy = "recipe", cascade=CascadeType.ALL)
+	@OneToMany(mappedBy = "recipe", cascade=CascadeType.PERSIST)
     private List<RecipeIngredient> ingredients;
-	*/
+	//Persist lets me enter an ingredient and measurement already in the DB to a recipe
+	//Merge lets me create new one ad add it to a recipe
 	
 	
 	
