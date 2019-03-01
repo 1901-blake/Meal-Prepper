@@ -10,35 +10,41 @@ const initialState: IEnterNewRecipeState = {
     amount: 0,
     measure: new Measure(0, ''),
     ingredient: new Ingredient(0, ''),
-    recipeName: '', 
+    recipeName: '',
     description: '',
-    instructions: '', 
-    status: 0, 
-    measurePop: [], 
+    instructions: '',
+    status: 0,
+    measurePop: [],
     ingredientPop: []
 }
 
 export const enterNewRecipeReducer = (state = initialState, action: any) => {
     switch (action.type) {
-        case enterNewRecipeTypes.ADD_INGREDIENT: 
+        case enterNewRecipeTypes.ADD_INGREDIENT:
             let newIngredArr = [...state.ingredArr];
             let tempMeasure = action.payload.measure;
             let tempIngredient = action.payload.ingredient;
 
             let arrMeasure = [...state.measurePop];
-            let checkMeasure = arrMeasure.find(function(element) {
+            let checkMeasure = arrMeasure.find(function (element) {
                 return element.name === tempMeasure
             });
 
             let arrIngredient = [...state.ingredientPop];
-            let checkIngredient = arrIngredient.find(function(element) {
+            let checkIngredient = arrIngredient.find(function (element) {
                 return element.name === tempIngredient
             });
-            console.log(checkMeasure);
-            console.log(checkIngredient);
 
             if (checkIngredient && checkMeasure) {
                 let ingred: Ingredients = new Ingredients(checkMeasure, checkIngredient, action.payload.amount);
+                newIngredArr.push(ingred);
+            } else if (checkMeasure) {
+                let ingredientObj = new Ingredient(0, action.payload.ingredient);
+                let ingred: Ingredients = new Ingredients(checkMeasure, ingredientObj, action.payload.amount);
+                newIngredArr.push(ingred);
+            } else if (checkIngredient) {
+                let measureObj: Measure = new Measure(0, action.payload.measure);
+                let ingred: Ingredients = new Ingredients(measureObj, checkIngredient, action.payload.amount);
                 newIngredArr.push(ingred);
             } else {
                 let measureObj = new Measure(0, action.payload.measure);
@@ -47,25 +53,25 @@ export const enterNewRecipeReducer = (state = initialState, action: any) => {
                 newIngredArr.push(ingred);
             }
             return {
-                ...state, 
+                ...state,
                 ingredArr: newIngredArr
             }
         case enterNewRecipeTypes.UPDATE_AMOUNT:
             return {
-                ...state, 
+                ...state,
                 amount: action.payload.amount
             }
         case enterNewRecipeTypes.UPDATE_MEASURE:
             return {
-                ...state, 
+                ...state,
                 measure: action.payload.measure
             }
         case enterNewRecipeTypes.UPDATE_INGREDIENT:
             return {
-                ...state, 
+                ...state,
                 ingredient: action.payload.ingredient
             }
-        case enterNewRecipeTypes.UPDATE_RECIPE_NAME: 
+        case enterNewRecipeTypes.UPDATE_RECIPE_NAME:
             return {
                 ...state,
                 recipeName: action.payload.name
@@ -77,12 +83,13 @@ export const enterNewRecipeReducer = (state = initialState, action: any) => {
             }
         case enterNewRecipeTypes.UPDATE_INSTRUCTIONS:
             return {
-                ...state, 
+                ...state,
                 instructions: action.payload.instructions
             }
-        case enterNewRecipeTypes.SUBMIT_RECIPE: 
+        case enterNewRecipeTypes.SUBMIT_RECIPE:
+            console.log(...state.ingredArr);
             return {
-                ...state, 
+                ...state,
                 status: action.payload.status
             }
         case enterNewRecipeTypes.POPULATE_INGREDIENT:
@@ -95,6 +102,6 @@ export const enterNewRecipeReducer = (state = initialState, action: any) => {
                 ...state,
                 measurePop: action.payload.measurePop
             }
-        }
+    }
     return state;
 }

@@ -1,4 +1,3 @@
-import { Ingredients } from "./Ingredients";
 
 export class Recipe {
     recipe_id : number; // database name is recipe_id
