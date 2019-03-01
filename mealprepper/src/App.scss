@@ -59,7 +59,6 @@ body, html {
   // font-style: italic;
 }
 
-
 #locator {
   position: relative;
   visibility: visible;
@@ -103,4 +102,10 @@ body, html {
   right: auto;
   bottom: auto;
   background-color: papayawhip;
+}
+
+.error-message-div {
+  padding : 1em;
+  background-color: #ff7272;
+  color: white;
 }

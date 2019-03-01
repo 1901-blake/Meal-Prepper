@@ -87,7 +87,7 @@ export class NavComponent extends React.Component<INavProps, any> {
                             <SignUpButton/>
                             <ChangePasswordButton/>
                         </DropdownMenu>
-                        <SignInButton/>
+                        <SignInButton />
                         <SignUpButton/>
                         <SignOutButton/>
                         <ForgotPasswordButton/>

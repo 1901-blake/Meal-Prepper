@@ -1,6 +1,5 @@
 package com.revature.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,7 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Table(name = "ratings")
@@ -27,9 +25,6 @@ public class Ratings {
     @JoinColumn(name = "user_id")
     private Users user;
 	
-	/*@ManyToOne(fetch = FetchType.LAZY)
-	@JsonIgnore
-    @JoinColumn(name = "Recipe_id")*/
 	@Column(name = "Recipe_id")
     private int recipe;
 	

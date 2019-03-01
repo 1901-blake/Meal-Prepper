@@ -8,6 +8,8 @@ import Modal from 'reactstrap/lib/Modal';
 import ModalBody from 'reactstrap/lib/ModalBody';
 import ModalFooter from 'reactstrap/lib/ModalFooter';
 import ModalHeader from 'reactstrap/lib/ModalHeader';
+import { ToastContainer, toast } from 'react-toastify';
+import { CircularProgress } from '@material-ui/core';
 
 export interface SignInButtonProps {
     className? : string,
@@ -20,7 +22,8 @@ export interface SignInButtonState {
     credentials : {
         email: string,
         password : string
-    }
+    },
+    progressIsHidden : boolean
 }
  
 // This componenet will build a signIn modal that displays when clicked
@@ -33,7 +36,8 @@ class SignInButton extends React.Component<SignInButtonProps, SignInButtonState>
             credentials : {
                 email: '',
                 password:''
-            }
+            },
+            progressIsHidden : true
         };
     }
 
@@ -44,7 +48,8 @@ class SignInButton extends React.Component<SignInButtonProps, SignInButtonState>
             credentials : {
                 email: '',
                 password:''
-            }
+            },
+            progressIsHidden : true
         }));
     }
 
@@ -62,10 +67,14 @@ class SignInButton extends React.Component<SignInButtonProps, SignInButtonState>
 
     signIn = async (credentials: any) => {
         try {
-            const data = await Auth.signIn(credentials.email, credentials.password)
+            this.setState({progressIsHidden : false});
+            const data = await Auth.signIn(credentials.email, credentials.password);
+            this.setState({progressIsHidden : true});
+            toast('Successfully logged in.');
             this.toggle();
         } catch (err) {
-            console.log(err);
+            this.setState({progressIsHidden : true});
+            toast(`Failed to log in. \n${err.message}`);
         }
     }
 
@@ -93,7 +102,10 @@ class SignInButton extends React.Component<SignInButtonProps, SignInButtonState>
                         </Form>
                     </ModalBody>
                     <ModalFooter className="justify-content-center">
-                        <Button type="submit" color={this.props.color} onClick={() => this.signIn(this.state.credentials)}>Sign in</Button>
+                        <Button type="submit" color={this.props.color} className={this.props.className}
+                        onClick={() => this.signIn(this.state.credentials)}>Sign in</Button>
+                        <CircularProgress hidden={this.state.progressIsHidden}/>
+
                     </ModalFooter>
                 </Modal>
             </React.Fragment>

@@ -12,12 +12,6 @@ import { generateMealPlanReducer } from './GenerateMealPlan.reducer';
 import { Ingredient } from '../Model/Ingredient';
 import { Measure } from '../Model/Measure';
 import { Ingredients } from '../Model/Ingredients';
-// import { Ingredients } from '../Model/Ingredients';
-
-
-export interface rTuple {
-  rTuple: [number, string, string]
-}
 
 
 export interface INavState {
@@ -44,7 +38,9 @@ export interface IEnterNewRecipeState {
   recipeName: string, 
   description: string, 
   instructions: string, 
-  status: number
+  status: number, 
+  ingredientPop: Ingredient[], 
+  measurePop: Measure[]
 }
 export interface IRecipeHistoryState {
   recipehistoryarray: Recipe[];
