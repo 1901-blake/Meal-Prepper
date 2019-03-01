@@ -67,5 +67,10 @@ public class RecipeServiceImpl implements RecipeService {
 		return null;
 	}
 
+	@Override
+	public List<Recipe> findByDescription(String description) {
+		return recipeRepo.findByDescription(description);
+	}
+
 
 }
