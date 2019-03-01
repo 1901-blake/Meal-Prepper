@@ -12,7 +12,7 @@ export const groceryTypes = {
 
 export const loadGroceryRow = () => async (dispatch) => {
     console.log('loadGroceryRow action loading');
-    const resp = await fetch('http://localhost:5500/recipeingredient');
+    const resp = await fetch('http://ec2-18-225-37-190.us-east-2.compute.amazonaws.com:5500/recipeingredient');
     // recipeClient.
     const body = await resp.json();
     console.log('resp status in loadGroceryRow is ' + resp.status);
