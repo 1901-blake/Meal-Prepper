@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -29,9 +30,21 @@ public class Recipe {
 	private String description;
 	private String instructions;
 	
-	@OneToMany(mappedBy = "recipe", cascade=CascadeType.ALL)
-    private List<RecipeIngredient> ingredients;
+	@OneToMany(cascade=CascadeType.ALL)
+	@JoinColumn(name="ID")
+	private List<RecipeIngredient> ingredients;
 	
+	/*@OneToMany(mappedBy = "recipe", cascade=CascadeType.ALL)
+    private List<RecipeIngredient> ingredients;
+	*/
+	
+	
+	
+	
+	
+	
+	
+
 	@OneToMany(mappedBy = "recipe", cascade=CascadeType.PERSIST)
 	@JsonIgnore
     private List<Ratings> newrecipe;

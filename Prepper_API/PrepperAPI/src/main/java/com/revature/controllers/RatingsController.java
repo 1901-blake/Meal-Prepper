@@ -30,10 +30,6 @@ public class RatingsController {
 	public Ratings findById(@PathVariable int id) {
 		return ratingsService.findById(id);
 	}
-	
-	@PostMapping("/history")
-	public Ratings history(@Valid @RequestBody Ratings history) {
-		return ratingsService.save(history);
-	}
+
 
 }

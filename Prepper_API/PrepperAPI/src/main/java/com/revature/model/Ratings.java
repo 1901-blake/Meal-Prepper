@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Table(name = "ratings")
@@ -21,9 +22,8 @@ public class Ratings {
 	@Column(name = "id")//creating a primary key	
 	private int id;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
-    private Users user;
+    @Column(name = "user_id")
+    private int user;
 	
 	@Column(name = "Recipe_id")
     private int recipe;
@@ -35,7 +35,7 @@ public class Ratings {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Ratings(int id, Users user, int recipe, Integer rating) {
+	public Ratings(int id, int user, int recipe, Integer rating) {
 		super();
 		this.id = id;
 		this.user = user;
@@ -51,11 +51,11 @@ public class Ratings {
 		this.id = id;
 	}
 
-	public Users getUser() {
+	public int getUser() {
 		return user;
 	}
 
-	public void setUser(Users user) {
+	public void setUser(int user) {
 		this.user = user;
 	}
 
@@ -80,9 +80,9 @@ public class Ratings {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + id;
-		result = prime * result + rating;
+		result = prime * result + ((rating == null) ? 0 : rating.hashCode());
 		result = prime * result + recipe;
-		result = prime * result + ((user == null) ? 0 : user.hashCode());
+		result = prime * result + user;
 		return result;
 	}
 
@@ -97,17 +97,16 @@ public class Ratings {
 		Ratings other = (Ratings) obj;
 		if (id != other.id)
 			return false;
-		if (rating != other.rating)
+		if (rating == null) {
+			if (other.rating != null)
+				return false;
+		} else if (!rating.equals(other.rating))
 			return false;
 		if (recipe != other.recipe)
 			return false;
-		if (user == null) {
-			if (other.user != null)
-				return false;
-		} else if (!user.equals(other.user))
+		if (user != other.user)
 			return false;
 		return true;
 	}
 
-	
 }
