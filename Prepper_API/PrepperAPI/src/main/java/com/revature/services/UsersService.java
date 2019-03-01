@@ -11,6 +11,8 @@ public interface UsersService {
 	Users update(Users u);
 	Users delete(Users u);
 	
-	List<Users> findAll();
 	Users findById(int id);
+	List<Users> findAll();
+	List<Users> findBySubkey(String key);
+	
 }

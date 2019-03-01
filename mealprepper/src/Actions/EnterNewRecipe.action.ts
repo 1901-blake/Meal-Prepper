@@ -22,7 +22,7 @@ export const submitRecipe = (event, recipeName: string, description: string, ins
 
         console.log(description, instructions, recipeName, ingredients);
 
-        let recipe = await recipeClient.post('http://localhost:5500/recipe/createRecipe', {
+        let recipe = await recipeClient.post('http://ec2-18-225-37-190.us-east-2.compute.amazonaws.com:5500/recipe/createRecipe', {
             description: description,
             instructions: instructions, 
             name: recipeName, 
@@ -51,7 +51,7 @@ export const submitRecipe = (event, recipeName: string, description: string, ins
 
 export const populateIngredient = () => async (dispatch) => {
     try {
-        let ingred = await recipeClient.get('http://localhost:5500/ingredient');
+        let ingred = await recipeClient.get('http://ec2-18-225-37-190.us-east-2.compute.amazonaws.com:5500/ingredient');
         let list = ingred.data;
         console.log(list);
 
@@ -68,7 +68,7 @@ export const populateIngredient = () => async (dispatch) => {
 
 export const populateMeasure = () => async (dispatch) => {
     try {
-        let measure = await recipeClient.get('http://localhost:5500/measure');
+        let measure = await recipeClient.get('http://ec2-18-225-37-190.us-east-2.compute.amazonaws.com:5500/measure');
         let list = measure.data;
         console.log(list);
 

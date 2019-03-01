@@ -34,6 +34,11 @@ public class RecipeController {
 		return recipeService.findById(id);
 	}
 	
+	@GetMapping("category/{description}")
+	public List<Recipe> findByDescription(@PathVariable String description) {
+		return recipeService.findByDescription(description);
+	}
+	
 	//generate random number of recipes
 	@GetMapping("generate/{numOfRecipes}")
 	public List<Recipe> findRandomRecipes(@PathVariable int numOfRecipes) {
@@ -45,6 +50,24 @@ public class RecipeController {
 		for (int i = 0; i < numOfRecipes; i++) {
 	        int randomIndex = rand.nextInt(fullList.size());
 	        buildList.add(fullList.get(randomIndex));
+	    }
+		
+		return buildList;
+	}
+	
+		
+	@GetMapping("generate/{numOfRecipes}/{description}")
+	public List<Recipe> findRandomRecipe(@PathVariable int numOfRecipes, String description) {
+		List<Recipe> fullList = recipeService.findByDescription(description);//findByCategory
+		
+		List<Recipe> buildList = new ArrayList<Recipe> ();
+	
+		Random rand = new Random();
+		
+		for (int i = 0; i < numOfRecipes; i++) {
+	        int randomIndex = rand.nextInt(fullList.size());
+	        buildList.add(fullList.get(randomIndex));
+	     
 	    }
 		
 		return buildList;

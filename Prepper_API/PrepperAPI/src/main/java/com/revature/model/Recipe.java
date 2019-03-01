@@ -29,7 +29,7 @@ public class Recipe {
 	private String description;
 	private String instructions;
 	
-	@OneToMany(mappedBy = "recipe", cascade=CascadeType.PERSIST)
+	@OneToMany(mappedBy = "recipe", cascade=CascadeType.ALL)
     private List<RecipeIngredient> ingredients;
 	
 	@OneToMany(mappedBy = "recipe", cascade=CascadeType.PERSIST)
