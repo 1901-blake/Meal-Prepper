@@ -19,6 +19,7 @@ import SignUpButton from '../AuthComponents/SignUpButton/SignUpButton';
 import ForgotPasswordButton from '../AuthComponents/ForgotPasswordButton/ForgotPasswordButton';
 import SignOutButton from '../AuthComponents/SignOutButton/SignOutButton';
 import ChangePasswordButton from '../AuthComponents/ChangePasswordButton/ChangePasswordButton';
+import Button from 'reactstrap/lib/Button';
 
 
 
@@ -61,6 +62,7 @@ export class NavComponent extends React.Component<INavProps, any> {
                     <NavItem>
                         <NavLink><Link to="/recipehistory" className="navItems">Recipe History</Link></NavLink>
                     </NavItem>
+                    {/* <Button tag = Link to="/recipehistory">Enter New Recipe</Button> */}
                     <NavItem>
                         <NavLink><Link to="/recipeInput" className="navItems">Enter New Recipe</Link></NavLink>
                     </NavItem>
@@ -80,19 +82,13 @@ export class NavComponent extends React.Component<INavProps, any> {
                                 <NavLink>
                                     <Link to="/userinfo" className="dropdownItems">User Info</Link></NavLink>
                             </DropdownItem>
-                            <SignInButton/>
-                            <SignUpButton/>
-                            <SignOutButton/>
-                            <ForgotPasswordButton/>
-                            <SignUpButton/>
-                            <ChangePasswordButton/>
                         </DropdownMenu>
-                        <SignInButton />
-                        <SignUpButton/>
-                        <SignOutButton/>
-                        <ForgotPasswordButton/>
-                        <ChangePasswordButton/>
                     </Dropdown>
+                    <SignInButton color="dark"/>
+                    <SignUpButton color="dark"/>
+                    <SignOutButton color="dark"/>
+                    <ForgotPasswordButton color="dark"/>
+                    <ChangePasswordButton color="dark"/>
                 </Nav>
             </div>
         );

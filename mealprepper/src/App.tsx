@@ -51,7 +51,10 @@ class App extends Component {
             <Route exact path="/setting" component={SettingComponent} />
             <Route exact path="/userinfo" component={UserInfoComponent} />
 
-            <ToastContainer autoClose={3000} />
+            <ToastContainer 
+              autoClose={3000} 
+              position="bottom-right"
+            />
 
           </div>
         </BrowserRouter>

@@ -52,7 +52,6 @@ public class RecipeIngredient {
 
 	public RecipeIngredient() {
 		super();
-		System.out.println(recipe);
 		
 	}
 
@@ -135,4 +134,11 @@ public class RecipeIngredient {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "RecipeIngredient [id=" + id + ", recipe=" + recipe + ", measure=" + measure + ", ingredient="
+				+ ingredient + ", amount=" + amount + "]";
+	}
+	
 }

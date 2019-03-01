@@ -49,10 +49,10 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**") // all endpoints in the api
-            .allowedOrigins("http://ec2-18-225-37-190.us-east-2.compute.amazonaws.com:9001", "http://ec2-18-225-37-190.us-east-2.compute.amazonaws.com:3000") // allow this origin
-            .allowedMethods("PUT", "DELETE", "GET", "OPTIONS", "POST", "PATCH")
+        	.allowedOrigins("http://localhost:3000",
+        		"http://meal-prepper-app.s3-website.us-east-2.amazonaws.com")
+        	.allowedMethods("PUT", "DELETE", "GET", "OPTIONS", "POST", "PATCH")
             .allowedHeaders("header1", "header2", "Authorization", "content-type")
-//            .exposedHeaders("header1", "header2")
             .allowCredentials(true);
 	}
     

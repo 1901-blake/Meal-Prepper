@@ -1,4 +1,6 @@
 import { Recipe } from "../Model/Recipe";
+import { recipeClient } from "../Axios/recipe.client";
+import { FullRecipe } from "../Model/FullRecipe";
 
 export const recipeHistoryTypes = {
     LOAD_RECIPE_HISTORY_ROW: 'LOAD_RECIPE_HISTORY_ROW'
@@ -7,50 +9,50 @@ export const recipeHistoryTypes = {
 
 export const loadrecipeHistoryRow = () => async (dispatch) => {
 
-    const tempuser = 0;
+    try {
+        const tempuser = 0;
 
-    console.log('loadrecipeHistoryRow action loading');
-    const resp = await fetch('http://localhost:5500/recipe');
-    console.log('resp has a status of: ' + resp.status);
+        console.log('loadrecipeHistoryRow action loading');
+        const resp = await recipeClient.get('recipe');
+        console.log('resp has a status of: ' + resp.status);
 
-    // const resp = await fetch('http://ec2-18-225-37-190.us-east-2.compute.amazonaws.com:5500/recipe');
-    // console.log('resp has a status of: ' + resp.status);
+        // const resp = await fetch('http://ec2-18-225-37-190.us-east-2.compute.amazonaws.com:5500/recipe');
+        // console.log('resp has a status of: ' + resp.status);
 
 
-    if (resp.status == 200) {
+        if (resp.status == 200) {
 
-        const body = await resp.json();
+            const body = await resp.data;
 
-        let temprecipe: Recipe[] = [];
+            let temprecipe: Recipe[] = [];
 
-        for (let index = 0; index < body.length; index++) {
+            for (let index = 0; index < body.length; index++) {
 
-            if (body[index].id == tempuser) {
-                temprecipe[index] = new Recipe();
-                temprecipe[index].recipe_id = body[index].id;
-                temprecipe[index].name = body[index].name;
-                temprecipe[index].description = body[index].description;
-                temprecipe[index].instructions = body[index].instructions;
+                if (body[index].id == tempuser) {
+                    temprecipe[index] = new Recipe();
+                    temprecipe[index].recipe_id = body[index].id;
+                    temprecipe[index].name = body[index].name;
+                    temprecipe[index].description = body[index].description;
+                    temprecipe[index].instructions = body[index].instructions;
+                }
+                else if (tempuser == 0) {
+                    temprecipe[index] = new Recipe(body[index].id, body[index].name, body[index].description, body[index].instructions);
+                }
+                else {
+
+                }
+
             }
-            else if (tempuser == 0) {
-                temprecipe[index] = new Recipe();
-                temprecipe[index].recipe_id = body[index].id;
-                temprecipe[index].name = body[index].name;
-                temprecipe[index].description = body[index].description;
-                temprecipe[index].instructions = body[index].instructions;
-            }
-            else {
+            dispatch({
 
-            }
+                payload: {
+                    recipehis: temprecipe,
+                },
+                type: recipeHistoryTypes.LOAD_RECIPE_HISTORY_ROW
+            })
 
         }
-        dispatch({
-
-            payload: {
-                recipehis: temprecipe,
-            },
-            type: recipeHistoryTypes.LOAD_RECIPE_HISTORY_ROW
-        })
-
+    } catch (err) {
+        console.log(err);
     }
 }
