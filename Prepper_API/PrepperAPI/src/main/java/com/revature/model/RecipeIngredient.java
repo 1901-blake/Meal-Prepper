@@ -30,16 +30,6 @@ public class RecipeIngredient {
 	@JsonIgnore
 	private Recipe recipe;
 	
-	
-	/*@ManyToOne
-	@JoinColumn(name="ID", insertable=false, updatable=false)
-	private Measure measure;
-	
-	@ManyToOne
-	@JoinColumn(name="ID", insertable=false, updatable=false)
-	private Ingredient ingredient;
-	*/
-	
 	@ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.MERGE)
     @JoinColumn(name = "measure_id")
     private Measure measure;

@@ -19,25 +19,22 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 @JsonFilter("depth_5")
-public class Users {
+public class NewUser {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
 	private String subkey;
-
-	@OneToMany(mappedBy = "user", cascade=CascadeType.MERGE)
-    private List<Ratings> ratinginfo;
 	
-	public Users() {
+	public NewUser() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 
-	public Users(int id, String subkey, List<Ratings> ratinginfo) {
+	public NewUser(int id, String subkey) {
 		super();
 		this.id = id;
 		this.subkey = subkey;
-		this.ratinginfo = ratinginfo;
 	}
 
 	public int getId() {
@@ -54,14 +51,6 @@ public class Users {
 
 	public void setSubkey(String subkey) {
 		this.subkey = subkey;
-	}
-
-	public List<Ratings> getRatinginfo() {
-		return ratinginfo;
-	}
-
-	public void setRatinginfo(List<Ratings> ratinginfo) {
-		this.ratinginfo = ratinginfo;
 	}
 
 	@Override
@@ -81,7 +70,7 @@ public class Users {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Users other = (Users) obj;
+		NewUser other = (NewUser) obj;
 		if (id != other.id)
 			return false;
 		if (subkey == null) {
@@ -91,4 +80,7 @@ public class Users {
 			return false;
 		return true;
 	}
+	
+	
+
 }
