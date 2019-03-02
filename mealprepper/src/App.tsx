@@ -33,7 +33,7 @@ Amplify.configure({
 class App extends Component {
   redirect = async () => {
     if(await Auth.confirmSignIn) {
-      return null;
+      return;
     } else {
       return <Redirect to='/' />;
     }
