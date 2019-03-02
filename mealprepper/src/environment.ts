@@ -8,7 +8,7 @@ const prod = {
 
 
 
-export let enviromnent = prod;
+export let enviromnent = dev;
 
 if (process.env.NODE_ENV === 'production') {
     enviromnent = prod;

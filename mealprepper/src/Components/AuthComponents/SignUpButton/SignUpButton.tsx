@@ -5,6 +5,7 @@ import ModalBody from 'reactstrap/lib/ModalBody';
 import { Auth } from 'aws-amplify';
 import { toast } from 'react-toastify';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { recipeClient } from '../../../Axios/recipe.client';
 
 export interface SignupButtonProps {
     className? : string,
@@ -145,6 +146,10 @@ class SignUpButton extends React.Component<SignupButtonProps, SignupButtonState>
             this.setState({progressIsHidden : true});
             this.setSignUpButtonText('Success');
             toast('Successfully signed up. Check your email.');
+            const subkey = data.userSub;
+            const temp = await recipeClient.post(`/user/newUser`, {
+                subkey: subkey
+            });
             this.toggle();
         } catch (err) {
             this.setState({progressIsHidden : true});

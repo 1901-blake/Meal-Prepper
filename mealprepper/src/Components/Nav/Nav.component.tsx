@@ -50,9 +50,9 @@ export class NavComponent extends React.Component<INavProps, any> {
                             Meal Plan
                         </DropdownToggle>
                         <DropdownMenu left>
-                        <DropdownItem>
-                            <NavLink><Link to="/generate">Generate Meal Plan</Link></NavLink>
-                        </DropdownItem>
+                            <DropdownItem>
+                                <NavLink><Link to="/generate">Generate Meal Plan</Link></NavLink>
+                            </DropdownItem>
                             <DropdownItem>
                                 <NavLink>
                                     <Link to="/weeklyinfo">Weekly View</Link></NavLink>
@@ -84,11 +84,11 @@ export class NavComponent extends React.Component<INavProps, any> {
                             </DropdownItem>
                         </DropdownMenu>
                     </Dropdown>
-                    <SignInButton color="dark"/>
-                    <SignUpButton color="dark"/>
-                    <SignOutButton color="dark"/>
-                    <ForgotPasswordButton color="dark"/>
-                    <ChangePasswordButton color="dark"/>
+                    <SignInButton color="dark" />
+                    <SignUpButton color="dark" />
+                    <SignOutButton color="dark" />
+                    <ForgotPasswordButton color="dark" />
+                    <ChangePasswordButton color="dark" />
                 </Nav>
             </div>
         );

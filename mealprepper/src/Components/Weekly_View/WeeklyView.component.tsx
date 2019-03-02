@@ -12,12 +12,6 @@ import CardText from "reactstrap/lib/CardText";
 import CardBody from "reactstrap/lib/CardBody";
 import CardImg from "reactstrap/lib/CardImg";
 
-
-const divStyle = {
-    
-
-};
-
 //takein the state from store and any function needed in action
 export interface IWeeklyViewProps {
     weeklyview: IWeeklyViewState,
