@@ -13,6 +13,6 @@ public interface UsersService {
 	
 	Users findById(int id);
 	List<Users> findAll();
-	List<Users> findBySubkey(String key);
+	List<Users> findBySubkey(String key);	
 	
 }

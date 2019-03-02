@@ -25,11 +25,12 @@ public class Ratings {
 	@Column(name = "id")//creating a primary key	
 	private int id;
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.MERGE)
+	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
+	@JsonIgnore
     private Users user;
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.MERGE)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "Recipe_id")
     private Recipe recipe;
 	

@@ -16,8 +16,13 @@ public class UsersServiceImpl implements UsersService{
 	@Autowired
 	private UsersRepo usersRepo;
 	
+	@Transactional
 	@Override
 	public Users save(Users u) {
+		u.getRatinginfo().forEach(ratings -> {
+			ratings.setUser(u);
+
+		});
 		return usersRepo.save(u);
 	}
 

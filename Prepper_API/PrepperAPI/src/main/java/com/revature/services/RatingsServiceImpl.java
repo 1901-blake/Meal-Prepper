@@ -2,6 +2,8 @@ package com.revature.services;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,7 @@ public class RatingsServiceImpl implements RatingsService{
 	@Autowired
 	private RatingsRepo ratingsRepo;
 
+	@Transactional
 	@Override
 	public Ratings save(Ratings a) {
 		return ratingsRepo.save(a);
