@@ -38,12 +38,12 @@ export class NavComponent extends React.Component<INavProps, any> {
     render() {
         return (
             <div>
-                <Nav className="navbar navbar-expand-lg navbar-dark bg-dark" pills>
+                <Nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" pills>
                     <Link to="" className="navbar-brand">
                         <img src={logodark} height="50" className="d-inline-block align-top" alt="prepper" />
                     </Link>
                     <NavItem>
-                        <NavLink><Link to="/grocerylist" >Grocery List</Link></NavLink>
+                        <NavLink><Link to="/grocerylist" className="navItems">Grocery List</Link></NavLink>
                     </NavItem>
                     <Dropdown nav isOpen={this.props.nav.dropdown1} toggle={this.props.toggle}>
                         <DropdownToggle nav className="navItems">
@@ -69,7 +69,7 @@ export class NavComponent extends React.Component<INavProps, any> {
                     <NavItem>
                         <NavLink><Link to="/favorites" className="navItems">Favorites</Link></NavLink>
                     </NavItem>
-                    <Dropdown nav isOpen={this.props.nav.dropdown2} toggle={this.props.toggle1}>
+                    <Dropdown nav isOpen={this.props.nav.dropdown2} toggle={this.props.toggle1} color="dark">
                         <DropdownToggle nav className="navItems">
                             Profile
                         </DropdownToggle>
