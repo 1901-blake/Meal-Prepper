@@ -11,11 +11,11 @@ import { SettingComponent } from './Components/Setting/Setting.component';
 import UserInfoComponent from './Components/User_Info/UserInfo.component';
 import EnterNewRecipeComponent from './Components/Recipe_Input/EnterNewRecipe.component';
 import { HomeComponent } from './Components/Home/Home.component';
-import Amplify from 'aws-amplify';
+import Amplify, { Auth } from 'aws-amplify';
 import config from './config/cognito.config';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import { Route } from 'react-router';
+import { Route, Redirect } from 'react-router';
 import GenerateMealPlanComponent from './Components/Generate/GenerateMealPlan.component';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -31,10 +31,19 @@ Amplify.configure({
 });
 
 class App extends Component {
+  redirect = async () => {
+    if(await Auth.confirmSignIn) {
+      return null;
+    } else {
+      return <Redirect to='/' />;
+    }
+  }
+
   render() {
     return (
       <Provider store={store}>
         <BrowserRouter>
+          {this.redirect()}
           <div>
             <NavComponent />
 
