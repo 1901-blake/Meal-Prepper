@@ -40,11 +40,11 @@
   font-size: 1.5em;
 }
 
-.home {
-  height: 100%;
-  margin: 0;
-  background: no-repeat center/80% url("assets/background.jpeg");
-}
+// .home {
+//   height: 100%;
+//   margin: 0;
+//   background: no-repeat center/80% url("assets/background.jpeg");
+// }
 
 body, html {
   height: 100%;
@@ -55,6 +55,9 @@ body, html {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  background-attachment: fixed;
+  border: 1px solid transparent;
+  overflow: scroll;
 }
 
 .jumbotron {
@@ -65,10 +68,11 @@ body, html {
 }
 
 #locator {
+  color: white;
   position: relative;
   visibility: visible;
   left: 0%;
-  margin-top: 27%;
+  margin-top: 30%;
   width: 75%;
   z-index: 200;
 }

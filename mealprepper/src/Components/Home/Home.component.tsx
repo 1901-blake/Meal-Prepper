@@ -6,7 +6,7 @@ export class HomeComponent extends React.Component {
 
   render() {
     return (
-      <div className="bg jumbotron">
+      <div className="bg">
         <div id="locator">
           <h1 className="display-1 font-italic">Welcome to Prepper!</h1>
           <SignInButton/>
