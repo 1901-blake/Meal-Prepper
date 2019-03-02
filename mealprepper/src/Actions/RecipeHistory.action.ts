@@ -16,10 +16,6 @@ export const loadrecipeHistoryRow = () => async (dispatch) => {
         const resp = await recipeClient.get('recipe');
         console.log('resp has a status of: ' + resp.status);
 
-        // const resp = await fetch('http://ec2-18-225-37-190.us-east-2.compute.amazonaws.com:5500/recipe');
-        // console.log('resp has a status of: ' + resp.status);
-
-
         if (resp.status == 200) {
 
             const body = await resp.data;

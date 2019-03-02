@@ -34,18 +34,16 @@ export interface IEnterNewRecipeState {
   ingredArr: Ingredients[]
   amount: number
   measure: Measure
-  ingredient: Ingredient, 
-  recipeName: string, 
-  description: string, 
-  instructions: string, 
-  status: number, 
-  ingredientPop: Ingredient[], 
+  ingredient: Ingredient,
+  recipeName: string,
+  description: string,
+  instructions: string,
+  status: number,
+  ingredientPop: Ingredient[],
   measurePop: Measure[]
 }
 export interface IRecipeHistoryState {
   recipehistoryarray: Recipe[];
-}
-export interface ISettingState {
 }
 export interface IUserInfoState {
   firstname: string
