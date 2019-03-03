@@ -39,10 +39,6 @@ public class UsersController {
 		
 	@PostMapping("/history")
 	public Users history(@Valid @RequestBody Users history) {
-<<<<<<< HEAD
-		System.out.println();
-		return usersService.save(history);
-=======
 		List<Users> allUsers = usersService.findAll();
 
 		boolean duplicateefound = false;
@@ -69,7 +65,6 @@ public class UsersController {
 		}else {
 			return usersService.save(history);
 		}
->>>>>>> 66e5f92131936abfb676edd9283c4aa3399d9737
 	}
 	
 }

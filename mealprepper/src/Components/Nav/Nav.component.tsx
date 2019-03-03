@@ -16,12 +16,9 @@ import SignUpButton from '../AuthComponents/SignUpButton/SignUpButton';
 import ForgotPasswordButton from '../AuthComponents/ForgotPasswordButton/ForgotPasswordButton';
 import SignOutButton from '../AuthComponents/SignOutButton/SignOutButton';
 import ChangePasswordButton from '../AuthComponents/ChangePasswordButton/ChangePasswordButton';
-<<<<<<< HEAD
-=======
 import Container from 'reactstrap/lib/Container';
 import Col from 'reactstrap/lib/Col';
 import { spawn } from 'child_process';
->>>>>>> 66e5f92131936abfb676edd9283c4aa3399d9737
 
 
 
@@ -38,61 +35,6 @@ export class NavComponent extends React.Component<INavProps, any> {
     }
 
     render() {
-<<<<<<< HEAD
-        return (
-            <div>
-                <Nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" pills>
-                    <Link to="" className="navbar-brand">
-                        <img src={logodark} height="50" className="d-inline-block align-top" alt="prepper" />
-                    </Link>
-                    <NavItem>
-                        <NavLink><Link to="/grocerylist" className="navItems">Grocery List</Link></NavLink>
-                    </NavItem>
-                    <Dropdown nav isOpen={this.props.nav.dropdown1} toggle={this.props.toggle}>
-                        <DropdownToggle nav className="navItems">
-                            Meal Plan
-                        </DropdownToggle>
-                        <DropdownMenu left>
-                            <DropdownItem>
-                                <NavLink><Link to="/generate">Generate Meal Plan</Link></NavLink>
-                            </DropdownItem>
-                            <DropdownItem>
-                                <NavLink>
-                                    <Link to="/weeklyinfo">Weekly View</Link></NavLink>
-                            </DropdownItem>
-                        </DropdownMenu>
-                    </Dropdown>
-                    <NavItem>
-                        <NavLink><Link to="/recipehistory" className="navItems">Recipe History</Link></NavLink>
-                    </NavItem>
-                    {/* <Button tag = Link to="/recipehistory">Enter New Recipe</Button> */}
-                    <NavItem>
-                        <NavLink><Link to="/recipeInput" className="navItems">Enter New Recipe</Link></NavLink>
-                    </NavItem>
-                    <Dropdown nav isOpen={this.props.nav.dropdown2} toggle={this.props.toggle1} color="dark">
-                        <DropdownToggle nav className="navItems">
-                            Profile
-                        </DropdownToggle>
-                        <DropdownMenu left>
-                            <DropdownItem>
-                                <NavLink>
-                                    <Link to="/setting" className="dropdownItems">Settings</Link></NavLink>
-                            </DropdownItem>
-                            <DropdownItem>
-                                <NavLink>
-                                    <Link to="/userinfo" className="dropdownItems">User Info</Link></NavLink>
-                            </DropdownItem>
-                        </DropdownMenu>
-                    </Dropdown>
-                    <SignInButton color="dark" />
-                    <SignUpButton color="dark" />
-                    <SignOutButton color="dark" />
-                    <ForgotPasswordButton color="dark" />
-                    <ChangePasswordButton color="dark" />
-                </Nav>
-            </div>
-        );
-=======
         if (this.props.isLoggedIn) {
             return (
                 <div>
@@ -164,7 +106,6 @@ export class NavComponent extends React.Component<INavProps, any> {
                 </div>
             );
         }
->>>>>>> 66e5f92131936abfb676edd9283c4aa3399d9737
     }
 }
 

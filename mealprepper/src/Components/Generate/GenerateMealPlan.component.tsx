@@ -4,20 +4,12 @@ import { connect } from "react-redux";
 import { generateRecipes, saveRecipes } from "../../Actions/GenerateMealPlan.action";
 import Table from "reactstrap/lib/Table";
 import Button from "reactstrap/lib/Button";
-<<<<<<< HEAD
-import { FullRecipe } from "../../Model/FullRecipe";
-=======
 import { Redirect } from "react-router";
->>>>>>> 66e5f92131936abfb676edd9283c4aa3399d9737
 
 
 interface IGenerateMealPlanProps {
     generate: IGenerateMealPlanState,
-<<<<<<< HEAD
-    saveRecipes: (event, recipes: FullRecipe[]) => Promise<void>, 
-=======
     isLoggedIn : boolean,
->>>>>>> 66e5f92131936abfb676edd9283c4aa3399d9737
     generateRecipes: () => Promise<void>
 }
 
@@ -31,46 +23,6 @@ export class GenerateMealPlanComponent extends React.Component<IGenerateMealPlan
     }
 
     render() {
-<<<<<<< HEAD
-        return (
-            <div>
-                <div className="generat-meal-table">
-                    <Table>
-                        <thead>
-                            <tr>
-                                <td>Id</td>
-                                <td>Recipe Name</td>
-                                <td>Description</td>
-                                <td>Instructions</td>
-                                <td>Amount</td>
-                                <td>Measure</td>
-                                <td>Ingredient</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        {this.props.generate.mealPlan.map(meal => (
-                            <tr key={meal.id}>
-                                <td>{meal.id}</td>
-                                <td>{meal.name}</td>
-                                <td>{meal.description}</td>
-                                <td><p>{meal.instructions}</p></td>
-                                <td>{meal.ingredients.map(ele => (
-                                    <pre>{ele.amount}</pre>
-                                ))}</td>
-                                <td>{meal.ingredients.map(ele => (
-                                    <pre >{ele.measure.name}</pre>
-                                ))}</td>
-                                <td>{meal.ingredients.map(ele => (
-                                        <pre>{ele.ingredient.name}</pre>
-                                ))}</td>
-                            </tr>
-                        ))}
-                        </tbody>
-                    </Table>
-                    <Button onClick={() => this.props.saveRecipes(event, this.props.generate.mealPlan)}>Submit</Button>
-                    <Button onClick={() => this.props.generateRecipes()}>Regenerate</Button><br />
-                    {this.props.generate.status}
-=======
       if (this.props.isLoggedIn) {
             return (
                 <div className="bg">
@@ -135,7 +87,6 @@ export class GenerateMealPlanComponent extends React.Component<IGenerateMealPlan
                             <Button>Submit</Button>
                         </div>
                     </div>
->>>>>>> 66e5f92131936abfb676edd9283c4aa3399d9737
                 </div>
             )
         } else {

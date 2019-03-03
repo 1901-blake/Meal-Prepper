@@ -46,10 +46,6 @@ class App extends Component {
     return (
       <Provider store={store}>
         <BrowserRouter>
-<<<<<<< HEAD
-          {/* {this.redirect()} */}
-=======
->>>>>>> 66e5f92131936abfb676edd9283c4aa3399d9737
           <div>
             <NavComponent />
             {this.redirect()}
