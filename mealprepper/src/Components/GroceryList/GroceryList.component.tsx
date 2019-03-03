@@ -46,7 +46,6 @@ export class GroceryListComponent extends React.Component<IGrocProps, any> {
             this.props.addGroceryRow(this.state.tempname, this.state.tempamount, this.state.tempmeasure);
 
         } else {
-            console.log(this.props.generate.breakfast[0].description);
         }
     }
 
@@ -95,7 +94,7 @@ export class GroceryListComponent extends React.Component<IGrocProps, any> {
 
                                     <td> <button onClick={this.addrowfunc}>+</button> </td>
                                     <td> <input type="number" placeholder="Amount" onChange={this.changeamount} /> </td>
-                                    <td> <input type="number" placeholder="Measure" onChange={this.changeamount} /> </td>
+                                    <td> <input type="text" placeholder="Measure" onChange={this.changeamount} /> </td>
                                     <td> <input type="text" placeholder="Ingredient Name" onChange={this.changemeasure} /> </td>
                                 </tr>
 
