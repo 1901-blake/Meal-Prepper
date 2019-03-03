@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from 'react-redux';
-import {IState, state } from "../../reducers";
+import {IState } from "../../reducers";
+import { Redirect } from "react-router";
 
 const divStyle = {
     margin: '40px',
@@ -10,10 +11,11 @@ const divStyle = {
 //takein the state from store and any function needed in action
 export interface ISettingProps {
     // setting: ISettingState,
+    isLoggedIn : boolean
 }
 
 //change the prop intake to the interface props
-export class SettingComponent extends React.Component<any, any> {
+export class SettingComponent extends React.Component<ISettingProps, any> {
 
     constructor(props) {
         super(props);
@@ -22,11 +24,17 @@ export class SettingComponent extends React.Component<any, any> {
     }
     
     render() {
-        return (
-            <div className="bg">
-                Settings Component
-            </div>
-        )
+        if (this.props.isLoggedIn) {
+            return (
+                <div className="bg">
+                    Settings Component
+                </div>
+            )
+        } else {
+            return (
+                <Redirect to='/'/>
+            )
+        }
     }
 }
 
@@ -34,6 +42,7 @@ export class SettingComponent extends React.Component<any, any> {
 const mapStateToProps = (state: IState) => {
     return {
         // setting: state.setting
+        isLoggedIn : state.auth.isLoggedIn
     }
 }
 //add function when added in setting.action

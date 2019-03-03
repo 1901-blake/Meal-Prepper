@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { IState, state, IRecipeHistoryState } from "../../reducers";
 import { loadrecipeHistoryRow } from "../../Actions/RecipeHistory.action";
 import Table from "reactstrap/lib/Table";
+import { Redirect } from "react-router";
 
 const divStyle = {
     margin: '40px',
@@ -12,6 +13,7 @@ const divStyle = {
 //takein the state from store and any function needed in action
 export interface IRecipeHistoryProps {
     recipehistory: IRecipeHistoryState,
+    isLoggedIn : boolean,
     loadrecipeHistoryRow: () => void
 
 }
@@ -31,7 +33,8 @@ export class RecipeHistoryComponent extends React.Component<IRecipeHistoryProps,
     }
 
     render() {
-        return (
+        if(this.props.isLoggedIn) {
+            return (
             <div className="bg">
                 <h1 className="tableHeaders">Recipe History</h1>
                 <div className="large-table">
@@ -41,7 +44,7 @@ export class RecipeHistoryComponent extends React.Component<IRecipeHistoryProps,
                             <th>name</th>
                             <th>description</th>
                             <th>instructions</th>
-
+    
                         </thead>
                         <tbody >
                             {
@@ -59,19 +62,23 @@ export class RecipeHistoryComponent extends React.Component<IRecipeHistoryProps,
                 </div>
             </div>
         )
+        } else {
+            return (
+                <Redirect to='/' />
+            )
+        }
     }
 }
 
-//uncommit this when the store has info for the current component
 const mapStateToProps = (state: IState) => {
     return {
-        recipehistory: state.recipehistory
+        recipehistory: state.recipehistory,
+        isLoggedIn : state.auth.isLoggedIn
     }
 }
-//add function when added in setting.action
+
 const mapDispatchToProps = {
     loadrecipeHistoryRow
 }
 
-//change the component if you copied and paste
 export default connect(mapStateToProps, mapDispatchToProps)(RecipeHistoryComponent);

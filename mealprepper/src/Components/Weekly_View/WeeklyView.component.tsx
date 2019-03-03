@@ -11,10 +11,13 @@ import CardTitle from "reactstrap/lib/CardTitle";
 import CardText from "reactstrap/lib/CardText";
 import CardBody from "reactstrap/lib/CardBody";
 import CardImg from "reactstrap/lib/CardImg";
+import { stat } from "fs";
+import { Redirect } from "react-router";
 
 //takein the state from store and any function needed in action
 export interface IWeeklyViewProps {
     weeklyview: IWeeklyViewState,
+    isLoggedIn : boolean,
     loadWeeklyPlan: (number) => void
 }
 
@@ -44,40 +47,47 @@ export class WeeklyViewComponent extends React.Component<IWeeklyViewProps, any> 
         this.props.loadWeeklyPlan(0);
     }
     render() {
-        return (
-            <div className="bg">
-                <div className="weekly-scroller">
-                        {
-                            this.props.weeklyview.weeklyrecipe.map((r) => (
-                                <Card className="weekly-div-card" onClick={this.toggleModol.bind(this, r)}>
-                                    <CardImg top width="100%" height="50%" src={Tomato} />
-                                    <Button color="weekly-delete" className="ml-auto">X</Button>
-                                    <CardBody className="too-much-text">
-                                        <CardTitle>{r.name}</CardTitle>
-                                        <CardText>{r.description}</CardText>
-                                    </CardBody>
-                                </Card>
-                            ))
-                        }
-                    <div>
-                        <Modal isOpen={this.state.modalebool} className="Modalstyle" onRequestClose={this.toggleModol}>
-                            <button onClick={this.toggleModol.bind(this, this.state.dailyview)}> X </button>
-                            <p>{this.state.dailyview.recipe_id}</p>
-                            <p>{this.state.dailyview.name}</p>
-                            <p>{this.state.dailyview.description}</p>
-                            <p>{this.state.dailyview.instructions}</p>
-                        </Modal>
+        if (this.props.isLoggedIn) {
+            return (
+                <div className="bg">
+                    <div className="weekly-scroller">
+                            {
+                                this.props.weeklyview.weeklyrecipe.map((r) => (
+                                    <Card className="weekly-div-card" onClick={this.toggleModol.bind(this, r)}>
+                                        <CardImg top width="100%" height="50%" src={Tomato} />
+                                        <Button color="weekly-delete" className="ml-auto">X</Button>
+                                        <CardBody className="too-much-text">
+                                            <CardTitle>{r.name}</CardTitle>
+                                            <CardText>{r.description}</CardText>
+                                        </CardBody>
+                                    </Card>
+                                ))
+                            }
+                        <div>
+                            <Modal isOpen={this.state.modalebool} className="Modalstyle" onRequestClose={this.toggleModol}>
+                                <button onClick={this.toggleModol.bind(this, this.state.dailyview)}> X </button>
+                                <p>{this.state.dailyview.recipe_id}</p>
+                                <p>{this.state.dailyview.name}</p>
+                                <p>{this.state.dailyview.description}</p>
+                                <p>{this.state.dailyview.instructions}</p>
+                            </Modal>
+                        </div>
                     </div>
                 </div>
-            </div>
-        )
+            )
+        } else {
+            return (
+                <Redirect to='/' />
+            );
+        }
     }
 }
 
 //uncommit this when the store has info for the current component
 const mapStateToProps = (state: IState) => {
     return {
-        weeklyview: state.weeklyview
+        weeklyview: state.weeklyview,
+        isLoggedIn : state.auth.isLoggedIn
     }
 }
 //add function when added in setting.action
