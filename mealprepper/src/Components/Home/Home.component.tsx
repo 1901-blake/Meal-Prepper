@@ -31,7 +31,6 @@ class HomeComponent extends React.Component<HomeComponentProps, HomeComponentSta
         <div className="bg">
           <div id="locator">
             <h1 className="display-1 font-italic">Welcome to Prepper!</h1>
-            <SignInButton/>
           </div>
           <div>
             <img src={LGLogo} className="locater-img"/>
