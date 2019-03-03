@@ -1,14 +1,15 @@
 import React from "react";
 import { IState, IGenerateMealPlanState } from "../../reducers";
 import { connect } from "react-redux";
-import { generateRecipes } from "../../Actions/GenerateMealPlan.action";
+import { generateRecipes, saveRecipes } from "../../Actions/GenerateMealPlan.action";
 import Table from "reactstrap/lib/Table";
 import Button from "reactstrap/lib/Button";
+import { FullRecipe } from "../../Model/FullRecipe";
 
 
 interface IGenerateMealPlanProps {
     generate: IGenerateMealPlanState,
-
+    saveRecipes: (event, recipes: FullRecipe[]) => Promise<void>, 
     generateRecipes: () => Promise<void>
 }
 
@@ -43,12 +44,12 @@ export class GenerateMealPlanComponent extends React.Component<IGenerateMealPlan
                                 <td>{meal.id}</td>
                                 <td>{meal.name}</td>
                                 <td>{meal.description}</td>
-                                <td>{meal.instructions}</td>
+                                <td><p>{meal.instructions}</p></td>
                                 <td>{meal.ingredients.map(ele => (
                                     <pre>{ele.amount}</pre>
                                 ))}</td>
                                 <td>{meal.ingredients.map(ele => (
-                                    <pre>{ele.measure.name}</pre>
+                                    <pre >{ele.measure.name}</pre>
                                 ))}</td>
                                 <td>{meal.ingredients.map(ele => (
                                         <pre>{ele.ingredient.name}</pre>
@@ -57,7 +58,9 @@ export class GenerateMealPlanComponent extends React.Component<IGenerateMealPlan
                         ))}
                         </tbody>
                     </Table>
-                    <Button>Submit</Button>
+                    <Button onClick={() => this.props.saveRecipes(event, this.props.generate.mealPlan)}>Submit</Button>
+                    <Button onClick={() => this.props.generateRecipes()}>Regenerate</Button><br />
+                    {this.props.generate.status}
                 </div>
             </div>
         )
@@ -71,7 +74,8 @@ const mapStateToProps = (state: IState) => {
 }
 
 const mapDispatchToProps = {
-    generateRecipes
+    generateRecipes, 
+    saveRecipes
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(GenerateMealPlanComponent);

@@ -4,7 +4,8 @@ import { generateMealPlanTypes } from "../Actions/GenerateMealPlan.action";
 
 
 const initialState: IGenerateMealPlanState = {
-    mealPlan: []
+    mealPlan: [], 
+    status: ''
 }
 
 export const generateMealPlanReducer = (state = initialState, action: any) => {
@@ -13,6 +14,11 @@ export const generateMealPlanReducer = (state = initialState, action: any) => {
             return {
                 ...state,
                 mealPlan: action.payload.recipe
+            }
+        case generateMealPlanTypes.SAVE_RECIPE:
+            return {
+                ...state,
+                status: action.payload.status
             }
         }
     return state;

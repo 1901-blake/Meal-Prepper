@@ -6,7 +6,6 @@ import NavComponent from './Components/Nav/Nav.component';
 import GroceryListComponent from './Components/GroceryList/GroceryList.component';
 import  WeeklyViewComponent  from './Components/Weekly_View/WeeklyView.component';
 import RecipeHistoryComponent from './Components/Recipe_History/Recipe.component';
-import  FavoriteComponent  from './Components/Favorites/Favorite.component';
 import { SettingComponent } from './Components/Setting/Setting.component';
 import UserInfoComponent from './Components/User_Info/UserInfo.component';
 import EnterNewRecipeComponent from './Components/Recipe_Input/EnterNewRecipe.component';
@@ -43,7 +42,7 @@ class App extends Component {
     return (
       <Provider store={store}>
         <BrowserRouter>
-          {this.redirect()}
+          {/* {this.redirect()} */}
           <div>
             <NavComponent />
 
@@ -55,7 +54,6 @@ class App extends Component {
 
             <Route exact path="/recipehistory" component={RecipeHistoryComponent} />
             <Route exact path="/recipeInput" component={EnterNewRecipeComponent} />
-            <Route exact path="/favorites" component={FavoriteComponent} />
 
             <Route exact path="/setting" component={SettingComponent} />
             <Route exact path="/userinfo" component={UserInfoComponent} />

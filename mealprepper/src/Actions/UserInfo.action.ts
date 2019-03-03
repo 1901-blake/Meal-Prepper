@@ -13,6 +13,7 @@ export const handleSubmit = (event, username: string, firstname: string, lastnam
     event.preventDefault();
     try {
         let curr = await Auth.currentAuthenticatedUser();
+        console.log(curr);
         Auth.updateUserAttributes(curr, {
             'email': email, 
             'name': username, 

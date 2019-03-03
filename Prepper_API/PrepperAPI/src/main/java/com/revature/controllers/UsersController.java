@@ -39,6 +39,7 @@ public class UsersController {
 		
 	@PostMapping("/history")
 	public Users history(@Valid @RequestBody Users history) {
+		System.out.println();
 		return usersService.save(history);
 	}
 	

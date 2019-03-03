@@ -11,7 +11,7 @@ import com.revature.model.Users;
 import com.revature.repos.UsersRepo;
 
 @Service
-public class UsersServiceImpl implements UsersService{
+public class UsersServiceImpl implements UsersService {
 
 	@Autowired
 	private UsersRepo usersRepo;
