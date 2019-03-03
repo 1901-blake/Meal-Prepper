@@ -38,9 +38,9 @@ export const loadGroceryRow = (generate : FullRecipe[]) => async (dispatch) => {
 
 }
 
-export const addGroceryRow = (Ingredientname: string, amount: number) => (dispatch) => {
+export const addGroceryRow = (Ingredientname: string, amount: number, measure: string) => (dispatch) => {
 
-    let fullfillmeasure = new Measure(0, '');
+    let fullfillmeasure = new Measure(0, measure);
     let fullfillingredient = new Ingredient(0, Ingredientname);
 
 

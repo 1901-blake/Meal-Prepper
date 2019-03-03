@@ -1,9 +1,8 @@
 import React from "react";
 import { connect } from 'react-redux';
-import { IState, state, IWeeklyViewState } from "../../reducers";
+import { IState, IWeeklyViewState } from "../../reducers";
 import Modal from 'react-modal';
 import { loadWeeklyPlan } from "../../Actions/WeeklyView.action";
-import { Recipe } from "../../Model/Recipe";
 import Tomato from "../../assets/Tomato.jpeg"
 import Button from "reactstrap/lib/Button";
 import Card from "reactstrap/lib/Card";
@@ -11,8 +10,11 @@ import CardTitle from "reactstrap/lib/CardTitle";
 import CardText from "reactstrap/lib/CardText";
 import CardBody from "reactstrap/lib/CardBody";
 import CardImg from "reactstrap/lib/CardImg";
-import { stat } from "fs";
 import { Redirect } from "react-router";
+import ModalBody from "reactstrap/lib/ModalBody";
+import ModalHeader from "reactstrap/lib/ModalHeader";
+import { FullRecipe } from "../../Model/FullRecipe";
+import { Ingredients } from "../../Model/Ingredients";
 
 //takein the state from store and any function needed in action
 export interface IWeeklyViewProps {
@@ -21,8 +23,6 @@ export interface IWeeklyViewProps {
     loadWeeklyPlan: (number) => void
 }
 
-Modal.setAppElement('#root');
-
 //change the prop intake to the interface props and also change the class name if copied and paste
 export class WeeklyViewComponent extends React.Component<IWeeklyViewProps, any> {
 
@@ -30,11 +30,11 @@ export class WeeklyViewComponent extends React.Component<IWeeklyViewProps, any> 
         super(props);
         this.state = {
             modalebool: false,
-            dailyview: Recipe
+            dailyview: FullRecipe
         }
     }
 
-    toggleModol = (selectedcard: Recipe) => {
+    toggleModol = (selectedcard: FullRecipe) => {
         this.setState({ modalebool: !this.state.modalebool });
 
         if (selectedcard != null) {
@@ -45,35 +45,55 @@ export class WeeklyViewComponent extends React.Component<IWeeklyViewProps, any> 
     componentDidMount() {
         console.log('componentDidMount loadWeeklyPlan');
         this.props.loadWeeklyPlan(0);
+        Modal.setAppElement('body');
+    }
+    replaceCard = (event: any) => {
+
+    }
+    renderIngredients = (ingredients: Ingredients[]) => {
+        console.log(ingredients)
+        if (ingredients) {
+            console.log('test')
+            return ingredients.map((r, index) => {
+                return <p>{r.amount} {r.measure.name} {r.ingredient.name}</p>
+            })
+        } else {
+            return;
+        }
     }
     render() {
         if (this.props.isLoggedIn) {
             return (
-                <div className="bg">
-                    <div className="weekly-scroller">
-                            {
-                                this.props.weeklyview.weeklyrecipe.map((r) => (
-                                    <Card className="weekly-div-card" onClick={this.toggleModol.bind(this, r)}>
-                                        <CardImg top width="100%" height="50%" src={Tomato} />
-                                        <Button color="weekly-delete" className="ml-auto">X</Button>
-                                        <CardBody className="too-much-text">
-                                            <CardTitle>{r.name}</CardTitle>
-                                            <CardText>{r.description}</CardText>
-                                        </CardBody>
-                                    </Card>
-                                ))
-                            }
-                        <div>
-                            <Modal isOpen={this.state.modalebool} className="Modalstyle" onRequestClose={this.toggleModol}>
-                                <button onClick={this.toggleModol.bind(this, this.state.dailyview)}> X </button>
-                                <p>{this.state.dailyview.recipe_id}</p>
-                                <p>{this.state.dailyview.name}</p>
-                                <p>{this.state.dailyview.description}</p>
-                                <p>{this.state.dailyview.instructions}</p>
-                            </Modal>
+                <React.Fragment>
+                    <div className="bg">
+                        <div className="weekly-scroller">
+                                {
+                                    this.props.weeklyview.weeklyrecipe.map((r, index) => (
+                                        <Card className="weekly-div-card" onClick={this.toggleModol.bind(this, r)} id={`${index}`}>
+                                            <CardImg top width="100%" height="50%" src={Tomato} />
+                                            <Button color="weekly-delete" className="ml-auto"
+                                            onClick={this.replaceCard}> X </Button>
+                                            <CardBody className="too-much-text">
+                                                <CardTitle>{r.name}</CardTitle>
+                                                <CardText>{r.description}</CardText>
+                                            </CardBody>
+                                        </Card>
+                                    ))
+                                }
                         </div>
                     </div>
-                </div>
+                    <Modal isOpen={this.state.modalebool} toggle={this.toggleModol}>
+                        <ModalHeader>
+                            <Button onClick={this.toggleModol.bind(this, this.state.dailyview)}> X </Button>
+                        </ModalHeader>
+                        <ModalBody>
+                            <p>{this.state.dailyview.name}</p>
+                            <p>{this.state.dailyview.description}</p>
+                            <p>{this.state.dailyview.instructions}</p>
+                            {this.renderIngredients(this.state.dailyview.ingredients)}
+                        </ModalBody>
+                    </Modal>
+                </React.Fragment>
             )
         } else {
             return (

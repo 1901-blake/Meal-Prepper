@@ -19,6 +19,7 @@ import Col from 'reactstrap/lib/Col';
 import Button from 'reactstrap/lib/Button';
 
 
+
 export interface INavProps {
     nav: INavState,
     isLoggedIn : boolean,
@@ -42,8 +43,6 @@ export class NavComponent extends React.Component<INavProps, any> {
                         <Link to="/grocerylist" className="navItems">
                             <Button color="dark">Grocery List</Button>{' '}
                         </Link>
-                        
-
                         <Dropdown nav isOpen={this.props.nav.dropdown1} toggle={this.props.toggle}>
                             <DropdownToggle nav className="navItems">
                                 Meal Plan
@@ -96,12 +95,8 @@ export class NavComponent extends React.Component<INavProps, any> {
                         <Link to="" className="navbar-brand">
                             <img src={logodark} height="50" className="d-inline-block align-top" alt="prepper" />
                         </Link>
-                        <Container >
-                            <Col inline md={{span:4, offset:8}}>
-                                <SignInButton color="dark" />
-                                <SignUpButton color="dark" />
-                            </Col>
-                        </Container>
+                            <SignInButton color="dark" className="ml-auto"/>
+                            <SignUpButton color="dark" />
                     </Nav>
                 </div>
             );

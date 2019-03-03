@@ -146,8 +146,9 @@ class SignUpButton extends React.Component<SignupButtonProps, SignupButtonState>
             this.setState({progressIsHidden : true});
             this.setSignUpButtonText('Success');
             toast('Successfully signed up. Check your email.');
+            console.log(data);
             const subkey = data.userSub;
-            const temp = await recipeClient.post(`/user/newUser`, {
+            const temp = await recipeClient.post(`/users/newUser`, {
                 subkey: subkey
             });
             this.toggle();

@@ -6,7 +6,6 @@ import { enterNewRecipeReducer } from './EnterNewRecipe.reducer';
 import { recipeHistoryReducer } from './RecipeHistory.reducer';
 import { userInfoReducer } from './userinfo.reducer';
 import { weeklyViewReducer } from './weeklyview.reducer';
-import { favoriteReducer } from './Favorite.reducer';
 import { FullRecipe } from '../Model/FullRecipe';
 import { generateMealPlanReducer } from './GenerateMealPlan.reducer';
 import { Ingredient } from '../Model/Ingredient';
@@ -24,15 +23,16 @@ export interface INavState {
 }
 
 export interface IGenerateMealPlanState {
-  mealPlan: FullRecipe[]
+  breakfast: FullRecipe[] 
+  lunch: FullRecipe[]
+  dinner: FullRecipe[]
+  dessert: FullRecipe[]
+  status: string
 }
 
 export interface IAboutStateState {
 }
 export interface IDailyState {
-}
-export interface IFavoriteState {
-  favoriteRecipeArr: Recipe[]
 }
 export interface IEnterNewRecipeState {
   ingredArr: Ingredients[]
@@ -48,7 +48,7 @@ export interface IEnterNewRecipeState {
   
 }
 export interface IRecipeHistoryState {
-  recipehistoryarray: Recipe[];
+  recipehistoryarray: FullRecipe[];
 }
 export interface IUserInfoState {
   firstname: string
@@ -59,7 +59,7 @@ export interface IUserInfoState {
 }
 export interface IWeeklyViewState {
   //create an array of recipe and call it weekly recipe
-  weeklyrecipe: Recipe[];
+  weeklyrecipe: FullRecipe[];
   // this should be filled by the action by calling an fetch
 }
 
@@ -71,8 +71,7 @@ export interface IGRocState {
 export interface IState {
   auth : IAuthState,
   // about: IAboutState,
-  // daily: IDailyState
-  favorite: IFavoriteState,
+  // daily: IDailyState,
   nav: INavState,
   groc: IGRocState,
   newRecipe: IEnterNewRecipeState,
@@ -87,7 +86,6 @@ export interface IState {
 
 export const state = combineReducers<IState>({
   auth: AuthReducer,
-  favorite: favoriteReducer,
   nav: navReducer,
   groc: grocReducer,
   newRecipe: enterNewRecipeReducer,

@@ -5,15 +5,10 @@ import { loadrecipeHistoryRow } from "../../Actions/RecipeHistory.action";
 import Table from "reactstrap/lib/Table";
 import { Redirect } from "react-router";
 
-const divStyle = {
-    margin: '40px',
-    border: '3px solid pink',
-};
-
 //takein the state from store and any function needed in action
 export interface IRecipeHistoryProps {
     recipehistory: IRecipeHistoryState,
-    isLoggedIn : boolean,
+    isLoggedIn: boolean,
     loadrecipeHistoryRow: () => void
 
 }
@@ -33,35 +28,46 @@ export class RecipeHistoryComponent extends React.Component<IRecipeHistoryProps,
     }
 
     render() {
-        if(this.props.isLoggedIn) {
+        if (this.props.isLoggedIn) {
             return (
-            <div className="bg">
-                <h1 className="tableHeaders">Recipe History</h1>
-                <div className="large-table">
-                    <Table hover responsive>
-                        <thead >
-                            <th>id</th>
-                            <th>name</th>
-                            <th>description</th>
-                            <th>instructions</th>
-    
-                        </thead>
-                        <tbody >
-                            {
-                                this.props.recipehistory.recipehistoryarray.map((r) => (
-                                    <tr >
-                                        <td>{r.recipe_id}</td>
-                                        <td>{r.name}</td>
-                                        <td>{r.description}</td>
-                                        <td>{r.instructions}</td>
-                                    </tr>
-                                ))
-                            }
-                        </tbody>
-                    </Table>
+                <div className="bg">
+                    <h1 className="tableHeaders">Recipe History</h1>
+                    <div className="large-table">
+                        <Table hover responsive>
+                            <thead >
+                                <tr>
+                                    <th>name</th>
+                                    <th>description</th>
+                                    <th>instructions</th>
+                                    <th scope="col">Amount</th>
+                                    <th scope="col"> Measure</th>
+                                    <th scope="col">Ingredient</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    this.props.recipehistory.recipehistoryarray.map((r) => (
+                                        <tr key={r.id}>
+                                            <td>{r.name}</td>
+                                            <td>{r.description}</td>
+                                            <p><td>{r.instructions}</td></p>
+                                            <td>{r.ingredients.map(meal => (
+                                                <pre>{meal.amount}</pre>
+                                            ))}</td>
+                                            <td>{r.ingredients.map(meal => (
+                                                <pre>{meal.measure.name}</pre>
+                                            ))}</td>
+                                            <td>{r.ingredients.map(meal => (
+                                                <pre>{meal.ingredient.name}</pre>
+                                            ))}</td>
+                                        </tr>
+                                    ))
+                                }
+                            </tbody>
+                        </Table>
+                    </div>
                 </div>
-            </div>
-        )
+            )
         } else {
             return (
                 <Redirect to='/' />
@@ -73,7 +79,7 @@ export class RecipeHistoryComponent extends React.Component<IRecipeHistoryProps,
 const mapStateToProps = (state: IState) => {
     return {
         recipehistory: state.recipehistory,
-        isLoggedIn : state.auth.isLoggedIn
+        isLoggedIn: state.auth.isLoggedIn
     }
 }
 
