@@ -35,7 +35,7 @@ class App extends Component {
     if(await Auth.confirmSignIn) {
       return;
     } else {
-      return <Redirect to='/' />;
+      return <Redirect to="" />;
     }
   }
 
@@ -43,7 +43,7 @@ class App extends Component {
     return (
       <Provider store={store}>
         <BrowserRouter>
-          {this.redirect()}
+          {/* {this.redirect()} */}
           <div>
             <NavComponent />
 

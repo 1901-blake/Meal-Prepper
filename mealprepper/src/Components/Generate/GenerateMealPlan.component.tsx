@@ -23,41 +23,97 @@ export class GenerateMealPlanComponent extends React.Component<IGenerateMealPlan
 
     render() {
         return (
-            <div>
-                <div className="generat-meal-table">
-                    <Table>
+            <div className="bg">
+                <div className="large-table">
+                    <div className="generat-meal-table">
+                        <Table hover>
                         <thead>
                             <tr>
-                                <td>Id</td>
-                                <td>Recipe Name</td>
-                                <td>Description</td>
-                                <td>Instructions</td>
-                                <td>Amount</td>
-                                <td>Measure</td>
-                                <td>Ingredient</td>
+                                <th></th>
+                                <th>Sunday</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                                <th>Saturday</th>
                             </tr>
                         </thead>
-                        <tbody>
-                        {this.props.generate.mealPlan.map(meal => (
-                            <tr key={meal.id}>
-                                <td>{meal.id}</td>
-                                <td>{meal.name}</td>
-                                <td>{meal.description}</td>
-                                <td>{meal.instructions}</td>
-                                <td>{meal.ingredients.map(ele => (
-                                    <pre>{ele.amount}</pre>
-                                ))}</td>
-                                <td>{meal.ingredients.map(ele => (
-                                    <pre>{ele.measure.name}</pre>
-                                ))}</td>
-                                <td>{meal.ingredients.map(ele => (
-                                        <pre>{ele.ingredient.name}</pre>
-                                ))}</td>
+                        <tbody >
+                            <tr>
+                                <th>Breakfast</th>
+                                <td>Meal 1</td>
+                                <td>Meal 2</td>
+                                <td>Meal 3</td>
+                                <td>Meal 4</td>
+                                <td>Meal 5</td>
+                                <td>Meal 6</td>
+                                <td>Meal 7</td>
                             </tr>
-                        ))}
+                            <tr>
+                                <th>Lunch</th>
+                                <td>Meal 1</td>
+                                <td>Meal 2</td>
+                                <td>Meal 3</td>
+                                <td>Meal 4</td>
+                                <td>Meal 5</td>
+                                <td>Meal 6</td>
+                                <td>Meal 7</td>
+                            </tr>
+                            <tr>
+                                <th>Dinner</th>
+                                <td>Meal 1</td>
+                                <td>Meal 2</td>
+                                <td>Meal 3</td>
+                                <td>Meal 4</td>
+                                <td>Meal 5</td>
+                                <td>Meal 6</td>
+                                <td>Meal 7</td>
+                            </tr>
+                            <tr>
+                                <th>Dessert</th>
+                                <td>Meal 1</td>
+                                <td>Meal 2</td>
+                                <td>Meal 3</td>
+                                <td>Meal 4</td>
+                                <td>Meal 5</td>
+                                <td>Meal 6</td>
+                                <td>Meal 7</td>
+                            </tr>
                         </tbody>
-                    </Table>
-                    <Button>Submit</Button>
+                            {/* <thead>
+                                <tr>
+                                    <td>Id</td>
+                                    <td>Recipe Name</td>
+                                    <td>Description</td>
+                                    <td>Instructions</td>
+                                    <td>Amount</td>
+                                    <td>Measure</td>
+                                    <td>Ingredient</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {this.props.generate.mealPlan.map(meal => (
+                                <tr key={meal.id}>
+                                    <td>{meal.id}</td>
+                                    <td>{meal.name}</td>
+                                    <td>{meal.description}</td>
+                                    <td>{meal.instructions}</td>
+                                    <td>{meal.ingredients.map(ele => (
+                                        <pre>{ele.amount}</pre>
+                                    ))}</td>
+                                    <td>{meal.ingredients.map(ele => (
+                                        <pre>{ele.measure.name}</pre>
+                                    ))}</td>
+                                    <td>{meal.ingredients.map(ele => (
+                                            <pre>{ele.ingredient.name}</pre>
+                                    ))}</td>
+                                </tr>
+                            ))}
+                            </tbody> */}
+                        </Table>
+                        <Button>Submit</Button>
+                    </div>
                 </div>
             </div>
         )

@@ -39,10 +39,10 @@ export class GroceryListrowComponent extends React.Component<IGrocProps, any> {
                     <td><input type="checkbox" onChange={this.togglelinestyle} /></td>
                     {
                         linebool ?
-                            (<td style={{ textDecorationLine: 'line-through', textDecorationStyle: 'solid' ,verticalAlign: 'center'}} >{this.props.ingredient}</td>) :
-                            (<td style={{ textDecorationLine: '', textDecorationStyle: 'solid', verticalAlign: 'center'}}>{this.props.ingredient}</td>)
+                            (<td>{this.props.ingredient}</td>) :
+                            (<td>{this.props.ingredient}</td>)
                     }
-                    <td style={{verticalAlign: 'right'}}>{this.props.amount}</td>
+                    <td>{this.props.amount}</td>
 
             </>
         )
