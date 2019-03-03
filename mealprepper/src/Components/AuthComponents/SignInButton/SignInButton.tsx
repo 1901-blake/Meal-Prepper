@@ -8,12 +8,17 @@ import Modal from 'reactstrap/lib/Modal';
 import ModalBody from 'reactstrap/lib/ModalBody';
 import ModalFooter from 'reactstrap/lib/ModalFooter';
 import ModalHeader from 'reactstrap/lib/ModalHeader';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { CircularProgress } from '@material-ui/core';
+import { connect } from 'react-redux';
+import { IState } from '../../../reducers';
+import { login } from '../../../Actions/AuthActions'
+import ForgotPasswordButton from '../ForgotPasswordButton/ForgotPasswordButton';
 
 export interface SignInButtonProps {
     className? : string,
-    color? : string
+    color? : string,
+    login : () => void
 }
  
 export interface SignInButtonState {
@@ -71,6 +76,7 @@ class SignInButton extends React.Component<SignInButtonProps, SignInButtonState>
             const data = await Auth.signIn(credentials.email, credentials.password);
             this.setState({progressIsHidden : true});
             toast('Successfully logged in.');
+            this.props.login();
             this.toggle();
         } catch (err) {
             this.setState({progressIsHidden : true});
@@ -104,13 +110,22 @@ class SignInButton extends React.Component<SignInButtonProps, SignInButtonState>
                     <ModalFooter className="justify-content-center">
                         <Button type="submit" color={this.props.color} className={this.props.className}
                         onClick={() => this.signIn(this.state.credentials)}>Sign in</Button>
+                        <ForgotPasswordButton color={this.props.color} className={this.props.className} />
                         <CircularProgress hidden={this.state.progressIsHidden}/>
-
                     </ModalFooter>
                 </Modal>
             </React.Fragment>
         );
     }
 }
+
+const mapStateToProps = (state: IState) => {
+    return {
+    }
+}
+
+const mapDispatchToProps = {
+    login
+}
  
-export default SignInButton;
+export default connect(mapStateToProps, mapDispatchToProps)(SignInButton);

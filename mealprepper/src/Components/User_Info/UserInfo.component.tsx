@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { IState, state, IUserInfoState } from "../../reducers";
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import { updateEmail, updateUsername, updateFirstName, updateLastName, setInitial, handleSubmit } from "../../Actions/UserInfo.action";
+import ChangePasswordButton from "../AuthComponents/ChangePasswordButton/ChangePasswordButton";
 
 
 //takein the state from store and any function needed in action
@@ -51,6 +52,7 @@ export class UserInfoComponent extends React.Component<IUserInfoProps, any> {
                         </FormGroup>
                         <Button onClick={() => this.props.handleSubmit(event, this.props.userinfo.username, this.props.userinfo.firstname, this.props.userinfo.lastname, 
                             this.props.userinfo.email)}>Update</Button>
+                        <ChangePasswordButton />
                     </Form>
                     {this.props.userinfo.feedback}
                 </div>
