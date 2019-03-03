@@ -128,7 +128,7 @@ export class EnterNewRecipeComponent extends React.Component<IEnterNewRecipeProp
                                 <button type="reset" className="btn btn-secondary mr-1">Reset</button>
                                 <button type="button" className="btn btn-success" onClick={() =>
                                     this.props.addIngredient(this.props.newRecipe.amount, this.props.newRecipe.measure,
-                                    this.props.newRecipe.ingredient)} >Add Ingredient</button>
+                                    this.props.newRecipe.ingredient)} >Add Ingredient</button><br />
                                 <span color="red">{this.props.newRecipe.status}</span>
                             </div>
                         </FormGroup>

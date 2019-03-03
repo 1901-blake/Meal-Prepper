@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from 'react-redux';
-import { IState, IWeeklyViewState } from "../../reducers";
+import { IState, IWeeklyViewState, IGenerateMealPlanState } from "../../reducers";
 import Modal from 'react-modal';
 import { loadWeeklyPlan } from "../../Actions/WeeklyView.action";
 import Tomato from "../../assets/Tomato.jpeg"
@@ -19,8 +19,9 @@ import { Ingredients } from "../../Model/Ingredients";
 //takein the state from store and any function needed in action
 export interface IWeeklyViewProps {
     weeklyview: IWeeklyViewState,
+    generate: IGenerateMealPlanState,
     isLoggedIn : boolean,
-    loadWeeklyPlan: (number) => void
+    loadWeeklyPlan: (generate: IGenerateMealPlanState) => Promise<void>
 }
 
 //change the prop intake to the interface props and also change the class name if copied and paste
@@ -43,7 +44,7 @@ export class WeeklyViewComponent extends React.Component<IWeeklyViewProps, any> 
 
     }
     componentDidMount() {
-        this.props.loadWeeklyPlan(0);
+        this.props.loadWeeklyPlan(this.props.generate);
         Modal.setAppElement('body');
     }
     replaceCard = (event: any) => {
@@ -52,12 +53,13 @@ export class WeeklyViewComponent extends React.Component<IWeeklyViewProps, any> 
     renderIngredients = (ingredients: Ingredients[]) => {
         if (ingredients) {
             return ingredients.map((r, index) => {
-                return <p>{r.amount} {r.measure.name} {r.ingredient.name}</p>
+                return <p>Ingredients: {r.amount} {r.measure.name} {r.ingredient.name}</p>
             })
         } else {
             return;
         }
     }
+    
     render() {
         if (this.props.isLoggedIn) {
             return (
@@ -72,7 +74,6 @@ export class WeeklyViewComponent extends React.Component<IWeeklyViewProps, any> 
                                             onClick={this.replaceCard}> X </Button>
                                             <CardBody className="too-much-text">
                                                 <CardTitle>{r.name}</CardTitle>
-                                                <CardText>{r.description}</CardText>
                                             </CardBody>
                                         </Card>
                                     ))
@@ -84,9 +85,9 @@ export class WeeklyViewComponent extends React.Component<IWeeklyViewProps, any> 
                             <Button onClick={this.toggleModol.bind(this, this.state.dailyview)}> X </Button>
                         </ModalHeader>
                         <ModalBody>
-                            <p>{this.state.dailyview.name}</p>
-                            <p>{this.state.dailyview.description}</p>
-                            <p>{this.state.dailyview.instructions}</p>
+                            <p>Recipe Name: {this.state.dailyview.name}</p>
+                            <p>Description: {this.state.dailyview.description}</p>
+                            <p>Instructions: {this.state.dailyview.instructions}</p>
                             {this.renderIngredients(this.state.dailyview.ingredients)}
                         </ModalBody>
                     </Modal>
@@ -104,6 +105,7 @@ export class WeeklyViewComponent extends React.Component<IWeeklyViewProps, any> 
 const mapStateToProps = (state: IState) => {
     return {
         weeklyview: state.weeklyview,
+        generate: state.generate,
         isLoggedIn : state.auth.isLoggedIn
     }
 }

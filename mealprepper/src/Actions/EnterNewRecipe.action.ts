@@ -30,7 +30,7 @@ export const submitRecipe = (event, recipeName: string, description: string, ins
 
         dispatch({
             payload: {
-                status: recipe.status
+                status: 'Successful!'
             }, 
             type: enterNewRecipeTypes.SUBMIT_RECIPE
         })
@@ -39,7 +39,7 @@ export const submitRecipe = (event, recipeName: string, description: string, ins
         console.log(err);
         dispatch({
             payload: {
-                status: 400
+                status: 'Unsuccessful!'
             }, 
             type: enterNewRecipeTypes.SUBMIT_RECIPE
         })

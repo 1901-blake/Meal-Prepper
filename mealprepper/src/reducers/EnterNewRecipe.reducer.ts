@@ -13,7 +13,7 @@ const initialState: IEnterNewRecipeState = {
     recipeName: '',
     description: '',
     instructions: '',
-    status: 0,
+    status: '',
     measurePop: [],
     ingredientPop: []
 }

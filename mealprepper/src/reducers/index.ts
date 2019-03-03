@@ -42,7 +42,7 @@ export interface IEnterNewRecipeState {
   recipeName: string,
   description: string,
   instructions: string,
-  status: number,
+  status: string,
   ingredientPop: Ingredient[],
   measurePop: Measure[],
   
@@ -60,7 +60,6 @@ export interface IUserInfoState {
 export interface IWeeklyViewState {
   //create an array of recipe and call it weekly recipe
   weeklyrecipe: FullRecipe[];
-  // this should be filled by the action by calling an fetch
 }
 
 export interface IGRocState {

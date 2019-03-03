@@ -1,42 +1,42 @@
 import { recipeClient } from "../Axios/recipe.client";
 import { FullRecipe } from "../Model/FullRecipe";
+import { IGenerateMealPlanState } from "../reducers";
 
 export const weeklyViewTypes = {
     LOAD_WEEK_PLAN: 'LOAD_WEEK_PLAN',
 }
 
-export const loadWeeklyPlan = (amount: number) => async (dispatch) => {
+export const loadWeeklyPlan = (generate: IGenerateMealPlanState) => async (dispatch) => {
     try {
-        const resp = await recipeClient.get('recipe');
 
-        if (resp.status == 200) {
+        const breakArr = generate.breakfast;
+        const lunchArr = generate.lunch;
+        const dinnerArr = generate.dinner;
+        const dessertArr = generate.dessert;
+        let temprecipe: FullRecipe[] = [];
 
-            const body = await resp.data;
-            let temprecipe: FullRecipe[] = [];
+        //loop through the array of recipes from body
+        breakArr.forEach(element => (
+            temprecipe.push(element)
+        ));
+        lunchArr.forEach(element => (
+            temprecipe.push(element)
+        ));
+        dinnerArr.forEach(element => (
+            temprecipe.push(element)
+        ));
+        dessertArr.forEach(element => (
+            temprecipe.push(element)
+        ));
 
-            //loop through the array of recipes from body
-            for (let index = 0; index < body.length; index++) {
-                temprecipe[index] = new FullRecipe(
-                    body[index].id, 
-                    body[index].name, 
-                    body[index].description, 
-                    body[index].instructions,
-                    body[index].ingredients
-                    );
-            }
-
-            dispatch({
-
-                payload: {
-                    weeklyrecipe: temprecipe
-                },
-                type: weeklyViewTypes.LOAD_WEEK_PLAN
-            })
-        }
+        dispatch({
+            payload: {
+                weeklyrecipe: temprecipe
+            },
+            type: weeklyViewTypes.LOAD_WEEK_PLAN
+        });
 
     } catch (err) {
         console.log(err);
     }
-
-
 }
