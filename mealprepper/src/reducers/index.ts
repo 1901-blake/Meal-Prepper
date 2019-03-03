@@ -11,7 +11,11 @@ import { generateMealPlanReducer } from './GenerateMealPlan.reducer';
 import { Ingredient } from '../Model/Ingredient';
 import { Measure } from '../Model/Measure';
 import { Ingredients } from '../Model/Ingredients';
+import { AuthReducer } from './Auth.reducer';
 
+export interface IAuthState {
+  isLoggedIn : boolean
+}
 
 export interface INavState {
   dropdown1: boolean
@@ -55,36 +59,34 @@ export interface IWeeklyViewState {
   // this should be filled by the action by calling an fetch
 }
 
-
-
 export interface IGRocState {
   arrayingredient: Ingredients[]
   amount: number
 }
+
 export interface IState {
+  auth : IAuthState,
   // about: IAboutState,
   // daily: IDailyState,
   nav: INavState,
   groc: IGRocState,
   newRecipe: IEnterNewRecipeState,
-  weeklyview: IWeeklyViewState
+  weeklyview: IWeeklyViewState,
   // favorite: IFavoriteState
-  recipehistory: IRecipeHistoryState
-  userinfo: IUserInfoState
+  recipehistory: IRecipeHistoryState,
+  userinfo: IUserInfoState,
 
   generate: IGenerateMealPlanState
   // weeklyview: IWeeklyViewState
-
 }
 
-
-
 export const state = combineReducers<IState>({
+  auth: AuthReducer,
   nav: navReducer,
   groc: grocReducer,
   newRecipe: enterNewRecipeReducer,
   weeklyview: weeklyViewReducer,
   recipehistory: recipeHistoryReducer,
   userinfo: userInfoReducer,
-  generate: generateMealPlanReducer
+  generate: generateMealPlanReducer,
 })

@@ -4,12 +4,20 @@ import { connect } from "react-redux";
 import { generateRecipes, saveRecipes } from "../../Actions/GenerateMealPlan.action";
 import Table from "reactstrap/lib/Table";
 import Button from "reactstrap/lib/Button";
+<<<<<<< HEAD
 import { FullRecipe } from "../../Model/FullRecipe";
+=======
+import { Redirect } from "react-router";
+>>>>>>> 66e5f92131936abfb676edd9283c4aa3399d9737
 
 
 interface IGenerateMealPlanProps {
     generate: IGenerateMealPlanState,
+<<<<<<< HEAD
     saveRecipes: (event, recipes: FullRecipe[]) => Promise<void>, 
+=======
+    isLoggedIn : boolean,
+>>>>>>> 66e5f92131936abfb676edd9283c4aa3399d9737
     generateRecipes: () => Promise<void>
 }
 
@@ -23,6 +31,7 @@ export class GenerateMealPlanComponent extends React.Component<IGenerateMealPlan
     }
 
     render() {
+<<<<<<< HEAD
         return (
             <div>
                 <div className="generat-meal-table">
@@ -61,15 +70,86 @@ export class GenerateMealPlanComponent extends React.Component<IGenerateMealPlan
                     <Button onClick={() => this.props.saveRecipes(event, this.props.generate.mealPlan)}>Submit</Button>
                     <Button onClick={() => this.props.generateRecipes()}>Regenerate</Button><br />
                     {this.props.generate.status}
+=======
+      if (this.props.isLoggedIn) {
+            return (
+                <div className="bg">
+                    <div className="large-table">
+                        <div className="generat-meal-table">
+                            <Table hover>
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Sunday</th>
+                                        <th>Monday</th>
+                                        <th>Tuesday</th>
+                                        <th>Wednesday</th>
+                                        <th>Thursday</th>
+                                        <th>Friday</th>
+                                        <th>Saturday</th>
+                                    </tr>
+                                </thead>
+                                <tbody >
+                                    <tr>
+                                        <th>Breakfast</th>
+                                        <td>Meal 1</td>
+                                        <td>Meal 2</td>
+                                        <td>Meal 3</td>
+                                        <td>Meal 4</td>
+                                        <td>Meal 5</td>
+                                        <td>Meal 6</td>
+                                        <td>Meal 7</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Lunch</th>
+                                        <td>Meal 1</td>
+                                        <td>Meal 2</td>
+                                        <td>Meal 3</td>
+                                        <td>Meal 4</td>
+                                        <td>Meal 5</td>
+                                        <td>Meal 6</td>
+                                        <td>Meal 7</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Dinner</th>
+                                        <td>Meal 1</td>
+                                        <td>Meal 2</td>
+                                        <td>Meal 3</td>
+                                        <td>Meal 4</td>
+                                        <td>Meal 5</td>
+                                        <td>Meal 6</td>
+                                        <td>Meal 7</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Dessert</th>
+                                        <td>Meal 1</td>
+                                        <td>Meal 2</td>
+                                        <td>Meal 3</td>
+                                        <td>Meal 4</td>
+                                        <td>Meal 5</td>
+                                        <td>Meal 6</td>
+                                        <td>Meal 7</td>
+                                    </tr>
+                                </tbody>        
+                            </Table>
+                            <Button>Submit</Button>
+                        </div>
+                    </div>
+>>>>>>> 66e5f92131936abfb676edd9283c4aa3399d9737
                 </div>
-            </div>
-        )
+            )
+        } else {
+            return (
+                <Redirect to='/' />
+            );
+        }
     }
 }
 
 const mapStateToProps = (state: IState) => {
     return {
-        generate: state.generate
+        generate: state.generate,
+        isLoggedIn : state.auth.isLoggedIn
     }
 }
 
