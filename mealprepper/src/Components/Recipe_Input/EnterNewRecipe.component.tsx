@@ -42,11 +42,8 @@ export class EnterNewRecipeComponent extends React.Component<IEnterNewRecipeProp
     }
 
     rowRemove = (event) => {
-        // console.log("row: " + event.target.parentNode.parentNode.parentNode.nodeName);
-        // console.log("row index: " + event.target.parentNode.parentNode.parentNode.rowIndex);
         this.props.removeIngredient(this.props.newRecipe.ingredArr,event.target.parentNode.parentNode.parentNode.rowIndex - 1);
     }
-
 
     render() {
         if (this.props.isLoggedIn) {

@@ -12,8 +12,7 @@ export const userinfoTypes = {
 export const handleSubmit = (event, username: string, firstname: string, lastname: string, email: string) => async (dispatch) => {
     event.preventDefault();
     try {
-        let curr = await Auth.currentAuthenticatedUser();
-        console.log(curr);
+        let curr = await Auth.currentAuthenticatedUser({ bypassCache: true });
         Auth.updateUserAttributes(curr, {
             'email': email, 
             'name': username, 
@@ -43,7 +42,6 @@ export const setInitial = () => async (dispatch) => {
     try {
         let curr = await Auth.currentAuthenticatedUser({ bypassCache: true });
 
-        console.log(curr);
         dispatch({
             payload: {
                 username: curr.attributes.name,

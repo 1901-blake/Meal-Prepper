@@ -22,7 +22,6 @@ export class GroceryListrowComponent extends React.Component<IGrocProps, any> {
 
 
     togglelinestyle = (event) => {
-        console.log('togglelinestyle event value : ' + event.target.checked);
         if (event.target.checked) {
             this.setState({ linebool: true });
         }

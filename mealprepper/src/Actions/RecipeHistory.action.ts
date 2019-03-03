@@ -13,16 +13,11 @@ export const loadrecipeHistoryRow = () => async (dispatch) => {
         const user = await Auth.currentAuthenticatedUser();
         const subkey = user.attributes.sub;
         let temprecipe: FullRecipe[] = [];
-
-        console.log('loadrecipeHistoryRow action loading');
         const resp = await recipeClient.get('users');
-        console.log('resp has a status of: ' + resp.status);
 
         if (resp.status == 200) {
 
             const body = await resp.data;
-
-            console.log(body[0].ratinginfo);
 
             body.forEach(element => {
                 if (element.subkey === subkey) {

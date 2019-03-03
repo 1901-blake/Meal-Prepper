@@ -7,10 +7,7 @@ export const weeklyViewTypes = {
 
 export const loadWeeklyPlan = (amount: number) => async (dispatch) => {
     try {
-        console.log('loadWeeklyPlan loading');
         const resp = await recipeClient.get('recipe');
-
-        console.log('resp in loadWeeklyPlan.action has a status of: ' + resp.status);
 
         if (resp.status == 200) {
 

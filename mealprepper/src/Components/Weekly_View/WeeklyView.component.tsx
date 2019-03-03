@@ -43,7 +43,6 @@ export class WeeklyViewComponent extends React.Component<IWeeklyViewProps, any> 
 
     }
     componentDidMount() {
-        console.log('componentDidMount loadWeeklyPlan');
         this.props.loadWeeklyPlan(0);
         Modal.setAppElement('body');
     }
@@ -51,9 +50,7 @@ export class WeeklyViewComponent extends React.Component<IWeeklyViewProps, any> 
 
     }
     renderIngredients = (ingredients: Ingredients[]) => {
-        console.log(ingredients)
         if (ingredients) {
-            console.log('test')
             return ingredients.map((r, index) => {
                 return <p>{r.amount} {r.measure.name} {r.ingredient.name}</p>
             })

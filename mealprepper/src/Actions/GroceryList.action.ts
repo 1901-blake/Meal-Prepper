@@ -12,7 +12,6 @@ export const groceryTypes = {
 }
 
 export const loadGroceryRow = (generate : FullRecipe[]) => async (dispatch) => {
-    console.log('loadGroceryRow action loading');
 
     if (generate) {
 
@@ -45,7 +44,7 @@ export const addGroceryRow = (Ingredientname: string, amount: number, measure: s
 
 
     let tempingrdient = new Ingredients(fullfillmeasure, fullfillingredient, amount);
-    console.log(tempingrdient.ingredient.name);
+
     dispatch({
 
         payload: {

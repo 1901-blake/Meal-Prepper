@@ -21,17 +21,12 @@ export const submitRecipe = (event, recipeName: string, description: string, ins
     try {
         event.preventDefault();
 
-        console.log(description, instructions, recipeName, ingredients);
-
-        // http://ec2-18-225-37-190.us-east-2.compute.amazonaws.com
         let recipe = await recipeClient.post('recipe/createRecipe', {
             description: description,
             instructions: instructions, 
             name: recipeName, 
             ingredients: ingredients
         });
-        
-        console.log(recipe);
 
         dispatch({
             payload: {
@@ -55,7 +50,6 @@ export const populateIngredient = () => async (dispatch) => {
     try {
         let ingred = await recipeClient.get('ingredient');
         let list = ingred.data;
-        console.log(list);
 
         dispatch({
             payload: {
@@ -70,10 +64,8 @@ export const populateIngredient = () => async (dispatch) => {
 
 export const populateMeasure = () => async (dispatch) => {
     try {
-        // http://ec2-18-225-37-190.us-east-2.compute.amazonaws.com
         let measure = await recipeClient.get('measure');
         let list = measure.data;
-        console.log(list);
 
         dispatch({
             payload: {
@@ -99,7 +91,6 @@ export const addIngredient = (amount: number, measure: Measure, ingredient: Ingr
 
 export const removeIngredient = (ingarr: Ingredients[], rowIndex: number) => {
     ingarr.splice(rowIndex,1);
-    console.log(ingarr);
     return {        
         payload: {
             ingarr: ingarr

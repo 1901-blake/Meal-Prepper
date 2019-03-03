@@ -15,7 +15,6 @@ export const generateBreakfast = () => async (dispatch) => {
     try {
         let newRecipe = await recipeClient.get('recipe/generate/7/{description}?description=breakfast');
         let recipe = newRecipe.data;
-        console.log(recipe);
         dispatch({
             payload: {
                 recipe: recipe
@@ -31,7 +30,6 @@ export const generateLunch = () => async (dispatch) => {
     try {
         let newRecipe = await recipeClient.get('recipe/generate/7/{description}?description=lunch-dinner');
         let recipe = newRecipe.data;
-        console.log(recipe);
         dispatch({
             payload: {
                 recipe: recipe
@@ -47,7 +45,6 @@ export const generateDinner = () => async (dispatch) => {
     try {
         let newRecipe = await recipeClient.get('recipe/generate/7/{description}?description=lunch-dinner');
         let recipe = newRecipe.data;
-        console.log(recipe);
         dispatch({
             payload: {
                 recipe: recipe
@@ -63,7 +60,6 @@ export const generateDessert = () => async (dispatch) => {
     try {
         let newRecipe = await recipeClient.get('recipe/generate/7/{description}?description=dessert');
         let recipe = newRecipe.data;
-        console.log(recipe);
         dispatch({
             payload: {
                 recipe: recipe
@@ -89,7 +85,7 @@ export const saveRecipes = (event, recipes: IGenerateMealPlanState) => async (di
                     recipe: element, 
                     rating: ""
                 }],
-            })
+            }).catch(err => console.log(err))
         ));
         recipes.lunch.forEach(element => async () => (
             await recipeClient.post('/users/history', {
@@ -99,7 +95,7 @@ export const saveRecipes = (event, recipes: IGenerateMealPlanState) => async (di
                     recipe: element, 
                     rating: ""
                 }],
-            })
+            }).catch(err => console.log(err))
         ));
         recipes.dinner.forEach(element => async () => (
             await recipeClient.post('/users/history', {
@@ -109,7 +105,7 @@ export const saveRecipes = (event, recipes: IGenerateMealPlanState) => async (di
                     recipe: element, 
                     rating: ""
                 }],
-            })
+            }).catch(err => console.log(err))
         ));
         recipes.dessert.forEach(element => async () => (
             await recipeClient.post('/users/history', {
@@ -119,7 +115,7 @@ export const saveRecipes = (event, recipes: IGenerateMealPlanState) => async (di
                     recipe: element, 
                     rating: ""
                 }],
-            })
+            }).catch(err => console.log(err))
         ));
 
         dispatch({

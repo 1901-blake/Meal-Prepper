@@ -125,7 +125,6 @@ class ForgotPasswordButton extends React.Component<ForgotPasswordButtonProps, Fo
             this.setState({passwordProgressIsHidden : false});
             const data = await Auth.forgotPasswordSubmit(email, code, newPassword);
             this.setState({passwordProgressIsHidden : true});
-            console.log(data);
             toast("Successfully changed password.")
             this.toggle();
         } catch (err) {

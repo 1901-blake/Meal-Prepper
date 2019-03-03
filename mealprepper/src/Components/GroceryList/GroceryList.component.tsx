@@ -29,7 +29,6 @@ export class GroceryListComponent extends React.Component<IGrocProps, any> {
     }
 
     changeamount = (event) => {
-        console.log('col value: ' + event.target.parentNode.nodeName);
         this.setState({ tempamount: event.target.value });
     }
     changename = (event) => {
@@ -48,7 +47,6 @@ export class GroceryListComponent extends React.Component<IGrocProps, any> {
     }
 
     togglelinestyle = (event) => {
-        console.log('togglelinestyle event value : ' + event.target.checked);
         if (event.target.checked) {
             this.setState({ linebool: true });
         }
@@ -58,7 +56,6 @@ export class GroceryListComponent extends React.Component<IGrocProps, any> {
         }
     }
     componentDidMount() {
-        console.log('componentDidMount loadGroceryList');
         if (this.props.generate.breakfast && this.props.generate.lunch && this.props.generate.dinner && this.props.generate.dessert) {
 
             this.props.loadGroceryRow(this.props.generate.breakfast);
@@ -69,7 +66,6 @@ export class GroceryListComponent extends React.Component<IGrocProps, any> {
     }
 
     render() {
-        // let linebool = this.state.linebool;
         if (this.props.isLoggedIn) {
             return (
                 <div className="bg">
@@ -109,13 +105,13 @@ export class GroceryListComponent extends React.Component<IGrocProps, any> {
                 </div>
             )
         } else {
-           return (
-            <Redirect to='/'/>
+            return (
+                <Redirect to='/' />
             );
         }
     }
 }
-             
+
 const mapStateToProps = (state: IState) => {
     return {
         groc: state.groc,
@@ -126,8 +122,8 @@ const mapStateToProps = (state: IState) => {
 
 
 const mapDispatchToProps = {
-                            loadGroceryRow,
-                        addGroceryRow
-                    }
-                    
+    loadGroceryRow,
+    addGroceryRow
+}
+
 export default connect(mapStateToProps, mapDispatchToProps)(GroceryListComponent);

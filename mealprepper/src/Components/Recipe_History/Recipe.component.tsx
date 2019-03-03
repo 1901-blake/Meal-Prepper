@@ -23,7 +23,6 @@ export class RecipeHistoryComponent extends React.Component<IRecipeHistoryProps,
     }
 
     componentDidMount() {
-        console.log('componentDidMount loadrecipeHistory');
         this.props.loadrecipeHistoryRow();
     }
 

@@ -87,7 +87,6 @@ export const enterNewRecipeReducer = (state = initialState, action: any) => {
                 instructions: action.payload.instructions
             }
         case enterNewRecipeTypes.SUBMIT_RECIPE:
-            console.log(...state.ingredArr);
             return {
                 ...state,
                 status: action.payload.status
