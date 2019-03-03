@@ -1,7 +1,8 @@
 import React from "react";
 import { connect } from 'react-redux';
-import { IState, state, IFavoriteState } from "../../reducers";
+import { IState, IFavoriteState } from "../../reducers";
 import { favoritePlan } from "../../Actions/Favorite.action";
+import { Redirect } from "react-router";
 
 const divStyle = {
     table: {
@@ -17,13 +18,10 @@ const divStyle = {
     },
 };
 
-const star = {
-
-}
-
 //takein the state from store and any function needed in action
 export interface IFavoriteProps {
     favorite: IFavoriteState,
+    isLoggedIn : boolean
     favoritePlan: () => void
 }
 
@@ -39,35 +37,42 @@ export class FavoriteComponent extends React.Component<IFavoriteProps, any> {
         this.props.favoritePlan();
     }
     render() {
-        return (
-            <div className="bg">
-            <h1 className="tableHeaders">Favorites</h1>
-                <table style={divStyle.table}>
-                    <thead>
-
-                    </thead>
-
-                    <tbody >
-                        {
-                            this.props.favorite.favoriteRecipeArr.map((r) => (
-                                <tr>
-                                    <td style={divStyle.row}> {r.name} </td>
-                                    <td style={divStyle.row}> {r.description}</td>
-                                    <td style={divStyle.row}> {r.instructions}</td>
-                                </tr>
-                            ))
-                        }
-                    </tbody>
-                </table>
-            </div>
-        )
+        if (this.props.isLoggedIn) {
+            return (
+                <div className="bg">
+                <h1 className="tableHeaders">Favorites</h1>
+                    <table style={divStyle.table}>
+                        <thead>
+    
+                        </thead>
+    
+                        <tbody >
+                            {
+                                this.props.favorite.favoriteRecipeArr.map((r) => (
+                                    <tr>
+                                        <td style={divStyle.row}> {r.name} </td>
+                                        <td style={divStyle.row}> {r.description}</td>
+                                        <td style={divStyle.row}> {r.instructions}</td>
+                                    </tr>
+                                ))
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            )
+        } else {
+            return (
+                <Redirect to='/'/>
+            )
+        }
     }
 }
 
 //uncommit this when the store has info for the current component
 const mapStateToProps = (state: IState) => {
     return {
-        favorite: state.favorite
+        favorite: state.favorite,
+        isLoggedIn : state.auth.isLoggedIn
     }
 }
 //add function when added in setting.action

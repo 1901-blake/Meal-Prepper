@@ -10,8 +10,8 @@ import  FavoriteComponent  from './Components/Favorites/Favorite.component';
 import { SettingComponent } from './Components/Setting/Setting.component';
 import UserInfoComponent from './Components/User_Info/UserInfo.component';
 import EnterNewRecipeComponent from './Components/Recipe_Input/EnterNewRecipe.component';
-import { HomeComponent } from './Components/Home/Home.component';
-import Amplify, { Auth } from 'aws-amplify';
+import HomeComponent from './Components/Home/Home.component';
+import Amplify from 'aws-amplify';
 import config from './config/cognito.config';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
@@ -31,22 +31,25 @@ Amplify.configure({
 });
 
 class App extends Component {
-  redirect = async () => {
-    if(await Auth.confirmSignIn) {
-      return;
-    } else {
+  state = {
+    redirect: true
+  }
+
+  redirect= () => {
+    if(this.state.redirect) {
+      this.state.redirect = false;
       return <Redirect to='/' />;
     }
+    return null;
   }
 
   render() {
     return (
       <Provider store={store}>
         <BrowserRouter>
-          {this.redirect()}
           <div>
             <NavComponent />
-
+            {this.redirect()}
             <Route exact path="" component={HomeComponent} />
 
             <Route exact path="/grocerylist" component={GroceryListComponent} />
