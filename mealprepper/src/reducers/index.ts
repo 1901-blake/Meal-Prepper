@@ -44,7 +44,8 @@ export interface IEnterNewRecipeState {
   instructions: string,
   status: number,
   ingredientPop: Ingredient[],
-  measurePop: Measure[]
+  measurePop: Measure[],
+  
 }
 export interface IRecipeHistoryState {
   recipehistoryarray: Recipe[];

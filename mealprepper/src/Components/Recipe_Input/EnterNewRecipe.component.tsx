@@ -2,7 +2,8 @@ import React from "react";
 import { IEnterNewRecipeState, IState } from "../../reducers";
 import { addIngredient, updateAmount, updateIngredient, updateMeasure, updateRecipeName, 
     updateInstructions, updateDescription, submitRecipe, populateIngredient,
-    populateMeasure } from "../../Actions/EnterNewRecipe.action";
+    populateMeasure, 
+    removeIngredient} from "../../Actions/EnterNewRecipe.action";
 import { connect } from "react-redux";
 import { Measure } from "../../Model/Measure";
 import { Ingredient } from "../../Model/Ingredient";
@@ -15,6 +16,7 @@ interface IEnterNewRecipeProps {
     newRecipe: IEnterNewRecipeState,
     isLoggedIn : boolean,
     addIngredient: (amount: number, measure: Measure, ingredient: Ingredient) => void,
+    removeIngredient: (ingarr: Ingredients[], rowIndex: number) => void,
     populateIngredient: () => Promise<void>,
     populateMeasure: () => Promise<void>, 
     updateAmount: (event) => void,
@@ -38,6 +40,13 @@ export class EnterNewRecipeComponent extends React.Component<IEnterNewRecipeProp
         this.props.populateIngredient();
         this.props.populateMeasure();
     }
+
+    rowRemove = (event) => {
+        // console.log("row: " + event.target.parentNode.parentNode.parentNode.nodeName);
+        // console.log("row index: " + event.target.parentNode.parentNode.parentNode.rowIndex);
+        this.props.removeIngredient(this.props.newRecipe.ingredArr,event.target.parentNode.parentNode.parentNode.rowIndex - 1);
+    }
+
 
     render() {
         if (this.props.isLoggedIn) {
@@ -134,15 +143,18 @@ export class EnterNewRecipeComponent extends React.Component<IEnterNewRecipeProp
                                     <th scope="col">Amount</th>
                                     <th scope="col"> Measure</th>
                                     <th scope="col">Ingredient</th>
+                                    <th scope="col"></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {
                                     this.props.newRecipe.ingredArr.map(ele => (
                                         <tr>
+                                            {/* <td>{ele.index}</td> */}
                                             <td>{ele.amount}</td>
                                             <td>{ele.measure.name}</td>
                                             <td>{ele.ingredient.name}</td>
+                                            <td><Button close onClick={this.rowRemove}></Button></td>
                                         </tr>
                                     ))
                                 }
@@ -169,6 +181,7 @@ const mapStateToProps = (state: IState) => {
 
 const mapDispatchToProps = {
     addIngredient,
+    removeIngredient,
     populateIngredient,
     populateMeasure,
     updateAmount,

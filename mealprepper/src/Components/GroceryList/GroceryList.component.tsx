@@ -11,7 +11,7 @@ import { Redirect } from "react-router";
 export interface IGrocProps {
     groc: IGRocState,
     generate: IGenerateMealPlanState,
-    isLoggedIn : boolean,
+    isLoggedIn: boolean,
     loadGroceryRow: (generate: FullRecipe[]) => void,
     addGroceryRow: (Ingredientname: string, amount: number) => void
 
@@ -66,76 +66,57 @@ export class GroceryListComponent extends React.Component<IGrocProps, any> {
     }
 
     render() {
-
         let linebool = this.state.linebool;
-
-        return (
-            <div className="bg">
-            <h1 className="tableHeaders">Grocery List</h1>
-                <div className="user-info-class">
-                    {/* <table style={divStyle} id="groceryTable"> */}
-                    <Table hover id="groceryTable">
-
-                        <thead>
         if (this.props.isLoggedIn) {
             return (
-            <div className="bg">
-            <h1 className="tableHeaders">Grocery List</h1>
-                <div className="user-info-class">
-                    {/* <table style={divStyle} id="groceryTable"> */}
-                    <Table hover id="groceryTable">
-
-                        <thead>
-                            <tr>
-                                <th>active</th>
-                                <th>ingredient</th>
-                                <th>amount</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            <tr>
-
-                                <td> <button onClick={this.addrowfunc}>+</button> </td>
-                                <td> <input type="text" placeholder="ingredient name" onChange={this.changename} /> </td>
-                                <td> <input type="number" placeholder="amount" onChange={this.changeamount} /> </td>
-                            </tr>
-    
-                            {
-
-                                this.props.groc.arrayingredient.map((r) => (
-
+                <div className="bg">
+                    <h1 className="tableHeaders">Grocery List</h1>
+                    <div className="user-info-class">
+                        <Table hover id="groceryTable">
+                            <thead>
+                                <tr>
+                                    <th>active</th>
+                                    <th>ingredient</th>
+                                    <th>amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td> <button onClick={this.addrowfunc}>+</button> </td>
+                                    <td> <input type="text" placeholder="ingredient name" onChange={this.changename} /> </td>
+                                    <td> <input type="number" placeholder="amount" onChange={this.changeamount} /> </td>
+                                </tr>
+                                {
+                                    this.props.groc.arrayingredient.map((r) => (
                                         <tr>
                                             <GroceryListrowComponent ingredient={r.ingredient.name} amount={r.amount} />
                                         </tr>
-
-                                ))
-                            }
-                        </tbody>
-                    </Table>
-                    {/* </table> */}
+                                    ))
+                                }
+                            </tbody>
+                        </Table>
+                    </div>
                 </div>
-            </div>
-          )
+            )
         } else {
            return (
-            <Redirect to='/' />
-           );
+            <Redirect to='/'/>
+            );
         }
     }
 }
-
+             
 const mapStateToProps = (state: IState) => {
     return {
-        groc: state.groc,
-        generate: state.generate,
-        isLoggedIn : state.auth.isLoggedIn
-    }
-}
-
+                            groc: state.groc,
+                        generate: state.generate,
+                        isLoggedIn : state.auth.isLoggedIn
+                    }
+                }
+                
 const mapDispatchToProps = {
-    loadGroceryRow,
-    addGroceryRow
-}
-
+                            loadGroceryRow,
+                        addGroceryRow
+                    }
+                    
 export default connect(mapStateToProps, mapDispatchToProps)(GroceryListComponent);
