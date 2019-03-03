@@ -23,7 +23,10 @@ export interface INavState {
 }
 
 export interface IGenerateMealPlanState {
-  mealPlan: FullRecipe[], 
+  breakfast: FullRecipe[] 
+  lunch: FullRecipe[]
+  dinner: FullRecipe[]
+  dessert: FullRecipe[]
   status: string
 }
 
@@ -44,7 +47,7 @@ export interface IEnterNewRecipeState {
   measurePop: Measure[]
 }
 export interface IRecipeHistoryState {
-  recipehistoryarray: Recipe[];
+  recipehistoryarray: FullRecipe[];
 }
 export interface IUserInfoState {
   firstname: string
