@@ -47,8 +47,15 @@ public class RecipeController {
 		
 		Random rand = new Random();
 		
+		ArrayList<Integer> arr = new ArrayList<Integer>();
 		for (int i = 0; i < numOfRecipes; i++) {
 	        int randomIndex = rand.nextInt(fullList.size());
+	        for(int j = 0; j < arr.size();j++ ) {
+	        	if (randomIndex == arr.get(j)) {
+	        		randomIndex = rand.nextInt(fullList.size());
+				}
+	        }
+	        arr.add(randomIndex);
 	        buildList.add(fullList.get(randomIndex));
 	    }
 		
@@ -64,8 +71,15 @@ public class RecipeController {
 	
 		Random rand = new Random();
 		
+		ArrayList<Integer> arr = new ArrayList<Integer>();
 		for (int i = 0; i < numOfRecipes; i++) {
 	        int randomIndex = rand.nextInt(fullList.size());
+	        for(int j = 0; j < arr.size();j++ ) {
+	        	if (randomIndex == arr.get(j)) {
+	        		randomIndex = rand.nextInt(fullList.size());
+				}
+	        }
+	        arr.add(randomIndex);
 	        buildList.add(fullList.get(randomIndex));
 	     
 	    }
