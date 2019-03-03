@@ -24,67 +24,68 @@ export class GenerateMealPlanComponent extends React.Component<IGenerateMealPlan
 
     render() {
       if (this.props.isLoggedIn) {
-          return (
-            <div className="bg">
-                <div className="large-table">
-                    <div className="generat-meal-table">
-                        <Table hover>
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th>Sunday</th>
-                                <th>Monday</th>
-                                <th>Tuesday</th>
-                                <th>Wednesday</th>
-                                <th>Thursday</th>
-                                <th>Friday</th>
-                                <th>Saturday</th>
-                            </tr>
-                        </thead>
-                        <tbody >
-                            <tr>
-                                <th>Breakfast</th>
-                                <td>Meal 1</td>
-                                <td>Meal 2</td>
-                                <td>Meal 3</td>
-                                <td>Meal 4</td>
-                                <td>Meal 5</td>
-                                <td>Meal 6</td>
-                                <td>Meal 7</td>
-                            </tr>
-                            <tr>
-                                <th>Lunch</th>
-                                <td>Meal 1</td>
-                                <td>Meal 2</td>
-                                <td>Meal 3</td>
-                                <td>Meal 4</td>
-                                <td>Meal 5</td>
-                                <td>Meal 6</td>
-                                <td>Meal 7</td>
-                            </tr>
-                            <tr>
-                                <th>Dinner</th>
-                                <td>Meal 1</td>
-                                <td>Meal 2</td>
-                                <td>Meal 3</td>
-                                <td>Meal 4</td>
-                                <td>Meal 5</td>
-                                <td>Meal 6</td>
-                                <td>Meal 7</td>
-                            </tr>
-                            <tr>
-                                <th>Dessert</th>
-                                <td>Meal 1</td>
-                                <td>Meal 2</td>
-                                <td>Meal 3</td>
-                                <td>Meal 4</td>
-                                <td>Meal 5</td>
-                                <td>Meal 6</td>
-                                <td>Meal 7</td>
-                            </tr>
-                        </tbody>        
-                        </Table>
-                        <Button>Submit</Button>
+            return (
+                <div className="bg">
+                    <div className="large-table">
+                        <div className="generat-meal-table">
+                            <Table hover>
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Sunday</th>
+                                        <th>Monday</th>
+                                        <th>Tuesday</th>
+                                        <th>Wednesday</th>
+                                        <th>Thursday</th>
+                                        <th>Friday</th>
+                                        <th>Saturday</th>
+                                    </tr>
+                                </thead>
+                                <tbody >
+                                    <tr>
+                                        <th>Breakfast</th>
+                                        <td>Meal 1</td>
+                                        <td>Meal 2</td>
+                                        <td>Meal 3</td>
+                                        <td>Meal 4</td>
+                                        <td>Meal 5</td>
+                                        <td>Meal 6</td>
+                                        <td>Meal 7</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Lunch</th>
+                                        <td>Meal 1</td>
+                                        <td>Meal 2</td>
+                                        <td>Meal 3</td>
+                                        <td>Meal 4</td>
+                                        <td>Meal 5</td>
+                                        <td>Meal 6</td>
+                                        <td>Meal 7</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Dinner</th>
+                                        <td>Meal 1</td>
+                                        <td>Meal 2</td>
+                                        <td>Meal 3</td>
+                                        <td>Meal 4</td>
+                                        <td>Meal 5</td>
+                                        <td>Meal 6</td>
+                                        <td>Meal 7</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Dessert</th>
+                                        <td>Meal 1</td>
+                                        <td>Meal 2</td>
+                                        <td>Meal 3</td>
+                                        <td>Meal 4</td>
+                                        <td>Meal 5</td>
+                                        <td>Meal 6</td>
+                                        <td>Meal 7</td>
+                                    </tr>
+                                </tbody>        
+                            </Table>
+                            <Button>Submit</Button>
+                        </div>
                     </div>
                 </div>
             )

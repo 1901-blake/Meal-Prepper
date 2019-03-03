@@ -5,7 +5,6 @@ import { loadGroceryRow, addGroceryRow } from "../../Actions/GroceryList.action"
 import { FullRecipe } from "../../Model/FullRecipe";
 import { GroceryListrowComponent } from "./GroceryListrow.component";
 import Table from "reactstrap/lib/Table";
-import { AppState } from "@aws-amplify/core";
 import { Redirect } from "react-router";
 
 export interface IGrocProps {
@@ -69,14 +68,6 @@ export class GroceryListComponent extends React.Component<IGrocProps, any> {
 
         let linebool = this.state.linebool;
 
-        return (
-            <div className="bg">
-            <h1 className="tableHeaders">Grocery List</h1>
-                <div className="user-info-class">
-                    {/* <table style={divStyle} id="groceryTable"> */}
-                    <Table hover id="groceryTable">
-
-                        <thead>
         if (this.props.isLoggedIn) {
             return (
             <div className="bg">
