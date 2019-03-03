@@ -72,9 +72,7 @@ export class GroceryListComponent extends React.Component<IGrocProps, any> {
     }
 
     render() {
-
         let linebool = this.state.linebool;
-
         if (this.props.isLoggedIn) {
             return (
                 <div className="bg">
@@ -110,18 +108,17 @@ export class GroceryListComponent extends React.Component<IGrocProps, any> {
                                 }
                             </tbody>
                         </Table>
-                        {/* </table> */}
                     </div>
                 </div>
             )
         } else {
-            return (
-                <Redirect to='/' />
+           return (
+            <Redirect to='/'/>
             );
         }
     }
 }
-
+             
 const mapStateToProps = (state: IState) => {
     return {
         groc: state.groc,
@@ -130,9 +127,10 @@ const mapStateToProps = (state: IState) => {
     }
 }
 
-const mapDispatchToProps = {
-    loadGroceryRow,
-    addGroceryRow
-}
 
+const mapDispatchToProps = {
+                            loadGroceryRow,
+                        addGroceryRow
+                    }
+                    
 export default connect(mapStateToProps, mapDispatchToProps)(GroceryListComponent);

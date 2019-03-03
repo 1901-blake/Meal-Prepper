@@ -83,6 +83,7 @@ export class GenerateMealPlanComponent extends React.Component<IGenerateMealPlan
                         </div>
                     </div>
                 </div>
+            </div>
             )
         } else {
             return (

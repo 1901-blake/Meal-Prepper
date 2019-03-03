@@ -16,6 +16,7 @@ import SignUpButton from '../AuthComponents/SignUpButton/SignUpButton';
 import SignOutButton from '../AuthComponents/SignOutButton/SignOutButton';
 import Container from 'reactstrap/lib/Container';
 import Col from 'reactstrap/lib/Col';
+import Button from 'reactstrap/lib/Button';
 
 
 
@@ -39,38 +40,39 @@ export class NavComponent extends React.Component<INavProps, any> {
                         <Link to="" className="navbar-brand">
                             <img src={logodark} height="50" className="d-inline-block align-top" alt="prepper" />
                         </Link>
-                        <NavItem className="ml-auto">
-                            <NavLink><Link to="/grocerylist" className="navItems">Grocery List</Link></NavLink>
-                        </NavItem>
+                        <Link to="/grocerylist" className="navItems">
+                            <Button color="dark">Grocery List</Button>{' '}
+                        </Link>
                         <Dropdown nav isOpen={this.props.nav.dropdown1} toggle={this.props.toggle}>
                             <DropdownToggle nav className="navItems">
                                 Meal Plan
                             </DropdownToggle>
                             <DropdownMenu left>
                                 <DropdownItem>
-                                    <NavLink><Link to="/generate">Generate Meal Plan</Link></NavLink>
+                                    <NavLink><Link to="/generate" className="dropdownItems">Generate Meal Plan</Link></NavLink>
                                 </DropdownItem>
                                 <DropdownItem>
                                     <NavLink>
-                                        <Link to="/weeklyinfo">Weekly View</Link></NavLink>
+                                        <Link to="/weeklyinfo" className="dropdownItems">Weekly View</Link></NavLink>
                                 </DropdownItem>
                             </DropdownMenu>
                         </Dropdown>
-                        <NavItem>
-                            <NavLink><Link to="/recipehistory" className="navItems">Recipe History</Link></NavLink>
-                        </NavItem>
-                        {/* <Button tag = Link to="/recipehistory">Enter New Recipe</Button> */}
-                        <NavItem>
-                            <NavLink><Link to="/recipeInput" className="navItems">Enter New Recipe</Link></NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink><Link to="/favorites" className="navItems">Favorites</Link></NavLink>
-                        </NavItem>
-                        <Dropdown nav isOpen={this.props.nav.dropdown2} toggle={this.props.toggle1} color="dark">
+                        
+                        <Link to="/recipehistory" className="navItems">
+                            <Button color="dark">Recipe History</Button>{' '}
+                        </Link>
+                        <Link to="/recipeInput" className="navItems">
+                            <Button color="dark">Enter New Recipe</Button>{' '}
+                        </Link>
+                        {/* <Link to="/favorites" className="navItems">
+                            <Button color="dark">Favorites</Button>{' '}
+                        </Link> */}
+                        
+                        <Dropdown nav isOpen={this.props.nav.dropdown2} toggle={this.props.toggle1}>
                             <DropdownToggle nav className="navItems">
                                 Profile
                             </DropdownToggle>
-                            <DropdownMenu left>
+                            <DropdownMenu left color="dark">
                                 <DropdownItem>
                                     <NavLink>
                                         <Link to="/setting" className="dropdownItems">Settings</Link></NavLink>

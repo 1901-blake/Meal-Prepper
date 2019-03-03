@@ -102,6 +102,12 @@ export const enterNewRecipeReducer = (state = initialState, action: any) => {
                 ...state,
                 measurePop: action.payload.measurePop
             }
+        case enterNewRecipeTypes.REMOVE_INGREDIENT:
+            return {
+                ...state,
+                ingredArr : action.payload.ingarr
+            }
+            
     }
     return state;
 }

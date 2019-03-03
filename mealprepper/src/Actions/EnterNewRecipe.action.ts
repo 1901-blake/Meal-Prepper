@@ -13,7 +13,8 @@ export const enterNewRecipeTypes = {
     UPDATE_DESCRIPTION: 'ENTER_NEW_RECIPE_UPDATE_DESCRIPTION', 
     UPDATE_INSTRUCTIONS: 'ENTER_NEW_RECIPE_UPDATE_INSTRUCTIONS', 
     POPULATE_INGREDIENT: 'ENTER_NEW_RECIPE_POPULATE_INGREDIENT', 
-    POPULATE_MEASUREMENT: 'ENTER_NEW_RECIPE_POPULATE_MEASUREMENT'
+    POPULATE_MEASUREMENT: 'ENTER_NEW_RECIPE_POPULATE_MEASUREMENT',
+    REMOVE_INGREDIENT: 'ENTER_NEW_RECIPE_REMOVE_INGREDIENT'
 }
 
 export const submitRecipe = (event, recipeName: string, description: string, instructions: string, ingredients: Ingredients[]) => async (dispatch) => {
@@ -93,6 +94,17 @@ export const addIngredient = (amount: number, measure: Measure, ingredient: Ingr
             ingredient: ingredient
         }, 
         type: enterNewRecipeTypes.ADD_INGREDIENT
+    }
+}
+
+export const removeIngredient = (ingarr: Ingredients[], rowIndex: number) => {
+    ingarr.splice(rowIndex,1);
+    console.log(ingarr);
+    return {        
+        payload: {
+            ingarr: ingarr
+        }, 
+        type: enterNewRecipeTypes.REMOVE_INGREDIENT
     }
 }
 
