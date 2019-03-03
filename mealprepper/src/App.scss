@@ -168,6 +168,28 @@ body, html {
   justify-content: center;
 }
 
+.weekly-modal {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  pointer-events: auto;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid rgba(0,0,0,.2);
+  border-radius: .3rem;
+  outline: 0;
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  right: 40px;
+  border: 1px solid rgb(204, 204, 204);
+  background: rgb(255, 255, 255);
+  overflow: auto;
+  border-radius: 4px;
+  outline: none;
+  padding: 20px;
+}
+
 .too-much-text {
   overflow:hidden;
 }

@@ -14,12 +14,9 @@ import logodark from '../../assets/logo-dark.png'
 import { Nav } from 'reactstrap';
 import SignInButton from '../AuthComponents/SignInButton/SignInButton';
 import SignUpButton from '../AuthComponents/SignUpButton/SignUpButton';
-import ForgotPasswordButton from '../AuthComponents/ForgotPasswordButton/ForgotPasswordButton';
 import SignOutButton from '../AuthComponents/SignOutButton/SignOutButton';
-import ChangePasswordButton from '../AuthComponents/ChangePasswordButton/ChangePasswordButton';
 import Container from 'reactstrap/lib/Container';
 import Col from 'reactstrap/lib/Col';
-import { spawn } from 'child_process';
 
 
 
@@ -43,7 +40,7 @@ export class NavComponent extends React.Component<INavProps, any> {
                         <Link to="" className="navbar-brand">
                             <img src={logodark} height="50" className="d-inline-block align-top" alt="prepper" />
                         </Link>
-                        <NavItem>
+                        <NavItem className="ml-auto">
                             <NavLink><Link to="/grocerylist" className="navItems">Grocery List</Link></NavLink>
                         </NavItem>
                         <Dropdown nav isOpen={this.props.nav.dropdown1} toggle={this.props.toggle}>
@@ -97,12 +94,8 @@ export class NavComponent extends React.Component<INavProps, any> {
                         <Link to="" className="navbar-brand">
                             <img src={logodark} height="50" className="d-inline-block align-top" alt="prepper" />
                         </Link>
-                        <Container >
-                            <Col inline md={{span:4, offset:8}}>
-                                <SignInButton color="dark" />
-                                <SignUpButton color="dark" />
-                            </Col>
-                        </Container>
+                            <SignInButton color="dark" className="ml-auto"/>
+                            <SignUpButton color="dark" />
                     </Nav>
                 </div>
             );

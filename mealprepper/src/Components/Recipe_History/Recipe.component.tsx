@@ -5,11 +5,6 @@ import { loadrecipeHistoryRow } from "../../Actions/RecipeHistory.action";
 import Table from "reactstrap/lib/Table";
 import { Redirect } from "react-router";
 
-const divStyle = {
-    margin: '40px',
-    border: '3px solid pink',
-};
-
 //takein the state from store and any function needed in action
 export interface IRecipeHistoryProps {
     recipehistory: IRecipeHistoryState,
