@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from 'react-redux';
 import { IState, state, IRecipeHistoryState } from "../../reducers";
 import { loadrecipeHistoryRow } from "../../Actions/RecipeHistory.action";
+import Table from "reactstrap/lib/Table";
 import { Redirect } from "react-router";
 
 const divStyle = {
@@ -34,30 +35,33 @@ export class RecipeHistoryComponent extends React.Component<IRecipeHistoryProps,
     render() {
         if(this.props.isLoggedIn) {
             return (
-                <div className="bg">
-                    <table >
+            <div className="bg">
+                <h1 className="tableHeaders">Recipe History</h1>
+                <div className="large-table">
+                    <Table hover responsive>
                         <thead >
-                            <th style = {divStyle}>id</th>
-                            <th style = {divStyle}>name</th>
-                            <th style = {divStyle}>description</th>
-                            <th style = {divStyle}>instructions</th>
+                            <th>id</th>
+                            <th>name</th>
+                            <th>description</th>
+                            <th>instructions</th>
     
                         </thead>
                         <tbody >
                             {
                                 this.props.recipehistory.recipehistoryarray.map((r) => (
                                     <tr >
-                                        <td style = {divStyle}>{r.recipe_id}</td>
-                                        <td style = {divStyle}>{r.name}</td>
-                                        <td style = {divStyle}>{r.description}</td>
-                                        <td style = {divStyle}>{r.instructions}</td>
+                                        <td>{r.recipe_id}</td>
+                                        <td>{r.name}</td>
+                                        <td>{r.description}</td>
+                                        <td>{r.instructions}</td>
                                     </tr>
                                 ))
                             }
                         </tbody>
-                    </table>
+                    </Table>
                 </div>
-            )
+            </div>
+        )
         } else {
             return (
                 <Redirect to='/' />
@@ -66,17 +70,15 @@ export class RecipeHistoryComponent extends React.Component<IRecipeHistoryProps,
     }
 }
 
-//uncommit this when the store has info for the current component
 const mapStateToProps = (state: IState) => {
     return {
         recipehistory: state.recipehistory,
         isLoggedIn : state.auth.isLoggedIn
     }
 }
-//add function when added in setting.action
+
 const mapDispatchToProps = {
     loadrecipeHistoryRow
 }
 
-//change the component if you copied and paste
 export default connect(mapStateToProps, mapDispatchToProps)(RecipeHistoryComponent);

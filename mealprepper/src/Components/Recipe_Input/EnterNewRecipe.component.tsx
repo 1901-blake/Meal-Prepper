@@ -43,7 +43,7 @@ export class EnterNewRecipeComponent extends React.Component<IEnterNewRecipeProp
         if (this.props.isLoggedIn) {
             return (
                 <div className="bg">
-                    <h1 className="update-profile-heading">Enter New Recipe</h1>
+                    <h1 className="tableHeaders">Enter New Recipe</h1>
                     <div className="user-info-class">
                     <Form className="update-profile-form">
                         <FormGroup className="form-row">
