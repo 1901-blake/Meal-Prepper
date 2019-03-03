@@ -67,8 +67,11 @@ export class NavComponent extends React.Component<INavProps, any> {
                         {/* <Link to="/favorites" className="navItems">
                             <Button color="dark">Favorites</Button>{' '}
                         </Link> */}
+                        <Link to="/userinfo" className="navItems">
+                            <Button color="dark">User Info</Button>{' '}
+                        </Link>
                         
-                        <Dropdown nav isOpen={this.props.nav.dropdown2} toggle={this.props.toggle1}>
+                        {/* <Dropdown nav isOpen={this.props.nav.dropdown2} toggle={this.props.toggle1}>
                             <DropdownToggle nav className="navItems">
                                 Profile
                             </DropdownToggle>
@@ -82,7 +85,7 @@ export class NavComponent extends React.Component<INavProps, any> {
                                         <Link to="/userinfo" className="dropdownItems">User Info</Link></NavLink>
                                 </DropdownItem>
                             </DropdownMenu>
-                        </Dropdown>
+                        </Dropdown> */}
                         <SignOutButton color="dark" />
                     </Nav>
                 </div>
