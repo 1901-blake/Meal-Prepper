@@ -52,7 +52,7 @@ public class WebConfig implements WebMvcConfigurer {
         	.allowedOrigins("http://localhost:3000",
         		"http://meal-prepper-app.s3-website.us-east-2.amazonaws.com")
         	.allowedMethods("PUT", "DELETE", "GET", "OPTIONS", "POST", "PATCH")
-            .allowedHeaders("header1", "header2", "Authorization", "content-type")
+            .allowedHeaders("header1", "header2", "Authorization", "Content-Type")
             .allowCredentials(true);
 	}
     
