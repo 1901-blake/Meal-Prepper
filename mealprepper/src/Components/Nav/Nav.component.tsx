@@ -40,7 +40,7 @@ export class NavComponent extends React.Component<INavProps, any> {
                         <Link to="" className="navbar-brand">
                             <img src={logodark} height="50" className="d-inline-block align-top" alt="prepper" />
                         </Link>
-                        <Link to="/grocerylist" className="navItems">
+                        <Link to="/grocerylist" className="navItems ml-auto">
                             <Button color="dark">Grocery List</Button>{' '}
                         </Link>
                         <Dropdown nav isOpen={this.props.nav.dropdown1} toggle={this.props.toggle}>
