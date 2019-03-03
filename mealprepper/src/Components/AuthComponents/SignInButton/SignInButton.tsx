@@ -108,9 +108,9 @@ class SignInButton extends React.Component<SignInButtonProps, SignInButtonState>
                         </Form>
                     </ModalBody>
                     <ModalFooter className="justify-content-center">
-                        <Button type="submit" color={this.props.color} className={this.props.className}
+                        <Button type="submit" color={this.props.color}
                         onClick={() => this.signIn(this.state.credentials)}>Sign in</Button>
-                        <ForgotPasswordButton color={this.props.color} className={this.props.className} />
+                        <ForgotPasswordButton color={this.props.color} />
                         <CircularProgress hidden={this.state.progressIsHidden}/>
                     </ModalFooter>
                 </Modal>

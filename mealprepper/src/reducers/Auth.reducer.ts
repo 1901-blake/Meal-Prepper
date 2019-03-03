@@ -2,7 +2,7 @@ import { AuthActionTypes } from "../Actions/AuthActions";
 import { IAuthState } from ".";
 
 const initialState: IAuthState = {
-    isLoggedIn : false
+    isLoggedIn : true
 }
 
 export const AuthReducer = (state = initialState, action: any) => {
