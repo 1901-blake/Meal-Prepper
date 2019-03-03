@@ -28,8 +28,6 @@ export class GroceryListComponent extends React.Component<IGrocProps, any> {
         }
     }
 
-
-
     changeamount = (event) => {
         console.log('col value: ' + event.target.parentNode.nodeName);
         this.setState({ tempamount: event.target.value });
@@ -72,12 +70,12 @@ export class GroceryListComponent extends React.Component<IGrocProps, any> {
     }
 
     render() {
-        let linebool = this.state.linebool;
+        // let linebool = this.state.linebool;
         if (this.props.isLoggedIn) {
             return (
                 <div className="bg">
                     <h1 className="tableHeaders">Grocery List</h1>
-                    <div className="user-info-class">
+                    <div className="medium-table">
                         {/* <table style={divStyle} id="groceryTable"> */}
                         <Table hover id="groceryTable">
 
