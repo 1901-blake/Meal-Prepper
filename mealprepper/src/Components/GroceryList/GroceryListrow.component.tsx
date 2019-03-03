@@ -1,9 +1,12 @@
 import React from "react";
+import { Measure } from "../../Model/Measure";
+import { Ingredient } from "../../Model/Ingredient";
 
 
 export interface IGrocProps {
-    ingredient: string,
+    ingredient: Ingredient,
     amount: number,
+    measure: Measure
 }
 
 export class GroceryListrowComponent extends React.Component<IGrocProps, any> {
@@ -38,11 +41,21 @@ export class GroceryListrowComponent extends React.Component<IGrocProps, any> {
 
                     <td><input type="checkbox" onChange={this.togglelinestyle} /></td>
                     {
-                        linebool ?
-                            (<td>{this.props.ingredient}</td>) :
-                            (<td>{this.props.ingredient}</td>)
+                       linebool ?
+                       (<td style={{ textDecorationLine: 'line-through', textDecorationStyle: 'solid', verticalAlign: 'center' }} >{this.props.amount}</td>) :
+                       (<td style={{ textDecorationLine: '', textDecorationStyle: 'solid', verticalAlign: 'center' }}>{this.props.amount}</td>)
                     }
-                    <td>{this.props.amount}</td>
+                    {
+                        linebool ?
+                        (<td style={{ textDecorationLine: 'line-through', textDecorationStyle: 'solid', verticalAlign: 'center' }} >{this.props.measure.name}</td>) :
+                        (<td style={{ textDecorationLine: '', textDecorationStyle: 'solid', verticalAlign: 'center' }}>{this.props.measure.name}</td>)
+                    }
+                    {
+                        linebool ?
+                        (<td style={{ textDecorationLine: 'line-through', textDecorationStyle: 'solid', verticalAlign: 'center' }} >{this.props.ingredient.name}</td>) :
+                        (<td style={{ textDecorationLine: '', textDecorationStyle: 'solid', verticalAlign: 'center' }}>{this.props.ingredient.name}</td>)
+                    }
+                    
 
             </>
         )
