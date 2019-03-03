@@ -1,5 +1,5 @@
-import { Recipe } from "../Model/Recipe";
 import { recipeClient } from "../Axios/recipe.client";
+import { FullRecipe } from "../Model/FullRecipe";
 
 export const weeklyViewTypes = {
     LOAD_WEEK_PLAN: 'LOAD_WEEK_PLAN',
@@ -15,16 +15,17 @@ export const loadWeeklyPlan = (amount: number) => async (dispatch) => {
         if (resp.status == 200) {
 
             const body = await resp.data;
-
-            let temprecipe: Recipe[] = [];
+            let temprecipe: FullRecipe[] = [];
 
             //loop through the array of recipes from body
             for (let index = 0; index < body.length; index++) {
-                temprecipe[index] = new Recipe();
-                temprecipe[index].recipe_id = body[index].id;
-                temprecipe[index].name = body[index].name;
-                temprecipe[index].description = body[index].description;
-                temprecipe[index].instructions = body[index].instructions;
+                temprecipe[index] = new FullRecipe(
+                    body[index].id, 
+                    body[index].name, 
+                    body[index].description, 
+                    body[index].instructions,
+                    body[index].ingredients
+                    );
             }
 
             dispatch({

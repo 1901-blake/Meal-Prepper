@@ -58,7 +58,7 @@ export interface IUserInfoState {
 }
 export interface IWeeklyViewState {
   //create an array of recipe and call it weekly recipe
-  weeklyrecipe: Recipe[];
+  weeklyrecipe: FullRecipe[];
   // this should be filled by the action by calling an fetch
 }
 
