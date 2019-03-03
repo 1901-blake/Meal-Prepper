@@ -14,7 +14,7 @@ interface IGenerateMealPlanProps {
     generateBreakfast: () => Promise<void>,
     generateLunch: () => Promise<void>,
     generateDinner: () => Promise<void>,
-    generateDessert: () => Promise<void>, 
+    generateDessert: () => Promise<void>,
     saveRecipes: (event, recipes: IGenerateMealPlanState) => Promise<void>
 }
 
@@ -59,31 +59,30 @@ export class GenerateMealPlanComponent extends React.Component<IGenerateMealPlan
                                     <tr>
                                         <th>Lunch</th>
                                         {this.props.generate.lunch.map(meal => (
-                                                <td>{meal.name}</td>
+                                            <td>{meal.name}</td>
                                         ))}
                                     </tr>
                                     <tr>
                                         <th>Dinner</th>
                                         {this.props.generate.dinner.map(meal => (
-                                                <td>{meal.name}</td>
+                                            <td>{meal.name}</td>
                                         ))}
                                     </tr>
                                     <tr>
                                         <th>Dessert</th>
                                         {this.props.generate.dessert.map(meal => (
-                                                <td>{meal.name}</td>
+                                            <td>{meal.name}</td>
                                         ))}
                                     </tr>
                                 </tbody>
                             </Table>
                             <Button onClick={() => this.props.saveRecipes(event, this.props.generate)}>Save</Button>
                             <Button onClick={() => this.props.generateBreakfast() && this.props.generateLunch() && this.props.generateDinner()
-                            && this.props.generateDessert()}>Regenerate</Button><br />
+                                && this.props.generateDessert()}>Regenerate</Button><br />
                             {this.props.generate.status}
                         </div>
                     </div>
                 </div>
-            </div>
             )
         } else {
             return (
@@ -104,7 +103,7 @@ const mapDispatchToProps = {
     generateBreakfast,
     generateLunch,
     generateDinner,
-    generateDessert, 
+    generateDessert,
     saveRecipes
 }
 
