@@ -11,7 +11,7 @@ import { SettingComponent } from './Components/Setting/Setting.component';
 import UserInfoComponent from './Components/User_Info/UserInfo.component';
 import EnterNewRecipeComponent from './Components/Recipe_Input/EnterNewRecipe.component';
 import HomeComponent from './Components/Home/Home.component';
-import Amplify, { Auth } from 'aws-amplify';
+import Amplify from 'aws-amplify';
 import config from './config/cognito.config';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';

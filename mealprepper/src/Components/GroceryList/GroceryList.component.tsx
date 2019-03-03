@@ -4,6 +4,8 @@ import { IGRocState, IState, state, IGenerateMealPlanState } from "../../reducer
 import { loadGroceryRow, addGroceryRow } from "../../Actions/GroceryList.action";
 import { FullRecipe } from "../../Model/FullRecipe";
 import { GroceryListrowComponent } from "./GroceryListrow.component";
+import { AppState } from "@aws-amplify/core";
+import { Redirect } from "react-router";
 
 const divStyle = {
     margin: '40px',
@@ -13,6 +15,7 @@ const divStyle = {
 export interface IGrocProps {
     groc: IGRocState,
     generate: IGenerateMealPlanState,
+    isLoggedIn : boolean,
     loadGroceryRow: (generate: FullRecipe[]) => void,
     addGroceryRow: (Ingredientname: string, amount: number) => void
 
@@ -70,59 +73,66 @@ export class GroceryListComponent extends React.Component<IGrocProps, any> {
 
         let linebool = this.state.linebool;
 
-        return (
-            <div className="bg">
-                <h1 className="tableHeaders">Grocery List</h1>
-                <table style={divStyle} id="groceryTable">
-
-                    <thead style={divStyle}>
-                        <tr>
-                            <th>active</th>
-                            <th>ingredient</th>
-                            <th>amount</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        <tr style={divStyle}>
-                            <td> <button onClick={this.addrowfunc}>+</button> </td>
-                            <td> <input type="text" placeholder="ingredient name" onChange={this.changename} /> </td>
-                            <td> <input type="number" placeholder="amount" onChange={this.changeamount} /> </td>
-                        </tr>
-
-                        {/* {
-                            this.props.groc.arrayingredient.map((r) => (
-                                //dont forget Key
-                                <tr >
-                                    <td><input type="checkbox" onChange={this.togglelinestyle} /></td>
-                                    <td>{r.ingredient.name}</td>
-                                    <td>{r.amount}</td>
-                                </tr>
-                            ))
-                        } */}
-
-                        {
-
-                            this.props.groc.arrayingredient.map((r) => (
-
-                                    <tr>
-                                        <GroceryListrowComponent ingredient={r.ingredient.name} amount={r.amount} />
+        if (this.props.isLoggedIn) {
+            return (
+                <div className="bg">
+                    <h1 className="tableHeaders">Grocery List</h1>
+                    <table style={divStyle} id="groceryTable">
+    
+                        <thead style={divStyle}>
+                            <tr>
+                                <th>active</th>
+                                <th>ingredient</th>
+                                <th>amount</th>
+                            </tr>
+                        </thead>
+    
+                        <tbody>
+                            <tr style={divStyle}>
+                                <td> <button onClick={this.addrowfunc}>+</button> </td>
+                                <td> <input type="text" placeholder="ingredient name" onChange={this.changename} /> </td>
+                                <td> <input type="number" placeholder="amount" onChange={this.changeamount} /> </td>
+                            </tr>
+    
+                            {/* {
+                                this.props.groc.arrayingredient.map((r) => (
+                                    //dont forget Key
+                                    <tr >
+                                        <td><input type="checkbox" onChange={this.togglelinestyle} /></td>
+                                        <td>{r.ingredient.name}</td>
+                                        <td>{r.amount}</td>
                                     </tr>
-
-                            ))
-                        }
-                    </tbody>
-
-                </table>
-            </div>
-        )
+                                ))
+                            } */}
+    
+                            {
+    
+                                this.props.groc.arrayingredient.map((r) => (
+    
+                                        <tr>
+                                            <GroceryListrowComponent ingredient={r.ingredient.name} amount={r.amount} />
+                                        </tr>
+    
+                                ))
+                            }
+                        </tbody>
+    
+                    </table>
+                </div>
+            )
+        } else {
+           return (
+            <Redirect to='/' />
+           );
+        }
     }
 }
 
 const mapStateToProps = (state: IState) => {
     return {
         groc: state.groc,
-        generate: state.generate
+        generate: state.generate,
+        isLoggedIn : state.auth.isLoggedIn
     }
 }
 

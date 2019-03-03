@@ -17,6 +17,9 @@ import SignUpButton from '../AuthComponents/SignUpButton/SignUpButton';
 import ForgotPasswordButton from '../AuthComponents/ForgotPasswordButton/ForgotPasswordButton';
 import SignOutButton from '../AuthComponents/SignOutButton/SignOutButton';
 import ChangePasswordButton from '../AuthComponents/ChangePasswordButton/ChangePasswordButton';
+import Container from 'reactstrap/lib/Container';
+import Col from 'reactstrap/lib/Col';
+import { spawn } from 'child_process';
 
 
 
@@ -94,8 +97,12 @@ export class NavComponent extends React.Component<INavProps, any> {
                         <Link to="" className="navbar-brand">
                             <img src={logodark} height="50" className="d-inline-block align-top" alt="prepper" />
                         </Link>
-                        <SignInButton color="dark" />
-                        <SignUpButton color="dark" />
+                        <Container >
+                            <Col inline md={{span:4, offset:8}}>
+                                <SignInButton color="dark" />
+                                <SignUpButton color="dark" />
+                            </Col>
+                        </Container>
                     </Nav>
                 </div>
             );
