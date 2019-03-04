@@ -28,7 +28,7 @@
   vertical-align: middle;
   margin-left: auto;
   margin-right: auto;
-  width: 50%;
+  width: 800px;
   background-color: white;
 }
 
@@ -90,6 +90,11 @@ body, html {
     body {
       padding-top: 0px;
     }
+}
+
+.pre {
+  word-wrap: normal;      /* IE 5.5-7 */
+  white-space: pre;      /* Modern browsers */
 }
 
 .jumbotron {
