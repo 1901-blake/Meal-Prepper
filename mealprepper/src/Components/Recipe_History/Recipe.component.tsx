@@ -51,13 +51,13 @@ export class RecipeHistoryComponent extends React.Component<IRecipeHistoryProps,
                                             <td>{r.description}</td>
                                             <p><td>{r.instructions}</td></p>
                                             <td>{r.ingredients.map(meal => (
-                                                <pre>{meal.amount}</pre>
+                                                <p className="pre">{meal.amount}</p>
                                             ))}</td>
                                             <td>{r.ingredients.map(meal => (
-                                                <pre>{meal.measure.name}</pre>
+                                                <p className="pre">{meal.measure.name}</p>
                                             ))}</td>
                                             <td>{r.ingredients.map(meal => (
-                                                <pre>{meal.ingredient.name}</pre>
+                                                <p className="pre">{meal.ingredient.name}</p>
                                             ))}</td>
                                         </tr>
                                     ))
